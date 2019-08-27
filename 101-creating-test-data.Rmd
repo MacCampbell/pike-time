@@ -1,0 +1,54 @@
+---
+title: "Creating a test data set"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(maps)
+library(mapdata)
+```
+
+## What do our samples look like?
+
+```{r, warning=FALSE, message=FALSE}
+data<-read_csv(file="./metadata/190816_Pike ddRAD data identifiers.csv")
+data<-data %>% separate(`Coordinates (if available)`, into=c("Latitude", "Longitude"), sep =",")
+data$Latitude<-as.numeric(data$Latitude)
+data$Longitude<-as.numeric(data$Longitude)
+nrow(data)
+data %>% group_by(`Sampling locality (water body, drainage, region)`, Site, Region) %>% 
+  summarize(Count=n()) %>% ungroup() %>%
+  select(`Sampling locality (water body, drainage, region)`, Region, Site, Count)
+```
+
+510 samples from 20 places it looks like.
+
+What about a geographic distribution?
+
+```{r, warning=FALSE, message=FALSE}
+plot<-data %>% filter(Latitude != "NA") %>% group_by(Site, Latitude, Longitude) %>% summarize(SampleSize=n()) %>% select(Site, Latitude, Longitude, SampleSize) %>%
+  unique()
+
+alaska<-map_data("world") %>% filter(region %in% c("USA", "Canada"))
+
+ggplot()+geom_polygon(data=alaska, aes(x=long, y=lat, group=group))+
+  geom_point(data=plot, aes(x=Longitude, y=Latitude, size=SampleSize),
+             fill="blue", alpha=0.75, pch=21)+
+  xlab("Longitude")+
+  ylab("Latitude")+
+  coord_fixed(1.3, xlim=c(-180,-90), ylim=c(45,80))
+ 
+```
+
+Not sure what is up with Otter Lake.
+
+```{r, warning=FALSE, message=FALSE}
+otter<-data %>% filter(Latitude != "NA") %>% group_by(Site, Latitude, Longitude) %>% summarize(SampleSize=n()) %>% select(Site, Latitude, Longitude, SampleSize) %>%
+  unique() %>% filter(Site=="OtterLake")
+ggplot(otter)+geom_point(aes(x=Longitude, y=Latitude, size=SampleSize))
+```
