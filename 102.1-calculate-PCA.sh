@@ -21,13 +21,13 @@ mkdir outputs/102
 # ANGSD can be easily be used to compute genotype likelihoods and output them in the
 # required Beagle format {says the manual}.
 
-#Do the calculations
-angsd -GL 1 -out ./outputs/102/`basename $1 .bamlist` -nThreads $threads -doGlf 2 -doMajorMinor 1  -doMaf 2 -SNP_pval 1e-6 -bam ./bamlists/$bamlist
+#Do the calculations (putting in absolute paths)
+/home/macampbell2/angsd/angsd -GL 1 -out ./outputs/102/`basename $1 .bamlist` -nThreads $threads -doGlf 2 -doMajorMinor 1  -doMaf 2 -SNP_pval 1e-6 -bam ./bamlists/$bamlist
 
 # Step 3
 # Generate a covariance matrix
 # For Linux
-python ~/pcangsd/pcangsd.py -beagle ./outputs/102/`basename $1 .bamlist`.beagle.gz -admix -o ./outputs/102/`basename $1 .bamlist`
+python /home/macampbell2/pcangsd/pcangsd.py -beagle ./outputs/102/`basename $1 .bamlist`.beagle.gz -admix -o ./outputs/102/`basename $1 .bamlist`
 
 # admixture proportions are in .qopt
 # covariance matrix is .cov
