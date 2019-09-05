@@ -14,19 +14,58 @@ library(mapdata)
 ```
 
 ## What do our samples look like?
+Read in data.
+
+There were two main sequencing efforts by RTL and GW. Chase says we should be suspicious of the RTL set.
+
+There are therefore duplicated sequences.
 
 ```{r, warning=FALSE, message=FALSE}
 data<-read_csv(file="./metadata/190828_Pike ddRAD data identifiers.csv")
 data<-data %>% separate(`Coordinates (if available)`, into=c("Latitude", "Longitude"), sep =",")
 data$Latitude<-as.numeric(data$Latitude)
 data$Longitude<-as.numeric(data$Longitude)
+
+dups<-data %>% select(`Tissue identifier`) %>% group_by(`Tissue identifier`) %>% summarize(Count=n()) %>% filter (Count > 1)
+sum(dups$Count)
+
+#Make a df without the dups
+dedup<- filter(data, !(`Tissue identifier` %in% dups$`Tissue identifier`))
+
+temp<-filter(data, `Tissue identifier` %in% dups$`Tissue identifier`) %>% arrange(`DNA identifier`)
+
+#Apparently we may not want the RTL files
+temp2 <- temp %>% filter(`Sequencing project` !="RTL 6997240")
+
+#And some are duplicated as "topoff"" files
+temp3 <- temp2 %>% filter(!grepl("topoff",`Sequencing file name`))
+
+#Recombine the df without dups and the temp file.
+data<-rbind(dedup, temp3)
+
+```
+
+
+
+```{r, warning=FALSE, message=FALSE}
 nrow(data)
+#Are there sames that are not duplicated from the RTL sequencing effort?
+RTL<-filter(data, `Sequencing project`=="RTL 6997240")
+write_csv(RTL, path="outputs/101/RTL-unique-samples.csv")
+
+#Let's ditch those!
+data<-filter(data, `Sequencing project`!="RTL 6997240")
+
 data %>% group_by(`Sampling locality (water body, drainage, region)`, Site, Region) %>% 
   summarize(Count=n()) %>% ungroup() %>%
   select(`Sampling locality (water body, drainage, region)`, Region, Site, Count)
+
+data %>% ungroup() %>% group_by(`Sequencing project`) %>% summarize(Count=n())
+
+
 ```
 
-510 samples from 20 places it looks like.
+443 samples from 20 places it looks like.
 
 What about a geographic distribution?
 
@@ -73,8 +112,8 @@ ggplot()+geom_polygon(data=alaska, aes(x=long, y=lat, group=group))+
   coord_fixed(1.3, xlim=c(-160,-140), ylim=c(60,65))
 ```
 
-For lack of a better idea, I'll randomly sample these guys. Looks like there are 302 "Southcentral" samples. Figuring like this: 510-302+15+20=243!
-
+For lack of a better idea, I'll randomly sample these guys. 
+eval = FALSE to prevent creating a new random set of samples.
 ```{r, message=FALSE, warning=FAlSE, eval=FALSE}
 kenaiSamples<-data %>% filter(Site %in% c("StormyLake", "TinyLake")) %>% sample_n(15) 
 anchorageSamples<- data %>% filter(Region=="Southcentral") %>% 
@@ -84,6 +123,28 @@ natural<-data %>% filter(Region != "Southcentral")
 samples<-rbind(rbind(kenaiSamples, anchorageSamples), natural)
 
 #Many of these don't have lat/long data.
-write_csv(samples, path="./101/samples-to-analyze.csv")
+write_csv(samples, path="outputs/101/samples-to-analyze.csv")
 ```
 
+```{r, message=FALSE, warning=FAlSE, eval=FALSE}
+save(samples, file="./outputs/101/samples-to-analyze.rda")
+```
+
+### Let's figure out which *.bams we need.
+```{r, message=FALSE, warning=FAlSE}
+load(file="./outputs/101/samples-to-analyze.rda")
+samples<-as_tibble(samples)
+```
+
+
+BK1703222 has samples like I-025_S200_sorted.bam
+AN1711171 has samples like W-006_sorted.bam
+
+Making a path like
+/data/BK1703222/I-025_S200_sorted.bam
+```{r, message=FALSE, warning=FALSE}
+bamlist<-samples %>% select(`Sequencing project`, `RAD identifier`, Region, Site) %>% separate(`Sequencing project`, c("GW", "Project")) %>% mutate(String=paste("data/",Project,"/",`RAD identifier`,"_sorted.bam", sep=""))
+
+write(bamlist$String, file="bamlists/197.txt")
+save(bamlist, file="./outputs/101/197-with-Region-Site-BAMInfo.rda")
+```

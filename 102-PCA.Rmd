@@ -1,0 +1,57 @@
+---
+title: "102-PCA.Rmd"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## PCA
+One thing we can do real fast is a PCA to get a feel for the data.
+
+We have a bamlist of the 197 samples in the file /bamlists.
+
+Let's see how hard it is to run this PCA without subsampling the data.
+
+```{sh, eval=FALSE}
+angsd -GL 1 -out ./outputs/102/197-samples -nThreads 5 -doGlf 2 -doMajorMinor 1  -doMaf 2 -SNP_pval 1e-6 -bam ./bamlists/197.txt
+```
+
+There is some deal with Zcat on a Mac
+```{sh, eval=FALSE}
+ln -s outputs/102/197-samples.beagle.gz 197-samples.beagle.Z
+
+python ~/pcangsd/pcangsd.py -beagle ./outputs/102/197-samples.beagle.Z -admix -o ./outputs/102/197-samples
+```
+
+admixture proportions are in .qopt
+
+covariance matrix is .cov
+
+
+Hmmm.... Let's make this general and put on the cluster.
+
+Have a .bashrc to edit.
+
+What are we working with?
+chinook00.rcs.alaska.edu % lsb_release -a
+LSB Version:	:base-4.0-amd64:base-4.0-noarch:core-4.0-amd64:core-4.0-noarch:graphics-4.0-amd64:graphics-4.0-noarch:printing-4.0-amd64:printing-4.0-noarch
+Distributor ID:	CentOS
+Description:	CentOS release 6.10 (Final)
+Release:	6.10
+Codename:	Final
+
+
+(1) Rclone, putting into center
+chinook00.rcs.alaska.edu % rclone copy drive:/shared_esox_bams/ ./
+
+can git clone this project and get the files over there.
+
+(2) putting PCAngsd in ~/
+
+(3) Getting angsd and htslib
+
+(4) Made 102.1-calculate-PCA.sh
+
+Now I have to write up a slurm file..
