@@ -1,0 +1,2712 @@
+mkdir: cannot create directory `/home/macampbell2/pike-time/outputs': File exists
+mkdir: cannot create directory `/home/macampbell2/pike-time/outputs/102': File exists
+	-> angsd version: 0.931 (htslib: 1.9-342-gacdab39) build(Sep  5 2019 10:57:49)
+	-> SNP-filter using a pvalue: 1.000000e-06 correspond to 23.928127 likelihood units
+[bammer_main] 197 samples in 197 input files
+	-> Parsing 197 number of samples 
+[shared.cpp.changeChr():281] refid:0
+Charnge chr:0
+
+	-> Allocated ~ 10 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 20 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 30 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 40 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 50 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 60 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 70 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 80 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 90 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 100 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 110 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 120 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 130 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 140 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 150 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 160 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 170 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 180 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 190 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 200 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 210 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 220 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 230 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 240 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 250 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 260 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 270 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 280 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 290 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 300 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 310 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 320 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 330 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 340 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 350 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 360 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 370 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 380 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 390 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 400 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 410 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 420 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 430 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 440 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 450 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 460 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 470 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 480 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 490 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 500 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 510 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 520 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 530 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 540 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 550 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 560 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 570 million nodes to the nodepool, this is not an estimate of the memory usage
+	-> Printing at chr: NC_025968.3 pos:4839196 chunknumber 100 contains 7928 sites
+	-> Printing at chr: NC_025968.3 pos:7454746 chunknumber 200 contains 8586 sites
+	-> Printing at chr: NC_025968.3 pos:9586340 chunknumber 300 contains 3499 sites
+	-> Printing at chr: NC_025968.3 pos:12960741 chunknumber 400 contains 1913 sites
+	-> Printing at chr: NC_025968.3 pos:16266230 chunknumber 500 contains 4775 sites
+	-> Printing at chr: NC_025968.3 pos:20237929 chunknumber 600 contains 385 sites
+	-> Printing at chr: NC_025968.3 pos:24892891 chunknumber 700 contains 2160 sites
+	-> Printing at chr: NC_025968.3 pos:28152421 chunknumber 800 contains 10732 sites
+	-> Printing at chr: NC_025968.3 pos:30578253 chunknumber 900 contains 9078 sites
+	-> Printing at chr: NC_025968.3 pos:34461502 chunknumber 1000 contains 280 sites
+	-> Printing at chr: NC_025968.3 pos:38174223 chunknumber 1100 contains 36702 sites
+[shared.cpp.changeChr():281] refid:1
+Charnge chr:1
+	-> Printing at chr: NC_025969.3 pos:1926933 chunknumber 1200 contains 4243 sites
+	-> Printing at chr: NC_025969.3 pos:5098854 chunknumber 1300 contains 352 sites
+	-> Printing at chr: NC_025969.3 pos:8721242 chunknumber 1400 contains 1941 sites
+	-> Printing at chr: NC_025969.3 pos:11567749 chunknumber 1500 contains 2331 sites
+	-> Printing at chr: NC_025969.3 pos:15170480 chunknumber 1600 contains 962 sites
+	-> Printing at chr: NC_025969.3 pos:20516030 chunknumber 1700 contains 787 sites
+	-> Printing at chr: NC_025969.3 pos:25591160 chunknumber 1800 contains 5116 sites
+	-> Printing at chr: NC_025969.3 pos:28590735 chunknumber 1900 contains 1595 sites
+	-> Printing at chr: NC_025969.3 pos:30685974 chunknumber 2000 contains 3683 sites
+	-> Printing at chr: NC_025969.3 pos:33240451 chunknumber 2100 contains 2040 sites
+	-> Printing at chr: NC_025969.3 pos:36666066 chunknumber 2200 contains 5734 sites
+[shared.cpp.changeChr():281] refid:2
+Charnge chr:2
+	-> Printing at chr: NC_025970.3 pos:4182975 chunknumber 2300 contains 463 sites
+	-> Printing at chr: NC_025970.3 pos:6003607 chunknumber 2400 contains 3977 sites
+	-> Printing at chr: NC_025970.3 pos:8086863 chunknumber 2500 contains 7078 sites
+	-> Printing at chr: NC_025970.3 pos:11908476 chunknumber 2600 contains 11081 sites
+	-> Printing at chr: NC_025970.3 pos:15528067 chunknumber 2700 contains 5593 sites
+	-> Printing at chr: NC_025970.3 pos:19758180 chunknumber 2800 contains 19671 sites
+	-> Printing at chr: NC_025970.3 pos:22904243 chunknumber 2900 contains 659 sites
+	-> Printing at chr: NC_025970.3 pos:26520402 chunknumber 3000 contains 1480 sites
+[shared.cpp.changeChr():281] refid:3
+Charnge chr:3
+	-> Printing at chr: NC_025971.3 pos:790535 chunknumber 3100 contains 27046 sites
+	-> Printing at chr: NC_025971.3 pos:3223133 chunknumber 3200 contains 11007 sites
+	-> Printing at chr: NC_025971.3 pos:5294491 chunknumber 3300 contains 299 sites
+	-> Printing at chr: NC_025971.3 pos:7636570 chunknumber 3400 contains 13239 sites
+	-> Printing at chr: NC_025971.3 pos:11212518 chunknumber 3500 contains 19840 sites
+	-> Printing at chr: NC_025971.3 pos:14714577 chunknumber 3600 contains 27734 sites
+	-> Printing at chr: NC_025971.3 pos:18941191 chunknumber 3700 contains 3261 sites
+	-> Printing at chr: NC_025971.3 pos:22184983 chunknumber 3800 contains 14966 sites
+	-> Printing at chr: NC_025971.3 pos:25450124 chunknumber 3900 contains 15919 sites
+[shared.cpp.changeChr():281] refid:4
+Charnge chr:4
+	-> Printing at chr: NC_025972.3 pos:2726543 chunknumber 4000 contains 6125 sites
+	-> Printing at chr: NC_025972.3 pos:6106683 chunknumber 4100 contains 691 sites
+	-> Printing at chr: NC_025972.3 pos:8474733 chunknumber 4200 contains 3711 sites
+	-> Printing at chr: NC_025972.3 pos:10699179 chunknumber 4300 contains 10996 sites
+	-> Printing at chr: NC_025972.3 pos:13739879 chunknumber 4400 contains 551 sites
+	-> Printing at chr: NC_025972.3 pos:18188172 chunknumber 4500 contains 3617 sites
+	-> Printing at chr: NC_025972.3 pos:21618867 chunknumber 4600 contains 11563 sites
+	-> Printing at chr: NC_025972.3 pos:23931752 chunknumber 4700 contains 4038 sites
+	-> Printing at chr: NC_025972.3 pos:26530118 chunknumber 4800 contains 23317 sites
+	-> Printing at chr: NC_025972.3 pos:30829381 chunknumber 4900 contains 5886 sites
+[shared.cpp.changeChr():281] refid:5
+Charnge chr:5
+	-> Printing at chr: NC_025973.3 pos:2046770 chunknumber 5000 contains 31386 sites
+	-> Printing at chr: NC_025973.3 pos:5395553 chunknumber 5100 contains 3901 sites
+	-> Printing at chr: NC_025973.3 pos:8112788 chunknumber 5200 contains 4939 sites
+	-> Printing at chr: NC_025973.3 pos:11561318 chunknumber 5300 contains 7103 sites
+	-> Printing at chr: NC_025973.3 pos:16135823 chunknumber 5400 contains 712 sites
+	-> Printing at chr: NC_025973.3 pos:19896345 chunknumber 5500 contains 1940 sites
+	-> Printing at chr: NC_025973.3 pos:23309241 chunknumber 5600 contains 7951 sites
+	-> Printing at chr: NC_025973.3 pos:25654132 chunknumber 5700 contains 4660 sites
+	-> Printing at chr: NC_025973.3 pos:27996467 chunknumber 5800 contains 295 sites
+[shared.cpp.changeChr():281] refid:6
+Charnge chr:6
+	-> Printing at chr: NC_025974.3 pos:2006116 chunknumber 5900 contains 1450 sites
+	-> Printing at chr: NC_025974.3 pos:5730171 chunknumber 6000 contains 13397 sites
+	-> Printing at chr: NC_025974.3 pos:7962257 chunknumber 6100 contains 3975 sites
+	-> Printing at chr: NC_025974.3 pos:10274011 chunknumber 6200 contains 464 sites
+	-> Printing at chr: NC_025974.3 pos:13627624 chunknumber 6300 contains 304 sites
+	-> Printing at chr: NC_025974.3 pos:18940549 chunknumber 6400 contains 2154 sites
+	-> Printing at chr: NC_025974.3 pos:23023082 chunknumber 6500 contains 5551 sites
+	-> Printing at chr: NC_025974.3 pos:27219237 chunknumber 6600 contains 8229 sites
+	-> Printing at chr: NC_025974.3 pos:32449968 chunknumber 6700 contains 14105 sites
+	-> Printing at chr: NC_025974.3 pos:36771162 chunknumber 6800 contains 23722 sites
+	-> Printing at chr: NC_025974.3 pos:40463306 chunknumber 6900 contains 592 sites
+	-> Printing at chr: NC_025974.3 pos:43241789 chunknumber 7000 contains 532 sites
+[shared.cpp.changeChr():281] refid:7
+Charnge chr:7
+	-> Printing at chr: NC_025975.3 pos:573198 chunknumber 7100 contains 30492 sites
+	-> Printing at chr: NC_025975.3 pos:3490697 chunknumber 7200 contains 5502 sites
+	-> Printing at chr: NC_025975.3 pos:5800827 chunknumber 7300 contains 25273 sites
+	-> Printing at chr: NC_025975.3 pos:7879613 chunknumber 7400 contains 1449 sites
+	-> Printing at chr: NC_025975.3 pos:9802588 chunknumber 7500 contains 8280 sites
+	-> Printing at chr: NC_025975.3 pos:12678345 chunknumber 7600 contains 2777 sites
+	-> Printing at chr: NC_025975.3 pos:16767632 chunknumber 7700 contains 1911 sites
+	-> Printing at chr: NC_025975.3 pos:20462510 chunknumber 7800 contains 31743 sites
+
+	-> Allocated ~ 580 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 590 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 600 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 610 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 620 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 630 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 640 million nodes to the nodepool, this is not an estimate of the memory usage
+	-> Printing at chr: NC_025975.3 pos:24236405 chunknumber 7900 contains 10927 sites
+	-> Printing at chr: NC_025975.3 pos:28479785 chunknumber 8000 contains 14713 sites
+	-> Printing at chr: NC_025975.3 pos:32536690 chunknumber 8100 contains 1261 sites
+[shared.cpp.changeChr():281] refid:8
+Charnge chr:8
+	-> Printing at chr: NC_025976.3 pos:3861444 chunknumber 8200 contains 762 sites
+	-> Printing at chr: NC_025976.3 pos:6465172 chunknumber 8300 contains 322 sites
+	-> Printing at chr: NC_025976.3 pos:8532105 chunknumber 8400 contains 874 sites
+	-> Printing at chr: NC_025976.3 pos:10655930 chunknumber 8500 contains 1966 sites
+	-> Printing at chr: NC_025976.3 pos:12493694 chunknumber 8600 contains 875 sites
+	-> Printing at chr: NC_025976.3 pos:14636197 chunknumber 8700 contains 1469 sites
+	-> Printing at chr: NC_025976.3 pos:16988701 chunknumber 8800 contains 9360 sites
+	-> Printing at chr: NC_025976.3 pos:20352810 chunknumber 8900 contains 260 sites
+[shared.cpp.changeChr():281] refid:9
+Charnge chr:9
+	-> Printing at chr: NC_025977.3 pos:3239063 chunknumber 9000 contains 56875 sites
+	-> Printing at chr: NC_025977.3 pos:6449867 chunknumber 9100 contains 2057 sites
+	-> Printing at chr: NC_025977.3 pos:8897989 chunknumber 9200 contains 2697 sites
+	-> Printing at chr: NC_025977.3 pos:11768978 chunknumber 9300 contains 678 sites
+	-> Printing at chr: NC_025977.3 pos:15155134 chunknumber 9400 contains 3298 sites
+	-> Printing at chr: NC_025977.3 pos:17876765 chunknumber 9500 contains 14171 sites
+	-> Printing at chr: NC_025977.3 pos:20049265 chunknumber 9600 contains 4494 sites
+	-> Printing at chr: NC_025977.3 pos:21775885 chunknumber 9700 contains 9640 sites
+	-> Printing at chr: NC_025977.3 pos:23945314 chunknumber 9800 contains 7069 sites
+[shared.cpp.changeChr():281] refid:10
+Charnge chr:10
+	-> Printing at chr: NC_025978.3 pos:1449884 chunknumber 9900 contains 9648 sites
+	-> Printing at chr: NC_025978.3 pos:6191771 chunknumber 10000 contains 1093 sites
+	-> Printing at chr: NC_025978.3 pos:9387761 chunknumber 10100 contains 6908 sites
+	-> Printing at chr: NC_025978.3 pos:12983277 chunknumber 10200 contains 12679 sites
+	-> Printing at chr: NC_025978.3 pos:15509805 chunknumber 10300 contains 1807 sites
+	-> Printing at chr: NC_025978.3 pos:18905140 chunknumber 10400 contains 2948 sites
+	-> Printing at chr: NC_025978.3 pos:23120226 chunknumber 10500 contains 7155 sites
+	-> Printing at chr: NC_025978.3 pos:27517106 chunknumber 10600 contains 5430 sites
+	-> Printing at chr: NC_025978.3 pos:30350652 chunknumber 10700 contains 540 sites
+	-> Printing at chr: NC_025978.3 pos:33319537 chunknumber 10800 contains 265 sites
+	-> Printing at chr: NC_025978.3 pos:36441323 chunknumber 10900 contains 14109 sites
+	-> Printing at chr: NC_025978.3 pos:40080937 chunknumber 11000 contains 9937 sites
+	-> Printing at chr: NC_025978.3 pos:44464276 chunknumber 11100 contains 384 sites
+[shared.cpp.changeChr():281] refid:11
+Charnge chr:11
+	-> Printing at chr: NC_025979.3 pos:2753182 chunknumber 11200 contains 352 sites
+	-> Printing at chr: NC_025979.3 pos:5003524 chunknumber 11300 contains 2026 sites
+	-> Printing at chr: NC_025979.3 pos:7107745 chunknumber 11400 contains 23558 sites
+	-> Printing at chr: NC_025979.3 pos:9557352 chunknumber 11500 contains 17046 sites
+	-> Printing at chr: NC_025979.3 pos:12704833 chunknumber 11600 contains 10247 sites
+	-> Printing at chr: NC_025979.3 pos:17349720 chunknumber 11700 contains 33944 sites
+	-> Printing at chr: NC_025979.3 pos:20707838 chunknumber 11800 contains 3017 sites
+	-> Printing at chr: NC_025979.3 pos:25044429 chunknumber 11900 contains 16260 sites
+	-> Printing at chr: NC_025979.3 pos:28581842 chunknumber 12000 contains 8043 sites
+	-> Printing at chr: NC_025979.3 pos:31799406 chunknumber 12100 contains 275 sites
+[shared.cpp.changeChr():281] refid:12
+Charnge chr:12
+	-> Printing at chr: NC_025980.3 pos:270575 chunknumber 12200 contains 1105 sites
+	-> Printing at chr: NC_025980.3 pos:3466279 chunknumber 12300 contains 2350 sites
+	-> Printing at chr: NC_025980.3 pos:6675263 chunknumber 12400 contains 15462 sites
+	-> Printing at chr: NC_025980.3 pos:9707651 chunknumber 12500 contains 4367 sites
+	-> Printing at chr: NC_025980.3 pos:13199962 chunknumber 12600 contains 285 sites
+	-> Printing at chr: NC_025980.3 pos:17504233 chunknumber 12700 contains 12864 sites
+	-> Printing at chr: NC_025980.3 pos:21391183 chunknumber 12800 contains 9065 sites
+	-> Printing at chr: NC_025980.3 pos:25876980 chunknumber 12900 contains 1585 sites
+	-> Printing at chr: NC_025980.3 pos:28226555 chunknumber 13000 contains 6468 sites
+	-> Printing at chr: NC_025980.3 pos:30210950 chunknumber 13100 contains 1178 sites
+	-> Printing at chr: NC_025980.3 pos:33266657 chunknumber 13200 contains 2579 sites
+[shared.cpp.changeChr():281] refid:13
+Charnge chr:13
+	-> Printing at chr: NC_025981.3 pos:930359 chunknumber 13300 contains 289 sites
+	-> Printing at chr: NC_025981.3 pos:4065670 chunknumber 13400 contains 3607 sites
+	-> Printing at chr: NC_025981.3 pos:6864748 chunknumber 13500 contains 26008 sites
+	-> Printing at chr: NC_025981.3 pos:9730123 chunknumber 13600 contains 1952 sites
+	-> Printing at chr: NC_025981.3 pos:14204432 chunknumber 13700 contains 9799 sites
+	-> Printing at chr: NC_025981.3 pos:18453277 chunknumber 13800 contains 21064 sites
+	-> Printing at chr: NC_025981.3 pos:23160582 chunknumber 13900 contains 416 sites
+	-> Printing at chr: NC_025981.3 pos:25926240 chunknumber 14000 contains 20055 sites
+	-> Printing at chr: NC_025981.3 pos:28149119 chunknumber 14100 contains 34132 sites
+	-> Printing at chr: NC_025981.3 pos:30107005 chunknumber 14200 contains 417 sites
+	-> Printing at chr: NC_025981.3 pos:33411700 chunknumber 14300 contains 3615 sites
+[shared.cpp.changeChr():281] refid:14
+Charnge chr:14
+	-> Printing at chr: NC_025982.3 pos:4096247 chunknumber 14400 contains 2481 sites
+	-> Printing at chr: NC_025982.3 pos:7544176 chunknumber 14500 contains 158 sites
+	-> Printing at chr: NC_025982.3 pos:10382052 chunknumber 14600 contains 1135 sites
+	-> Printing at chr: NC_025982.3 pos:13525655 chunknumber 14700 contains 5286 sites
+	-> Printing at chr: NC_025982.3 pos:16727366 chunknumber 14800 contains 18888 sites
+	-> Printing at chr: NC_025982.3 pos:19692333 chunknumber 14900 contains 4251 sites
+	-> Printing at chr: NC_025982.3 pos:22136813 chunknumber 15000 contains 23240 sites
+	-> Printing at chr: NC_025982.3 pos:25538812 chunknumber 15100 contains 2520 sites
+	-> Printing at chr: NC_025982.3 pos:28228068 chunknumber 15200 contains 2742 sites
+	-> Printing at chr: NC_025982.3 pos:30683500 chunknumber 15300 contains 29769 sites
+[shared.cpp.changeChr():281] refid:15
+Charnge chr:15
+	-> Printing at chr: NC_025983.3 pos:3318941 chunknumber 15400 contains 9172 sites
+	-> Printing at chr: NC_025983.3 pos:7901439 chunknumber 15500 contains 316 sites
+	-> Printing at chr: NC_025983.3 pos:11223603 chunknumber 15600 contains 16251 sites
+	-> Printing at chr: NC_025983.3 pos:15043984 chunknumber 15700 contains 229 sites
+	-> Printing at chr: NC_025983.3 pos:18854559 chunknumber 15800 contains 2057 sites
+	-> Printing at chr: NC_025983.3 pos:22730608 chunknumber 15900 contains 10424 sites
+	-> Printing at chr: NC_025983.3 pos:25646003 chunknumber 16000 contains 1059 sites
+	-> Printing at chr: NC_025983.3 pos:28667898 chunknumber 16100 contains 15387 sites
+	-> Printing at chr: NC_025983.3 pos:30897379 chunknumber 16200 contains 11283 sites
+[shared.cpp.changeChr():281] refid:16
+Charnge chr:16
+	-> Printing at chr: NC_025984.3 pos:2410537 chunknumber 16300 contains 2769 sites
+	-> Printing at chr: NC_025984.3 pos:5220414 chunknumber 16400 contains 363 sites
+	-> Printing at chr: NC_025984.3 pos:7714722 chunknumber 16500 contains 10036 sites
+	-> Printing at chr: NC_025984.3 pos:10807466 chunknumber 16600 contains 9610 sites
+	-> Printing at chr: NC_025984.3 pos:16017940 chunknumber 16700 contains 296 sites
+	-> Printing at chr: NC_025984.3 pos:20843968 chunknumber 16800 contains 396 sites
+	-> Printing at chr: NC_025984.3 pos:25749984 chunknumber 16900 contains 9064 sites
+	-> Printing at chr: NC_025984.3 pos:28512431 chunknumber 17000 contains 11958 sites
+	-> Printing at chr: NC_025984.3 pos:31409264 chunknumber 17100 contains 3159 sites
+	-> Printing at chr: NC_025984.3 pos:35050018 chunknumber 17200 contains 107 sites
+	-> Printing at chr: NC_025984.3 pos:38832176 chunknumber 17300 contains 3790 sites
+[shared.cpp.changeChr():281] refid:17
+Charnge chr:17
+	-> Printing at chr: NC_025985.3 pos:3875992 chunknumber 17400 contains 12565 sites
+	-> Printing at chr: NC_025985.3 pos:7494770 chunknumber 17500 contains 12679 sites
+	-> Printing at chr: NC_025985.3 pos:11224581 chunknumber 17600 contains 24295 sites
+	-> Printing at chr: NC_025985.3 pos:14860241 chunknumber 17700 contains 1803 sites
+	-> Printing at chr: NC_025985.3 pos:17131355 chunknumber 17800 contains 10667 sites
+	-> Printing at chr: NC_025985.3 pos:19120349 chunknumber 17900 contains 3402 sites
+	-> Printing at chr: NC_025985.3 pos:20737897 chunknumber 18000 contains 4892 sites
+	-> Printing at chr: NC_025985.3 pos:22781323 chunknumber 18100 contains 27184 sites
+[shared.cpp.changeChr():281] refid:18
+Charnge chr:18
+	-> Printing at chr: NC_025986.3 pos:1203565 chunknumber 18200 contains 9101 sites
+	-> Printing at chr: NC_025986.3 pos:5036444 chunknumber 18300 contains 12620 sites
+	-> Printing at chr: NC_025986.3 pos:7627546 chunknumber 18400 contains 17592 sites
+	-> Printing at chr: NC_025986.3 pos:10080081 chunknumber 18500 contains 917 sites
+	-> Printing at chr: NC_025986.3 pos:12948119 chunknumber 18600 contains 1752 sites
+	-> Printing at chr: NC_025986.3 pos:16914842 chunknumber 18700 contains 23970 sites
+	-> Printing at chr: NC_025986.3 pos:21335359 chunknumber 18800 contains 7920 sites
+	-> Printing at chr: NC_025986.3 pos:26375745 chunknumber 18900 contains 1147 sites
+	-> Printing at chr: NC_025986.3 pos:29811028 chunknumber 19000 contains 260 sites
+	-> Printing at chr: NC_025986.3 pos:32143257 chunknumber 19100 contains 4980 sites
+	-> Printing at chr: NC_025986.3 pos:35670887 chunknumber 19200 contains 2072 sites
+	-> Printing at chr: NC_025986.3 pos:39583922 chunknumber 19300 contains 1150 sites
+[shared.cpp.changeChr():281] refid:19
+Charnge chr:19
+	-> Printing at chr: NC_025987.3 pos:3319856 chunknumber 19400 contains 4836 sites
+	-> Printing at chr: NC_025987.3 pos:6732642 chunknumber 19500 contains 4904 sites
+	-> Printing at chr: NC_025987.3 pos:10569296 chunknumber 19600 contains 262 sites
+	-> Printing at chr: NC_025987.3 pos:14835854 chunknumber 19700 contains 11514 sites
+	-> Printing at chr: NC_025987.3 pos:19208086 chunknumber 19800 contains 2495 sites
+	-> Printing at chr: NC_025987.3 pos:24167382 chunknumber 19900 contains 4849 sites
+	-> Printing at chr: NC_025987.3 pos:27730342 chunknumber 20000 contains 6848 sites
+	-> Printing at chr: NC_025987.3 pos:30200482 chunknumber 20100 contains 10092 sites
+	-> Printing at chr: NC_025987.3 pos:33270460 chunknumber 20200 contains 746 sites
+	-> Printing at chr: NC_025987.3 pos:35270796 chunknumber 20300 contains 10120 sites
+	-> Printing at chr: NC_025987.3 pos:39053534 chunknumber 20400 contains 12226 sites
+[shared.cpp.changeChr():281] refid:20
+Charnge chr:20
+
+	-> Allocated ~ 650 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 660 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 670 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 680 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 690 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 700 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 710 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 720 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 730 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 740 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 750 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 760 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 770 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 780 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 790 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 800 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 810 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 820 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 830 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 840 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 850 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 860 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 870 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 880 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 890 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 900 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 910 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 920 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 930 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 940 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 950 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 960 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 970 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 980 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 990 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1000 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1010 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1020 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1030 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1040 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1050 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1060 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1070 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1080 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1090 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1100 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1110 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1120 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1130 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1140 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1150 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1160 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1170 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1180 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1190 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1200 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1210 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1220 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1230 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1240 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1250 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1260 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1270 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1280 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1290 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1300 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1310 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1320 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1330 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1340 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1350 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1360 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1370 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1380 million nodes to the nodepool, this is not an estimate of the memory usage
+	-> Printing at chr: NC_025988.3 pos:918103 chunknumber 20500 contains 609 sites
+	-> Printing at chr: NC_025988.3 pos:3686375 chunknumber 20600 contains 3904 sites
+	-> Printing at chr: NC_025988.3 pos:7294403 chunknumber 20700 contains 2274 sites
+	-> Printing at chr: NC_025988.3 pos:12270345 chunknumber 20800 contains 12889 sites
+	-> Printing at chr: NC_025988.3 pos:14940082 chunknumber 20900 contains 3355 sites
+	-> Printing at chr: NC_025988.3 pos:17236585 chunknumber 21000 contains 293 sites
+	-> Printing at chr: NC_025988.3 pos:18700773 chunknumber 21100 contains 3882 sites
+	-> Printing at chr: NC_025988.3 pos:20821580 chunknumber 21200 contains 400 sites
+	-> Printing at chr: NC_025988.3 pos:24102815 chunknumber 21300 contains 5987 sites
+[shared.cpp.changeChr():281] refid:21
+Charnge chr:21
+	-> Printing at chr: NC_025989.3 pos:2554768 chunknumber 21400 contains 316 sites
+	-> Printing at chr: NC_025989.3 pos:4837168 chunknumber 21500 contains 10698 sites
+	-> Printing at chr: NC_025989.3 pos:7158450 chunknumber 21600 contains 3928 sites
+	-> Printing at chr: NC_025989.3 pos:8834930 chunknumber 21700 contains 5792 sites
+	-> Printing at chr: NC_025989.3 pos:11682371 chunknumber 21800 contains 22024 sites
+	-> Printing at chr: NC_025989.3 pos:14231398 chunknumber 21900 contains 2859 sites
+	-> Printing at chr: NC_025989.3 pos:16912680 chunknumber 22000 contains 565 sites
+	-> Printing at chr: NC_025989.3 pos:19615131 chunknumber 22100 contains 17802 sites
+[shared.cpp.changeChr():281] refid:22
+Charnge chr:22
+	-> Printing at chr: NC_025990.3 pos:2768120 chunknumber 22200 contains 2254 sites
+	-> Printing at chr: NC_025990.3 pos:5499846 chunknumber 22300 contains 814 sites
+	-> Printing at chr: NC_025990.3 pos:8606175 chunknumber 22400 contains 7573 sites
+	-> Printing at chr: NC_025990.3 pos:12041051 chunknumber 22500 contains 807 sites
+	-> Printing at chr: NC_025990.3 pos:15006201 chunknumber 22600 contains 3297 sites
+	-> Printing at chr: NC_025990.3 pos:17400679 chunknumber 22700 contains 11837 sites
+	-> Printing at chr: NC_025990.3 pos:19695393 chunknumber 22800 contains 1796 sites
+	-> Printing at chr: NC_025990.3 pos:21602220 chunknumber 22900 contains 2833 sites
+[shared.cpp.changeChr():281] refid:23
+Charnge chr:23
+	-> Printing at chr: NC_025991.3 pos:2389016 chunknumber 23000 contains 2286 sites
+	-> Printing at chr: NC_025991.3 pos:5092168 chunknumber 23100 contains 6102 sites
+	-> Printing at chr: NC_025991.3 pos:8795076 chunknumber 23200 contains 502 sites
+	-> Printing at chr: NC_025991.3 pos:11458238 chunknumber 23300 contains 252 sites
+	-> Printing at chr: NC_025991.3 pos:13298070 chunknumber 23400 contains 2257 sites
+	-> Printing at chr: NC_025991.3 pos:14977492 chunknumber 23500 contains 294 sites
+	-> Printing at chr: NC_025991.3 pos:16613308 chunknumber 23600 contains 694 sites
+	-> Printing at chr: NC_025991.3 pos:18773821 chunknumber 23700 contains 3171 sites
+	-> Printing at chr: NC_025991.3 pos:21640988 chunknumber 23800 contains 10841 sites
+[shared.cpp.changeChr():281] refid:24
+Charnge chr:24
+	-> Printing at chr: NC_025992.3 pos:3203585 chunknumber 23900 contains 3437 sites
+	-> Printing at chr: NC_025992.3 pos:6660501 chunknumber 24000 contains 1276 sites
+	-> Printing at chr: NC_025992.3 pos:8861413 chunknumber 24100 contains 3654 sites
+	-> Printing at chr: NC_025992.3 pos:10647458 chunknumber 24200 contains 4014 sites
+	-> Printing at chr: NC_025992.3 pos:12356605 chunknumber 24300 contains 803 sites
+	-> Printing at chr: NC_025992.3 pos:13519425 chunknumber 24400 contains 12500 sites
+	-> Printing at chr: NC_025992.3 pos:15879644 chunknumber 24500 contains 22447 sites
+	-> Printing at chr: NC_025992.3 pos:19632352 chunknumber 24600 contains 2393 sites
+[shared.cpp.changeChr():281] refid:26
+Charnge chr:26
+[shared.cpp.changeChr():281] refid:27
+Charnge chr:27
+[shared.cpp.changeChr():281] refid:28
+Charnge chr:28
+[shared.cpp.changeChr():281] refid:29
+Charnge chr:29
+[shared.cpp.changeChr():281] refid:31
+Charnge chr:31
+[shared.cpp.changeChr():281] refid:32
+Charnge chr:32
+[shared.cpp.changeChr():281] refid:33
+Charnge chr:33
+[shared.cpp.changeChr():281] refid:34
+Charnge chr:34
+[shared.cpp.changeChr():281] refid:36
+Charnge chr:36
+[shared.cpp.changeChr():281] refid:38
+Charnge chr:38
+[shared.cpp.changeChr():281] refid:39
+Charnge chr:39
+[shared.cpp.changeChr():281] refid:40
+Charnge chr:40
+[shared.cpp.changeChr():281] refid:41
+Charnge chr:41
+[shared.cpp.changeChr():281] refid:42
+Charnge chr:42
+[shared.cpp.changeChr():281] refid:43
+Charnge chr:43
+[shared.cpp.changeChr():281] refid:44
+Charnge chr:44
+[shared.cpp.changeChr():281] refid:45
+Charnge chr:45
+[shared.cpp.changeChr():281] refid:47
+Charnge chr:47
+[shared.cpp.changeChr():281] refid:48
+Charnge chr:48
+[shared.cpp.changeChr():281] refid:51
+Charnge chr:51
+[shared.cpp.changeChr():281] refid:52
+Charnge chr:52
+	-> Printing at chr: NW_017858675.1 pos:1450 chunknumber 24700 contains 6520 sites
+[shared.cpp.changeChr():281] refid:53
+Charnge chr:53
+[shared.cpp.changeChr():281] refid:55
+Charnge chr:55
+[shared.cpp.changeChr():281] refid:56
+Charnge chr:56
+[shared.cpp.changeChr():281] refid:57
+Charnge chr:57
+[shared.cpp.changeChr():281] refid:58
+Charnge chr:58
+[shared.cpp.changeChr():281] refid:59
+Charnge chr:59
+[shared.cpp.changeChr():281] refid:61
+Charnge chr:61
+[shared.cpp.changeChr():281] refid:62
+Charnge chr:62
+[shared.cpp.changeChr():281] refid:63
+Charnge chr:63
+[shared.cpp.changeChr():281] refid:64
+Charnge chr:64
+[shared.cpp.changeChr():281] refid:67
+Charnge chr:67
+[shared.cpp.changeChr():281] refid:68
+Charnge chr:68
+	-> Printing at chr: NW_017858691.1 pos:1846 chunknumber 24800 contains 5199 sites
+[shared.cpp.changeChr():281] refid:69
+Charnge chr:69
+[shared.cpp.changeChr():281] refid:70
+Charnge chr:70
+[shared.cpp.changeChr():281] refid:71
+Charnge chr:71
+[shared.cpp.changeChr():281] refid:72
+Charnge chr:72
+[shared.cpp.changeChr():281] refid:73
+Charnge chr:73
+[shared.cpp.changeChr():281] refid:74
+Charnge chr:74
+[shared.cpp.changeChr():281] refid:75
+Charnge chr:75
+[shared.cpp.changeChr():281] refid:76
+Charnge chr:76
+[shared.cpp.changeChr():281] refid:77
+Charnge chr:77
+[shared.cpp.changeChr():281] refid:78
+Charnge chr:78
+[shared.cpp.changeChr():281] refid:79
+Charnge chr:79
+[shared.cpp.changeChr():281] refid:80
+Charnge chr:80
+[shared.cpp.changeChr():281] refid:81
+Charnge chr:81
+[shared.cpp.changeChr():281] refid:82
+Charnge chr:82
+[shared.cpp.changeChr():281] refid:85
+Charnge chr:85
+[shared.cpp.changeChr():281] refid:86
+Charnge chr:86
+[shared.cpp.changeChr():281] refid:87
+Charnge chr:87
+[shared.cpp.changeChr():281] refid:88
+Charnge chr:88
+[shared.cpp.changeChr():281] refid:89
+Charnge chr:89
+[shared.cpp.changeChr():281] refid:90
+Charnge chr:90
+[shared.cpp.changeChr():281] refid:91
+Charnge chr:91
+[shared.cpp.changeChr():281] refid:92
+Charnge chr:92
+	-> Printing at chr: NW_017858715.1 pos:139467 chunknumber 24900 contains 1742 sites
+[shared.cpp.changeChr():281] refid:93
+Charnge chr:93
+[shared.cpp.changeChr():281] refid:94
+Charnge chr:94
+[shared.cpp.changeChr():281] refid:95
+Charnge chr:95
+[shared.cpp.changeChr():281] refid:96
+Charnge chr:96
+[shared.cpp.changeChr():281] refid:97
+Charnge chr:97
+[shared.cpp.changeChr():281] refid:98
+Charnge chr:98
+[shared.cpp.changeChr():281] refid:99
+Charnge chr:99
+[shared.cpp.changeChr():281] refid:100
+Charnge chr:100
+[shared.cpp.changeChr():281] refid:101
+Charnge chr:101
+[shared.cpp.changeChr():281] refid:102
+Charnge chr:102
+[shared.cpp.changeChr():281] refid:103
+Charnge chr:103
+[shared.cpp.changeChr():281] refid:104
+Charnge chr:104
+[shared.cpp.changeChr():281] refid:105
+Charnge chr:105
+[shared.cpp.changeChr():281] refid:106
+Charnge chr:106
+[shared.cpp.changeChr():281] refid:107
+Charnge chr:107
+	-> Printing at chr: NW_017858730.1 pos:416436 chunknumber 25000 contains 419 sites
+[shared.cpp.changeChr():281] refid:108
+Charnge chr:108
+[shared.cpp.changeChr():281] refid:109
+Charnge chr:109
+[shared.cpp.changeChr():281] refid:110
+Charnge chr:110
+[shared.cpp.changeChr():281] refid:111
+Charnge chr:111
+[shared.cpp.changeChr():281] refid:112
+Charnge chr:112
+[shared.cpp.changeChr():281] refid:116
+Charnge chr:116
+[shared.cpp.changeChr():281] refid:117
+Charnge chr:117
+[shared.cpp.changeChr():281] refid:118
+Charnge chr:118
+[shared.cpp.changeChr():281] refid:119
+Charnge chr:119
+[shared.cpp.changeChr():281] refid:120
+Charnge chr:120
+[shared.cpp.changeChr():281] refid:121
+Charnge chr:121
+[shared.cpp.changeChr():281] refid:122
+Charnge chr:122
+[shared.cpp.changeChr():281] refid:124
+Charnge chr:124
+	-> Printing at chr: NW_017858747.1 pos:114753 chunknumber 25100 contains 524 sites
+[shared.cpp.changeChr():281] refid:125
+Charnge chr:125
+[shared.cpp.changeChr():281] refid:126
+Charnge chr:126
+[shared.cpp.changeChr():281] refid:127
+Charnge chr:127
+[shared.cpp.changeChr():281] refid:128
+Charnge chr:128
+[shared.cpp.changeChr():281] refid:130
+Charnge chr:130
+[shared.cpp.changeChr():281] refid:131
+Charnge chr:131
+[shared.cpp.changeChr():281] refid:132
+Charnge chr:132
+[shared.cpp.changeChr():281] refid:134
+Charnge chr:134
+	-> Printing at chr: NW_017858757.1 pos:106624 chunknumber 25200 contains 94 sites
+[shared.cpp.changeChr():281] refid:135
+Charnge chr:135
+[shared.cpp.changeChr():281] refid:136
+Charnge chr:136
+[shared.cpp.changeChr():281] refid:137
+Charnge chr:137
+[shared.cpp.changeChr():281] refid:138
+Charnge chr:138
+[shared.cpp.changeChr():281] refid:139
+Charnge chr:139
+[shared.cpp.changeChr():281] refid:140
+Charnge chr:140
+[shared.cpp.changeChr():281] refid:141
+Charnge chr:141
+[shared.cpp.changeChr():281] refid:142
+Charnge chr:142
+[shared.cpp.changeChr():281] refid:143
+Charnge chr:143
+[shared.cpp.changeChr():281] refid:144
+Charnge chr:144
+[shared.cpp.changeChr():281] refid:145
+Charnge chr:145
+[shared.cpp.changeChr():281] refid:146
+Charnge chr:146
+[shared.cpp.changeChr():281] refid:147
+Charnge chr:147
+	-> Printing at chr: NW_017858770.1 pos:1424646 chunknumber 25300 contains 11805 sites
+[shared.cpp.changeChr():281] refid:149
+Charnge chr:149
+[shared.cpp.changeChr():281] refid:150
+Charnge chr:150
+[shared.cpp.changeChr():281] refid:151
+Charnge chr:151
+[shared.cpp.changeChr():281] refid:152
+Charnge chr:152
+[shared.cpp.changeChr():281] refid:153
+Charnge chr:153
+[shared.cpp.changeChr():281] refid:154
+Charnge chr:154
+[shared.cpp.changeChr():281] refid:155
+Charnge chr:155
+[shared.cpp.changeChr():281] refid:157
+Charnge chr:157
+[shared.cpp.changeChr():281] refid:158
+Charnge chr:158
+[shared.cpp.changeChr():281] refid:159
+Charnge chr:159
+[shared.cpp.changeChr():281] refid:160
+Charnge chr:160
+[shared.cpp.changeChr():281] refid:161
+Charnge chr:161
+[shared.cpp.changeChr():281] refid:162
+Charnge chr:162
+[shared.cpp.changeChr():281] refid:163
+Charnge chr:163
+[shared.cpp.changeChr():281] refid:164
+Charnge chr:164
+[shared.cpp.changeChr():281] refid:165
+Charnge chr:165
+[shared.cpp.changeChr():281] refid:166
+Charnge chr:166
+	-> Printing at chr: NW_017858789.1 pos:30561 chunknumber 25400 contains 261 sites
+[shared.cpp.changeChr():281] refid:167
+Charnge chr:167
+[shared.cpp.changeChr():281] refid:168
+Charnge chr:168
+[shared.cpp.changeChr():281] refid:169
+Charnge chr:169
+[shared.cpp.changeChr():281] refid:170
+Charnge chr:170
+[shared.cpp.changeChr():281] refid:172
+Charnge chr:172
+[shared.cpp.changeChr():281] refid:173
+Charnge chr:173
+[shared.cpp.changeChr():281] refid:174
+Charnge chr:174
+[shared.cpp.changeChr():281] refid:175
+Charnge chr:175
+[shared.cpp.changeChr():281] refid:177
+Charnge chr:177
+[shared.cpp.changeChr():281] refid:178
+Charnge chr:178
+[shared.cpp.changeChr():281] refid:179
+Charnge chr:179
+[shared.cpp.changeChr():281] refid:180
+Charnge chr:180
+[shared.cpp.changeChr():281] refid:182
+Charnge chr:182
+[shared.cpp.changeChr():281] refid:183
+Charnge chr:183
+[shared.cpp.changeChr():281] refid:184
+Charnge chr:184
+[shared.cpp.changeChr():281] refid:185
+Charnge chr:185
+[shared.cpp.changeChr():281] refid:186
+Charnge chr:186
+[shared.cpp.changeChr():281] refid:188
+Charnge chr:188
+[shared.cpp.changeChr():281] refid:189
+Charnge chr:189
+[shared.cpp.changeChr():281] refid:190
+Charnge chr:190
+	-> Printing at chr: NW_017858813.1 pos:202902 chunknumber 25500 contains 8954 sites
+[shared.cpp.changeChr():281] refid:191
+Charnge chr:191
+[shared.cpp.changeChr():281] refid:192
+Charnge chr:192
+[shared.cpp.changeChr():281] refid:193
+Charnge chr:193
+[shared.cpp.changeChr():281] refid:194
+Charnge chr:194
+[shared.cpp.changeChr():281] refid:195
+Charnge chr:195
+[shared.cpp.changeChr():281] refid:196
+Charnge chr:196
+[shared.cpp.changeChr():281] refid:198
+Charnge chr:198
+[shared.cpp.changeChr():281] refid:199
+Charnge chr:199
+[shared.cpp.changeChr():281] refid:200
+Charnge chr:200
+[shared.cpp.changeChr():281] refid:201
+Charnge chr:201
+[shared.cpp.changeChr():281] refid:202
+Charnge chr:202
+[shared.cpp.changeChr():281] refid:203
+Charnge chr:203
+[shared.cpp.changeChr():281] refid:204
+Charnge chr:204
+[shared.cpp.changeChr():281] refid:205
+Charnge chr:205
+[shared.cpp.changeChr():281] refid:207
+Charnge chr:207
+[shared.cpp.changeChr():281] refid:208
+Charnge chr:208
+[shared.cpp.changeChr():281] refid:209
+Charnge chr:209
+[shared.cpp.changeChr():281] refid:210
+Charnge chr:210
+[shared.cpp.changeChr():281] refid:211
+Charnge chr:211
+[shared.cpp.changeChr():281] refid:212
+Charnge chr:212
+[shared.cpp.changeChr():281] refid:213
+Charnge chr:213
+[shared.cpp.changeChr():281] refid:215
+Charnge chr:215
+[shared.cpp.changeChr():281] refid:216
+Charnge chr:216
+[shared.cpp.changeChr():281] refid:217
+Charnge chr:217
+[shared.cpp.changeChr():281] refid:218
+Charnge chr:218
+[shared.cpp.changeChr():281] refid:219
+Charnge chr:219
+	-> Printing at chr: NW_017858842.1 pos:116292 chunknumber 25600 contains 42494 sites
+[shared.cpp.changeChr():281] refid:220
+Charnge chr:220
+[shared.cpp.changeChr():281] refid:221
+Charnge chr:221
+[shared.cpp.changeChr():281] refid:222
+Charnge chr:222
+[shared.cpp.changeChr():281] refid:223
+Charnge chr:223
+[shared.cpp.changeChr():281] refid:225
+Charnge chr:225
+[shared.cpp.changeChr():281] refid:226
+Charnge chr:226
+[shared.cpp.changeChr():281] refid:227
+Charnge chr:227
+[shared.cpp.changeChr():281] refid:228
+Charnge chr:228
+[shared.cpp.changeChr():281] refid:229
+Charnge chr:229
+[shared.cpp.changeChr():281] refid:231
+Charnge chr:231
+[shared.cpp.changeChr():281] refid:233
+Charnge chr:233
+[shared.cpp.changeChr():281] refid:235
+Charnge chr:235
+[shared.cpp.changeChr():281] refid:237
+Charnge chr:237
+[shared.cpp.changeChr():281] refid:238
+Charnge chr:238
+[shared.cpp.changeChr():281] refid:239
+Charnge chr:239
+[shared.cpp.changeChr():281] refid:240
+Charnge chr:240
+[shared.cpp.changeChr():281] refid:241
+Charnge chr:241
+	-> Printing at chr: NW_017858864.1 pos:40691 chunknumber 25700 contains 714 sites
+[shared.cpp.changeChr():281] refid:242
+Charnge chr:242
+[shared.cpp.changeChr():281] refid:243
+Charnge chr:243
+[shared.cpp.changeChr():281] refid:244
+Charnge chr:244
+[shared.cpp.changeChr():281] refid:245
+Charnge chr:245
+[shared.cpp.changeChr():281] refid:246
+Charnge chr:246
+[shared.cpp.changeChr():281] refid:247
+Charnge chr:247
+[shared.cpp.changeChr():281] refid:248
+Charnge chr:248
+[shared.cpp.changeChr():281] refid:249
+Charnge chr:249
+[shared.cpp.changeChr():281] refid:251
+Charnge chr:251
+[shared.cpp.changeChr():281] refid:252
+Charnge chr:252
+[shared.cpp.changeChr():281] refid:253
+Charnge chr:253
+[shared.cpp.changeChr():281] refid:254
+Charnge chr:254
+[shared.cpp.changeChr():281] refid:255
+Charnge chr:255
+[shared.cpp.changeChr():281] refid:256
+Charnge chr:256
+[shared.cpp.changeChr():281] refid:257
+Charnge chr:257
+[shared.cpp.changeChr():281] refid:258
+Charnge chr:258
+[shared.cpp.changeChr():281] refid:259
+Charnge chr:259
+	-> Printing at chr: NW_017858882.1 pos:3371 chunknumber 25800 contains 3852 sites
+[shared.cpp.changeChr():281] refid:260
+Charnge chr:260
+[shared.cpp.changeChr():281] refid:261
+Charnge chr:261
+[shared.cpp.changeChr():281] refid:262
+Charnge chr:262
+[shared.cpp.changeChr():281] refid:263
+Charnge chr:263
+[shared.cpp.changeChr():281] refid:264
+Charnge chr:264
+[shared.cpp.changeChr():281] refid:265
+Charnge chr:265
+[shared.cpp.changeChr():281] refid:266
+Charnge chr:266
+[shared.cpp.changeChr():281] refid:267
+Charnge chr:267
+[shared.cpp.changeChr():281] refid:268
+Charnge chr:268
+[shared.cpp.changeChr():281] refid:269
+Charnge chr:269
+[shared.cpp.changeChr():281] refid:271
+Charnge chr:271
+[shared.cpp.changeChr():281] refid:272
+Charnge chr:272
+[shared.cpp.changeChr():281] refid:273
+Charnge chr:273
+[shared.cpp.changeChr():281] refid:274
+Charnge chr:274
+[shared.cpp.changeChr():281] refid:275
+Charnge chr:275
+[shared.cpp.changeChr():281] refid:276
+Charnge chr:276
+[shared.cpp.changeChr():281] refid:277
+Charnge chr:277
+[shared.cpp.changeChr():281] refid:278
+Charnge chr:278
+[shared.cpp.changeChr():281] refid:279
+Charnge chr:279
+[shared.cpp.changeChr():281] refid:280
+Charnge chr:280
+	-> Printing at chr: NW_017858903.1 pos:226185 chunknumber 25900 contains 6879 sites
+[shared.cpp.changeChr():281] refid:281
+Charnge chr:281
+[shared.cpp.changeChr():281] refid:282
+Charnge chr:282
+[shared.cpp.changeChr():281] refid:283
+Charnge chr:283
+[shared.cpp.changeChr():281] refid:284
+Charnge chr:284
+[shared.cpp.changeChr():281] refid:286
+Charnge chr:286
+[shared.cpp.changeChr():281] refid:287
+Charnge chr:287
+[shared.cpp.changeChr():281] refid:289
+Charnge chr:289
+[shared.cpp.changeChr():281] refid:290
+Charnge chr:290
+[shared.cpp.changeChr():281] refid:291
+Charnge chr:291
+[shared.cpp.changeChr():281] refid:292
+Charnge chr:292
+[shared.cpp.changeChr():281] refid:293
+Charnge chr:293
+[shared.cpp.changeChr():281] refid:295
+Charnge chr:295
+[shared.cpp.changeChr():281] refid:296
+Charnge chr:296
+[shared.cpp.changeChr():281] refid:297
+Charnge chr:297
+[shared.cpp.changeChr():281] refid:298
+Charnge chr:298
+[shared.cpp.changeChr():281] refid:299
+Charnge chr:299
+[shared.cpp.changeChr():281] refid:300
+Charnge chr:300
+[shared.cpp.changeChr():281] refid:301
+Charnge chr:301
+[shared.cpp.changeChr():281] refid:302
+Charnge chr:302
+	-> Printing at chr: NW_017858925.1 pos:107 chunknumber 26000 contains 93 sites
+[shared.cpp.changeChr():281] refid:303
+Charnge chr:303
+[shared.cpp.changeChr():281] refid:305
+Charnge chr:305
+[shared.cpp.changeChr():281] refid:306
+Charnge chr:306
+[shared.cpp.changeChr():281] refid:307
+Charnge chr:307
+[shared.cpp.changeChr():281] refid:308
+Charnge chr:308
+[shared.cpp.changeChr():281] refid:309
+Charnge chr:309
+[shared.cpp.changeChr():281] refid:311
+Charnge chr:311
+[shared.cpp.changeChr():281] refid:312
+Charnge chr:312
+[shared.cpp.changeChr():281] refid:313
+Charnge chr:313
+	-> Printing at chr: NW_017858936.1 pos:20653 chunknumber 26100 contains 1024 sites
+[shared.cpp.changeChr():281] refid:314
+Charnge chr:314
+[shared.cpp.changeChr():281] refid:315
+Charnge chr:315
+[shared.cpp.changeChr():281] refid:316
+Charnge chr:316
+[shared.cpp.changeChr():281] refid:317
+Charnge chr:317
+[shared.cpp.changeChr():281] refid:318
+Charnge chr:318
+[shared.cpp.changeChr():281] refid:320
+Charnge chr:320
+[shared.cpp.changeChr():281] refid:321
+Charnge chr:321
+[shared.cpp.changeChr():281] refid:323
+Charnge chr:323
+[shared.cpp.changeChr():281] refid:325
+Charnge chr:325
+[shared.cpp.changeChr():281] refid:326
+Charnge chr:326
+[shared.cpp.changeChr():281] refid:327
+Charnge chr:327
+[shared.cpp.changeChr():281] refid:328
+Charnge chr:328
+[shared.cpp.changeChr():281] refid:329
+Charnge chr:329
+[shared.cpp.changeChr():281] refid:330
+Charnge chr:330
+[shared.cpp.changeChr():281] refid:331
+Charnge chr:331
+[shared.cpp.changeChr():281] refid:334
+Charnge chr:334
+[shared.cpp.changeChr():281] refid:335
+Charnge chr:335
+[shared.cpp.changeChr():281] refid:336
+Charnge chr:336
+[shared.cpp.changeChr():281] refid:337
+Charnge chr:337
+	-> Printing at chr: NW_017858960.1 pos:207156 chunknumber 26200 contains 252 sites
+[shared.cpp.changeChr():281] refid:338
+Charnge chr:338
+[shared.cpp.changeChr():281] refid:339
+Charnge chr:339
+[shared.cpp.changeChr():281] refid:340
+Charnge chr:340
+[shared.cpp.changeChr():281] refid:343
+Charnge chr:343
+[shared.cpp.changeChr():281] refid:344
+Charnge chr:344
+[shared.cpp.changeChr():281] refid:345
+Charnge chr:345
+[shared.cpp.changeChr():281] refid:346
+Charnge chr:346
+[shared.cpp.changeChr():281] refid:347
+Charnge chr:347
+[shared.cpp.changeChr():281] refid:348
+Charnge chr:348
+[shared.cpp.changeChr():281] refid:349
+Charnge chr:349
+[shared.cpp.changeChr():281] refid:350
+Charnge chr:350
+[shared.cpp.changeChr():281] refid:351
+Charnge chr:351
+	-> Printing at chr: NW_017858974.1 pos:425188 chunknumber 26300 contains 255 sites
+[shared.cpp.changeChr():281] refid:352
+Charnge chr:352
+[shared.cpp.changeChr():281] refid:353
+Charnge chr:353
+[shared.cpp.changeChr():281] refid:356
+Charnge chr:356
+[shared.cpp.changeChr():281] refid:357
+Charnge chr:357
+[shared.cpp.changeChr():281] refid:358
+Charnge chr:358
+[shared.cpp.changeChr():281] refid:359
+Charnge chr:359
+[shared.cpp.changeChr():281] refid:360
+Charnge chr:360
+[shared.cpp.changeChr():281] refid:361
+Charnge chr:361
+[shared.cpp.changeChr():281] refid:363
+Charnge chr:363
+[shared.cpp.changeChr():281] refid:364
+Charnge chr:364
+[shared.cpp.changeChr():281] refid:365
+Charnge chr:365
+[shared.cpp.changeChr():281] refid:366
+Charnge chr:366
+[shared.cpp.changeChr():281] refid:367
+Charnge chr:367
+[shared.cpp.changeChr():281] refid:369
+Charnge chr:369
+[shared.cpp.changeChr():281] refid:370
+Charnge chr:370
+[shared.cpp.changeChr():281] refid:371
+Charnge chr:371
+[shared.cpp.changeChr():281] refid:372
+Charnge chr:372
+[shared.cpp.changeChr():281] refid:373
+Charnge chr:373
+[shared.cpp.changeChr():281] refid:374
+Charnge chr:374
+[shared.cpp.changeChr():281] refid:375
+Charnge chr:375
+	-> Printing at chr: NW_017858998.1 pos:64002 chunknumber 26400 contains 2481 sites
+[shared.cpp.changeChr():281] refid:376
+Charnge chr:376
+[shared.cpp.changeChr():281] refid:377
+Charnge chr:377
+[shared.cpp.changeChr():281] refid:378
+Charnge chr:378
+[shared.cpp.changeChr():281] refid:379
+Charnge chr:379
+[shared.cpp.changeChr():281] refid:380
+Charnge chr:380
+[shared.cpp.changeChr():281] refid:381
+Charnge chr:381
+[shared.cpp.changeChr():281] refid:382
+Charnge chr:382
+[shared.cpp.changeChr():281] refid:384
+Charnge chr:384
+[shared.cpp.changeChr():281] refid:385
+Charnge chr:385
+[shared.cpp.changeChr():281] refid:386
+Charnge chr:386
+[shared.cpp.changeChr():281] refid:387
+Charnge chr:387
+[shared.cpp.changeChr():281] refid:388
+Charnge chr:388
+[shared.cpp.changeChr():281] refid:389
+Charnge chr:389
+[shared.cpp.changeChr():281] refid:390
+Charnge chr:390
+[shared.cpp.changeChr():281] refid:391
+Charnge chr:391
+[shared.cpp.changeChr():281] refid:392
+Charnge chr:392
+[shared.cpp.changeChr():281] refid:394
+Charnge chr:394
+[shared.cpp.changeChr():281] refid:395
+Charnge chr:395
+	-> Printing at chr: NW_017859018.1 pos:1274 chunknumber 26500 contains 326 sites
+[shared.cpp.changeChr():281] refid:396
+Charnge chr:396
+[shared.cpp.changeChr():281] refid:397
+Charnge chr:397
+[shared.cpp.changeChr():281] refid:398
+Charnge chr:398
+[shared.cpp.changeChr():281] refid:399
+Charnge chr:399
+[shared.cpp.changeChr():281] refid:400
+Charnge chr:400
+[shared.cpp.changeChr():281] refid:401
+Charnge chr:401
+[shared.cpp.changeChr():281] refid:402
+Charnge chr:402
+[shared.cpp.changeChr():281] refid:403
+Charnge chr:403
+[shared.cpp.changeChr():281] refid:404
+Charnge chr:404
+[shared.cpp.changeChr():281] refid:405
+Charnge chr:405
+[shared.cpp.changeChr():281] refid:406
+Charnge chr:406
+[shared.cpp.changeChr():281] refid:409
+Charnge chr:409
+[shared.cpp.changeChr():281] refid:411
+Charnge chr:411
+[shared.cpp.changeChr():281] refid:413
+Charnge chr:413
+[shared.cpp.changeChr():281] refid:414
+Charnge chr:414
+[shared.cpp.changeChr():281] refid:415
+Charnge chr:415
+	-> Printing at chr: NW_017859038.1 pos:9325 chunknumber 26600 contains 193 sites
+[shared.cpp.changeChr():281] refid:417
+Charnge chr:417
+[shared.cpp.changeChr():281] refid:418
+Charnge chr:418
+[shared.cpp.changeChr():281] refid:419
+Charnge chr:419
+[shared.cpp.changeChr():281] refid:420
+Charnge chr:420
+[shared.cpp.changeChr():281] refid:421
+Charnge chr:421
+[shared.cpp.changeChr():281] refid:422
+Charnge chr:422
+[shared.cpp.changeChr():281] refid:423
+Charnge chr:423
+[shared.cpp.changeChr():281] refid:424
+Charnge chr:424
+[shared.cpp.changeChr():281] refid:425
+Charnge chr:425
+[shared.cpp.changeChr():281] refid:426
+Charnge chr:426
+[shared.cpp.changeChr():281] refid:427
+Charnge chr:427
+[shared.cpp.changeChr():281] refid:428
+Charnge chr:428
+[shared.cpp.changeChr():281] refid:429
+Charnge chr:429
+[shared.cpp.changeChr():281] refid:431
+Charnge chr:431
+[shared.cpp.changeChr():281] refid:432
+Charnge chr:432
+[shared.cpp.changeChr():281] refid:433
+Charnge chr:433
+[shared.cpp.changeChr():281] refid:434
+Charnge chr:434
+[shared.cpp.changeChr():281] refid:435
+Charnge chr:435
+[shared.cpp.changeChr():281] refid:436
+Charnge chr:436
+[shared.cpp.changeChr():281] refid:437
+Charnge chr:437
+[shared.cpp.changeChr():281] refid:438
+Charnge chr:438
+	-> Printing at chr: NW_017859061.1 pos:80108 chunknumber 26700 contains 774 sites
+[shared.cpp.changeChr():281] refid:439
+Charnge chr:439
+[shared.cpp.changeChr():281] refid:440
+Charnge chr:440
+[shared.cpp.changeChr():281] refid:441
+Charnge chr:441
+[shared.cpp.changeChr():281] refid:442
+Charnge chr:442
+[shared.cpp.changeChr():281] refid:443
+Charnge chr:443
+[shared.cpp.changeChr():281] refid:444
+Charnge chr:444
+[shared.cpp.changeChr():281] refid:445
+Charnge chr:445
+[shared.cpp.changeChr():281] refid:446
+Charnge chr:446
+[shared.cpp.changeChr():281] refid:448
+Charnge chr:448
+[shared.cpp.changeChr():281] refid:449
+Charnge chr:449
+[shared.cpp.changeChr():281] refid:450
+Charnge chr:450
+[shared.cpp.changeChr():281] refid:452
+Charnge chr:452
+[shared.cpp.changeChr():281] refid:453
+Charnge chr:453
+[shared.cpp.changeChr():281] refid:454
+Charnge chr:454
+[shared.cpp.changeChr():281] refid:455
+Charnge chr:455
+[shared.cpp.changeChr():281] refid:456
+Charnge chr:456
+[shared.cpp.changeChr():281] refid:457
+Charnge chr:457
+[shared.cpp.changeChr():281] refid:458
+Charnge chr:458
+[shared.cpp.changeChr():281] refid:460
+Charnge chr:460
+[shared.cpp.changeChr():281] refid:461
+Charnge chr:461
+[shared.cpp.changeChr():281] refid:463
+Charnge chr:463
+	-> Printing at chr: NW_017859086.1 pos:13205 chunknumber 26800 contains 272 sites
+[shared.cpp.changeChr():281] refid:464
+Charnge chr:464
+[shared.cpp.changeChr():281] refid:465
+Charnge chr:465
+[shared.cpp.changeChr():281] refid:467
+Charnge chr:467
+[shared.cpp.changeChr():281] refid:468
+Charnge chr:468
+[shared.cpp.changeChr():281] refid:469
+Charnge chr:469
+[shared.cpp.changeChr():281] refid:470
+Charnge chr:470
+[shared.cpp.changeChr():281] refid:472
+Charnge chr:472
+[shared.cpp.changeChr():281] refid:473
+Charnge chr:473
+[shared.cpp.changeChr():281] refid:474
+Charnge chr:474
+[shared.cpp.changeChr():281] refid:476
+Charnge chr:476
+[shared.cpp.changeChr():281] refid:477
+Charnge chr:477
+[shared.cpp.changeChr():281] refid:479
+Charnge chr:479
+[shared.cpp.changeChr():281] refid:480
+Charnge chr:480
+[shared.cpp.changeChr():281] refid:482
+Charnge chr:482
+[shared.cpp.changeChr():281] refid:483
+Charnge chr:483
+[shared.cpp.changeChr():281] refid:484
+Charnge chr:484
+[shared.cpp.changeChr():281] refid:485
+Charnge chr:485
+[shared.cpp.changeChr():281] refid:486
+Charnge chr:486
+[shared.cpp.changeChr():281] refid:487
+Charnge chr:487
+	-> Printing at chr: NW_017859110.1 pos:20248 chunknumber 26900 contains 3651 sites
+[shared.cpp.changeChr():281] refid:489
+Charnge chr:489
+[shared.cpp.changeChr():281] refid:490
+Charnge chr:490
+[shared.cpp.changeChr():281] refid:491
+Charnge chr:491
+[shared.cpp.changeChr():281] refid:492
+Charnge chr:492
+[shared.cpp.changeChr():281] refid:493
+Charnge chr:493
+[shared.cpp.changeChr():281] refid:495
+Charnge chr:495
+	-> Printing at chr: NW_017859118.1 pos:368427 chunknumber 27000 contains 7230 sites
+[shared.cpp.changeChr():281] refid:496
+Charnge chr:496
+[shared.cpp.changeChr():281] refid:497
+Charnge chr:497
+[shared.cpp.changeChr():281] refid:498
+Charnge chr:498
+[shared.cpp.changeChr():281] refid:499
+Charnge chr:499
+[shared.cpp.changeChr():281] refid:500
+Charnge chr:500
+[shared.cpp.changeChr():281] refid:502
+Charnge chr:502
+[shared.cpp.changeChr():281] refid:503
+Charnge chr:503
+[shared.cpp.changeChr():281] refid:504
+Charnge chr:504
+[shared.cpp.changeChr():281] refid:505
+Charnge chr:505
+[shared.cpp.changeChr():281] refid:506
+Charnge chr:506
+[shared.cpp.changeChr():281] refid:507
+Charnge chr:507
+[shared.cpp.changeChr():281] refid:508
+Charnge chr:508
+[shared.cpp.changeChr():281] refid:509
+Charnge chr:509
+[shared.cpp.changeChr():281] refid:510
+Charnge chr:510
+	-> Printing at chr: NW_017859133.1 pos:66997 chunknumber 27100 contains 18436 sites
+[shared.cpp.changeChr():281] refid:511
+Charnge chr:511
+[shared.cpp.changeChr():281] refid:513
+Charnge chr:513
+[shared.cpp.changeChr():281] refid:514
+Charnge chr:514
+[shared.cpp.changeChr():281] refid:515
+Charnge chr:515
+[shared.cpp.changeChr():281] refid:517
+Charnge chr:517
+[shared.cpp.changeChr():281] refid:518
+Charnge chr:518
+[shared.cpp.changeChr():281] refid:519
+Charnge chr:519
+[shared.cpp.changeChr():281] refid:520
+Charnge chr:520
+[shared.cpp.changeChr():281] refid:521
+Charnge chr:521
+[shared.cpp.changeChr():281] refid:522
+Charnge chr:522
+[shared.cpp.changeChr():281] refid:523
+Charnge chr:523
+[shared.cpp.changeChr():281] refid:524
+Charnge chr:524
+[shared.cpp.changeChr():281] refid:526
+Charnge chr:526
+[shared.cpp.changeChr():281] refid:527
+Charnge chr:527
+[shared.cpp.changeChr():281] refid:528
+Charnge chr:528
+[shared.cpp.changeChr():281] refid:529
+Charnge chr:529
+[shared.cpp.changeChr():281] refid:530
+Charnge chr:530
+[shared.cpp.changeChr():281] refid:531
+Charnge chr:531
+[shared.cpp.changeChr():281] refid:532
+Charnge chr:532
+[shared.cpp.changeChr():281] refid:533
+Charnge chr:533
+[shared.cpp.changeChr():281] refid:534
+Charnge chr:534
+[shared.cpp.changeChr():281] refid:535
+Charnge chr:535
+	-> Printing at chr: NW_017859158.1 pos:100967 chunknumber 27200 contains 834 sites
+[shared.cpp.changeChr():281] refid:536
+Charnge chr:536
+[shared.cpp.changeChr():281] refid:538
+Charnge chr:538
+[shared.cpp.changeChr():281] refid:539
+Charnge chr:539
+[shared.cpp.changeChr():281] refid:541
+Charnge chr:541
+[shared.cpp.changeChr():281] refid:542
+Charnge chr:542
+[shared.cpp.changeChr():281] refid:543
+Charnge chr:543
+[shared.cpp.changeChr():281] refid:544
+Charnge chr:544
+[shared.cpp.changeChr():281] refid:545
+Charnge chr:545
+[shared.cpp.changeChr():281] refid:547
+Charnge chr:547
+[shared.cpp.changeChr():281] refid:548
+Charnge chr:548
+[shared.cpp.changeChr():281] refid:549
+Charnge chr:549
+[shared.cpp.changeChr():281] refid:550
+Charnge chr:550
+[shared.cpp.changeChr():281] refid:551
+Charnge chr:551
+[shared.cpp.changeChr():281] refid:552
+Charnge chr:552
+[shared.cpp.changeChr():281] refid:554
+Charnge chr:554
+[shared.cpp.changeChr():281] refid:555
+Charnge chr:555
+[shared.cpp.changeChr():281] refid:556
+Charnge chr:556
+	-> Printing at chr: NW_017859179.1 pos:746 chunknumber 27300 contains 399 sites
+[shared.cpp.changeChr():281] refid:557
+Charnge chr:557
+[shared.cpp.changeChr():281] refid:559
+Charnge chr:559
+[shared.cpp.changeChr():281] refid:560
+Charnge chr:560
+[shared.cpp.changeChr():281] refid:561
+Charnge chr:561
+[shared.cpp.changeChr():281] refid:562
+Charnge chr:562
+[shared.cpp.changeChr():281] refid:563
+Charnge chr:563
+[shared.cpp.changeChr():281] refid:564
+Charnge chr:564
+[shared.cpp.changeChr():281] refid:565
+Charnge chr:565
+[shared.cpp.changeChr():281] refid:566
+Charnge chr:566
+[shared.cpp.changeChr():281] refid:567
+Charnge chr:567
+[shared.cpp.changeChr():281] refid:568
+Charnge chr:568
+[shared.cpp.changeChr():281] refid:569
+Charnge chr:569
+[shared.cpp.changeChr():281] refid:570
+Charnge chr:570
+[shared.cpp.changeChr():281] refid:571
+Charnge chr:571
+	-> Printing at chr: NW_017859194.1 pos:7921 chunknumber 27400 contains 34 sites
+[shared.cpp.changeChr():281] refid:573
+Charnge chr:573
+[shared.cpp.changeChr():281] refid:574
+Charnge chr:574
+[shared.cpp.changeChr():281] refid:575
+Charnge chr:575
+[shared.cpp.changeChr():281] refid:576
+Charnge chr:576
+[shared.cpp.changeChr():281] refid:577
+Charnge chr:577
+[shared.cpp.changeChr():281] refid:579
+Charnge chr:579
+[shared.cpp.changeChr():281] refid:580
+Charnge chr:580
+[shared.cpp.changeChr():281] refid:581
+Charnge chr:581
+[shared.cpp.changeChr():281] refid:582
+Charnge chr:582
+[shared.cpp.changeChr():281] refid:583
+Charnge chr:583
+[shared.cpp.changeChr():281] refid:584
+Charnge chr:584
+[shared.cpp.changeChr():281] refid:586
+Charnge chr:586
+[shared.cpp.changeChr():281] refid:587
+Charnge chr:587
+[shared.cpp.changeChr():281] refid:588
+Charnge chr:588
+[shared.cpp.changeChr():281] refid:589
+Charnge chr:589
+[shared.cpp.changeChr():281] refid:590
+Charnge chr:590
+[shared.cpp.changeChr():281] refid:591
+Charnge chr:591
+[shared.cpp.changeChr():281] refid:592
+Charnge chr:592
+[shared.cpp.changeChr():281] refid:593
+Charnge chr:593
+[shared.cpp.changeChr():281] refid:594
+Charnge chr:594
+	-> Printing at chr: NW_017859217.1 pos:958 chunknumber 27500 contains 1679 sites
+[shared.cpp.changeChr():281] refid:595
+Charnge chr:595
+[shared.cpp.changeChr():281] refid:596
+Charnge chr:596
+[shared.cpp.changeChr():281] refid:597
+Charnge chr:597
+[shared.cpp.changeChr():281] refid:598
+Charnge chr:598
+[shared.cpp.changeChr():281] refid:599
+Charnge chr:599
+[shared.cpp.changeChr():281] refid:600
+Charnge chr:600
+[shared.cpp.changeChr():281] refid:601
+Charnge chr:601
+[shared.cpp.changeChr():281] refid:602
+Charnge chr:602
+[shared.cpp.changeChr():281] refid:603
+Charnge chr:603
+[shared.cpp.changeChr():281] refid:604
+Charnge chr:604
+[shared.cpp.changeChr():281] refid:605
+Charnge chr:605
+[shared.cpp.changeChr():281] refid:608
+Charnge chr:608
+[shared.cpp.changeChr():281] refid:610
+Charnge chr:610
+[shared.cpp.changeChr():281] refid:611
+Charnge chr:611
+[shared.cpp.changeChr():281] refid:612
+Charnge chr:612
+[shared.cpp.changeChr():281] refid:613
+Charnge chr:613
+	-> Printing at chr: NW_017859236.1 pos:7843 chunknumber 27600 contains 372 sites
+[shared.cpp.changeChr():281] refid:614
+Charnge chr:614
+[shared.cpp.changeChr():281] refid:615
+Charnge chr:615
+[shared.cpp.changeChr():281] refid:616
+Charnge chr:616
+[shared.cpp.changeChr():281] refid:617
+Charnge chr:617
+[shared.cpp.changeChr():281] refid:619
+Charnge chr:619
+[shared.cpp.changeChr():281] refid:620
+Charnge chr:620
+[shared.cpp.changeChr():281] refid:621
+Charnge chr:621
+[shared.cpp.changeChr():281] refid:622
+Charnge chr:622
+[shared.cpp.changeChr():281] refid:624
+Charnge chr:624
+[shared.cpp.changeChr():281] refid:625
+Charnge chr:625
+[shared.cpp.changeChr():281] refid:626
+Charnge chr:626
+[shared.cpp.changeChr():281] refid:627
+Charnge chr:627
+[shared.cpp.changeChr():281] refid:628
+Charnge chr:628
+[shared.cpp.changeChr():281] refid:629
+Charnge chr:629
+[shared.cpp.changeChr():281] refid:630
+Charnge chr:630
+[shared.cpp.changeChr():281] refid:631
+Charnge chr:631
+[shared.cpp.changeChr():281] refid:632
+Charnge chr:632
+[shared.cpp.changeChr():281] refid:633
+Charnge chr:633
+[shared.cpp.changeChr():281] refid:634
+Charnge chr:634
+	-> Printing at chr: NW_017859257.1 pos:40667 chunknumber 27700 contains 1303 sites
+[shared.cpp.changeChr():281] refid:635
+Charnge chr:635
+[shared.cpp.changeChr():281] refid:636
+Charnge chr:636
+[shared.cpp.changeChr():281] refid:637
+Charnge chr:637
+[shared.cpp.changeChr():281] refid:640
+Charnge chr:640
+[shared.cpp.changeChr():281] refid:641
+Charnge chr:641
+[shared.cpp.changeChr():281] refid:642
+Charnge chr:642
+[shared.cpp.changeChr():281] refid:644
+Charnge chr:644
+[shared.cpp.changeChr():281] refid:646
+Charnge chr:646
+[shared.cpp.changeChr():281] refid:647
+Charnge chr:647
+[shared.cpp.changeChr():281] refid:648
+Charnge chr:648
+[shared.cpp.changeChr():281] refid:650
+Charnge chr:650
+[shared.cpp.changeChr():281] refid:651
+Charnge chr:651
+[shared.cpp.changeChr():281] refid:652
+Charnge chr:652
+[shared.cpp.changeChr():281] refid:653
+Charnge chr:653
+[shared.cpp.changeChr():281] refid:656
+Charnge chr:656
+	-> Printing at chr: NW_017859279.1 pos:1882 chunknumber 27800 contains 17511 sites
+[shared.cpp.changeChr():281] refid:657
+Charnge chr:657
+[shared.cpp.changeChr():281] refid:658
+Charnge chr:658
+[shared.cpp.changeChr():281] refid:659
+Charnge chr:659
+[shared.cpp.changeChr():281] refid:660
+Charnge chr:660
+[shared.cpp.changeChr():281] refid:661
+Charnge chr:661
+[shared.cpp.changeChr():281] refid:662
+Charnge chr:662
+[shared.cpp.changeChr():281] refid:664
+Charnge chr:664
+[shared.cpp.changeChr():281] refid:665
+Charnge chr:665
+[shared.cpp.changeChr():281] refid:666
+Charnge chr:666
+[shared.cpp.changeChr():281] refid:667
+Charnge chr:667
+[shared.cpp.changeChr():281] refid:668
+Charnge chr:668
+[shared.cpp.changeChr():281] refid:669
+Charnge chr:669
+[shared.cpp.changeChr():281] refid:670
+Charnge chr:670
+[shared.cpp.changeChr():281] refid:671
+Charnge chr:671
+[shared.cpp.changeChr():281] refid:672
+Charnge chr:672
+[shared.cpp.changeChr():281] refid:674
+Charnge chr:674
+[shared.cpp.changeChr():281] refid:675
+Charnge chr:675
+[shared.cpp.changeChr():281] refid:676
+Charnge chr:676
+[shared.cpp.changeChr():281] refid:677
+Charnge chr:677
+[shared.cpp.changeChr():281] refid:678
+Charnge chr:678
+[shared.cpp.changeChr():281] refid:679
+Charnge chr:679
+[shared.cpp.changeChr():281] refid:680
+Charnge chr:680
+[shared.cpp.changeChr():281] refid:681
+Charnge chr:681
+[shared.cpp.changeChr():281] refid:682
+Charnge chr:682
+[shared.cpp.changeChr():281] refid:683
+Charnge chr:683
+[shared.cpp.changeChr():281] refid:684
+Charnge chr:684
+	-> Printing at chr: NW_017859307.1 pos:119120 chunknumber 27900 contains 401 sites
+[shared.cpp.changeChr():281] refid:685
+Charnge chr:685
+[shared.cpp.changeChr():281] refid:686
+Charnge chr:686
+[shared.cpp.changeChr():281] refid:687
+Charnge chr:687
+[shared.cpp.changeChr():281] refid:688
+Charnge chr:688
+[shared.cpp.changeChr():281] refid:689
+Charnge chr:689
+[shared.cpp.changeChr():281] refid:690
+Charnge chr:690
+[shared.cpp.changeChr():281] refid:692
+Charnge chr:692
+[shared.cpp.changeChr():281] refid:693
+Charnge chr:693
+[shared.cpp.changeChr():281] refid:694
+Charnge chr:694
+[shared.cpp.changeChr():281] refid:695
+Charnge chr:695
+	-> Printing at chr: NW_017859318.1 pos:795407 chunknumber 28000 contains 23688 sites
+[shared.cpp.changeChr():281] refid:696
+Charnge chr:696
+[shared.cpp.changeChr():281] refid:697
+Charnge chr:697
+[shared.cpp.changeChr():281] refid:698
+Charnge chr:698
+[shared.cpp.changeChr():281] refid:699
+Charnge chr:699
+[shared.cpp.changeChr():281] refid:700
+Charnge chr:700
+[shared.cpp.changeChr():281] refid:701
+Charnge chr:701
+[shared.cpp.changeChr():281] refid:702
+Charnge chr:702
+[shared.cpp.changeChr():281] refid:703
+Charnge chr:703
+[shared.cpp.changeChr():281] refid:704
+Charnge chr:704
+[shared.cpp.changeChr():281] refid:705
+Charnge chr:705
+[shared.cpp.changeChr():281] refid:706
+Charnge chr:706
+[shared.cpp.changeChr():281] refid:708
+Charnge chr:708
+[shared.cpp.changeChr():281] refid:709
+Charnge chr:709
+[shared.cpp.changeChr():281] refid:710
+Charnge chr:710
+[shared.cpp.changeChr():281] refid:711
+Charnge chr:711
+[shared.cpp.changeChr():281] refid:713
+Charnge chr:713
+	-> Printing at chr: NW_017859336.1 pos:102646 chunknumber 28100 contains 31 sites
+[shared.cpp.changeChr():281] refid:714
+Charnge chr:714
+[shared.cpp.changeChr():281] refid:715
+Charnge chr:715
+[shared.cpp.changeChr():281] refid:716
+Charnge chr:716
+[shared.cpp.changeChr():281] refid:719
+Charnge chr:719
+[shared.cpp.changeChr():281] refid:721
+Charnge chr:721
+[shared.cpp.changeChr():281] refid:722
+Charnge chr:722
+[shared.cpp.changeChr():281] refid:724
+Charnge chr:724
+[shared.cpp.changeChr():281] refid:725
+Charnge chr:725
+[shared.cpp.changeChr():281] refid:726
+Charnge chr:726
+[shared.cpp.changeChr():281] refid:727
+Charnge chr:727
+[shared.cpp.changeChr():281] refid:729
+Charnge chr:729
+[shared.cpp.changeChr():281] refid:730
+Charnge chr:730
+[shared.cpp.changeChr():281] refid:731
+Charnge chr:731
+[shared.cpp.changeChr():281] refid:732
+Charnge chr:732
+[shared.cpp.changeChr():281] refid:733
+Charnge chr:733
+[shared.cpp.changeChr():281] refid:734
+Charnge chr:734
+[shared.cpp.changeChr():281] refid:735
+Charnge chr:735
+[shared.cpp.changeChr():281] refid:736
+Charnge chr:736
+[shared.cpp.changeChr():281] refid:737
+Charnge chr:737
+[shared.cpp.changeChr():281] refid:738
+Charnge chr:738
+[shared.cpp.changeChr():281] refid:739
+Charnge chr:739
+[shared.cpp.changeChr():281] refid:740
+Charnge chr:740
+[shared.cpp.changeChr():281] refid:742
+Charnge chr:742
+[shared.cpp.changeChr():281] refid:743
+Charnge chr:743
+	-> Printing at chr: NW_017859366.1 pos:5321 chunknumber 28200 contains 5995 sites
+[shared.cpp.changeChr():281] refid:744
+Charnge chr:744
+[shared.cpp.changeChr():281] refid:745
+Charnge chr:745
+[shared.cpp.changeChr():281] refid:746
+Charnge chr:746
+[shared.cpp.changeChr():281] refid:748
+Charnge chr:748
+[shared.cpp.changeChr():281] refid:749
+Charnge chr:749
+[shared.cpp.changeChr():281] refid:750
+Charnge chr:750
+[shared.cpp.changeChr():281] refid:751
+Charnge chr:751
+[shared.cpp.changeChr():281] refid:752
+Charnge chr:752
+[shared.cpp.changeChr():281] refid:753
+Charnge chr:753
+[shared.cpp.changeChr():281] refid:754
+Charnge chr:754
+[shared.cpp.changeChr():281] refid:755
+Charnge chr:755
+[shared.cpp.changeChr():281] refid:756
+Charnge chr:756
+[shared.cpp.changeChr():281] refid:757
+Charnge chr:757
+[shared.cpp.changeChr():281] refid:758
+Charnge chr:758
+[shared.cpp.changeChr():281] refid:759
+Charnge chr:759
+[shared.cpp.changeChr():281] refid:761
+Charnge chr:761
+[shared.cpp.changeChr():281] refid:762
+Charnge chr:762
+[shared.cpp.changeChr():281] refid:763
+Charnge chr:763
+[shared.cpp.changeChr():281] refid:764
+Charnge chr:764
+[shared.cpp.changeChr():281] refid:765
+Charnge chr:765
+	-> Printing at chr: NW_017859388.1 pos:270025 chunknumber 28300 contains 5791 sites
+[shared.cpp.changeChr():281] refid:767
+Charnge chr:767
+[shared.cpp.changeChr():281] refid:768
+Charnge chr:768
+[shared.cpp.changeChr():281] refid:769
+Charnge chr:769
+[shared.cpp.changeChr():281] refid:771
+Charnge chr:771
+[shared.cpp.changeChr():281] refid:772
+Charnge chr:772
+[shared.cpp.changeChr():281] refid:773
+Charnge chr:773
+[shared.cpp.changeChr():281] refid:774
+Charnge chr:774
+[shared.cpp.changeChr():281] refid:775
+Charnge chr:775
+[shared.cpp.changeChr():281] refid:776
+Charnge chr:776
+[shared.cpp.changeChr():281] refid:777
+Charnge chr:777
+[shared.cpp.changeChr():281] refid:778
+Charnge chr:778
+[shared.cpp.changeChr():281] refid:779
+Charnge chr:779
+[shared.cpp.changeChr():281] refid:780
+Charnge chr:780
+[shared.cpp.changeChr():281] refid:781
+Charnge chr:781
+[shared.cpp.changeChr():281] refid:782
+Charnge chr:782
+[shared.cpp.changeChr():281] refid:783
+Charnge chr:783
+[shared.cpp.changeChr():281] refid:784
+Charnge chr:784
+[shared.cpp.changeChr():281] refid:785
+Charnge chr:785
+[shared.cpp.changeChr():281] refid:787
+Charnge chr:787
+[shared.cpp.changeChr():281] refid:788
+Charnge chr:788
+	-> Printing at chr: NW_017859411.1 pos:7712 chunknumber 28400 contains 129 sites
+[shared.cpp.changeChr():281] refid:789
+Charnge chr:789
+[shared.cpp.changeChr():281] refid:790
+Charnge chr:790
+[shared.cpp.changeChr():281] refid:791
+Charnge chr:791
+[shared.cpp.changeChr():281] refid:792
+Charnge chr:792
+[shared.cpp.changeChr():281] refid:793
+Charnge chr:793
+[shared.cpp.changeChr():281] refid:794
+Charnge chr:794
+[shared.cpp.changeChr():281] refid:795
+Charnge chr:795
+[shared.cpp.changeChr():281] refid:796
+Charnge chr:796
+[shared.cpp.changeChr():281] refid:797
+Charnge chr:797
+[shared.cpp.changeChr():281] refid:798
+Charnge chr:798
+[shared.cpp.changeChr():281] refid:799
+Charnge chr:799
+[shared.cpp.changeChr():281] refid:800
+Charnge chr:800
+[shared.cpp.changeChr():281] refid:801
+Charnge chr:801
+[shared.cpp.changeChr():281] refid:802
+Charnge chr:802
+	-> Printing at chr: NW_017859425.1 pos:305715 chunknumber 28500 contains 8768 sites
+[shared.cpp.changeChr():281] refid:803
+Charnge chr:803
+[shared.cpp.changeChr():281] refid:804
+Charnge chr:804
+[shared.cpp.changeChr():281] refid:805
+Charnge chr:805
+[shared.cpp.changeChr():281] refid:806
+Charnge chr:806
+[shared.cpp.changeChr():281] refid:807
+Charnge chr:807
+[shared.cpp.changeChr():281] refid:808
+Charnge chr:808
+[shared.cpp.changeChr():281] refid:809
+Charnge chr:809
+[shared.cpp.changeChr():281] refid:810
+Charnge chr:810
+[shared.cpp.changeChr():281] refid:811
+Charnge chr:811
+[shared.cpp.changeChr():281] refid:812
+Charnge chr:812
+	-> Printing at chr: NW_017859435.1 pos:513960 chunknumber 28600 contains 16263 sites
+[shared.cpp.changeChr():281] refid:813
+Charnge chr:813
+[shared.cpp.changeChr():281] refid:814
+Charnge chr:814
+[shared.cpp.changeChr():281] refid:816
+Charnge chr:816
+[shared.cpp.changeChr():281] refid:817
+Charnge chr:817
+[shared.cpp.changeChr():281] refid:819
+Charnge chr:819
+[shared.cpp.changeChr():281] refid:820
+Charnge chr:820
+[shared.cpp.changeChr():281] refid:821
+Charnge chr:821
+[shared.cpp.changeChr():281] refid:822
+Charnge chr:822
+[shared.cpp.changeChr():281] refid:823
+Charnge chr:823
+	-> Printing at chr: NW_017859446.1 pos:13160 chunknumber 28700 contains 818 sites
+[shared.cpp.changeChr():281] refid:824
+Charnge chr:824
+[shared.cpp.changeChr():281] refid:825
+Charnge chr:825
+[shared.cpp.changeChr():281] refid:826
+Charnge chr:826
+[shared.cpp.changeChr():281] refid:827
+Charnge chr:827
+[shared.cpp.changeChr():281] refid:828
+Charnge chr:828
+[shared.cpp.changeChr():281] refid:829
+Charnge chr:829
+[shared.cpp.changeChr():281] refid:831
+Charnge chr:831
+[shared.cpp.changeChr():281] refid:832
+Charnge chr:832
+[shared.cpp.changeChr():281] refid:833
+Charnge chr:833
+[shared.cpp.changeChr():281] refid:834
+Charnge chr:834
+[shared.cpp.changeChr():281] refid:835
+Charnge chr:835
+[shared.cpp.changeChr():281] refid:836
+Charnge chr:836
+[shared.cpp.changeChr():281] refid:837
+Charnge chr:837
+[shared.cpp.changeChr():281] refid:838
+Charnge chr:838
+[shared.cpp.changeChr():281] refid:839
+Charnge chr:839
+[shared.cpp.changeChr():281] refid:840
+Charnge chr:840
+[shared.cpp.changeChr():281] refid:841
+Charnge chr:841
+[shared.cpp.changeChr():281] refid:842
+Charnge chr:842
+[shared.cpp.changeChr():281] refid:843
+Charnge chr:843
+	-> Printing at chr: NW_017859466.1 pos:10844 chunknumber 28800 contains 860 sites
+[shared.cpp.changeChr():281] refid:847
+Charnge chr:847
+[shared.cpp.changeChr():281] refid:848
+Charnge chr:848
+[shared.cpp.changeChr():281] refid:849
+Charnge chr:849
+[shared.cpp.changeChr():281] refid:850
+Charnge chr:850
+[shared.cpp.changeChr():281] refid:851
+Charnge chr:851
+[shared.cpp.changeChr():281] refid:852
+Charnge chr:852
+[shared.cpp.changeChr():281] refid:853
+Charnge chr:853
+[shared.cpp.changeChr():281] refid:854
+Charnge chr:854
+[shared.cpp.changeChr():281] refid:855
+Charnge chr:855
+[shared.cpp.changeChr():281] refid:856
+Charnge chr:856
+[shared.cpp.changeChr():281] refid:857
+Charnge chr:857
+[shared.cpp.changeChr():281] refid:858
+Charnge chr:858
+[shared.cpp.changeChr():281] refid:859
+Charnge chr:859
+[shared.cpp.changeChr():281] refid:860
+Charnge chr:860
+[shared.cpp.changeChr():281] refid:861
+Charnge chr:861
+[shared.cpp.changeChr():281] refid:862
+Charnge chr:862
+[shared.cpp.changeChr():281] refid:863
+Charnge chr:863
+[shared.cpp.changeChr():281] refid:864
+Charnge chr:864
+[shared.cpp.changeChr():281] refid:865
+Charnge chr:865
+	-> Printing at chr: NW_017859488.1 pos:221310 chunknumber 28900 contains 225 sites
+[shared.cpp.changeChr():281] refid:866
+Charnge chr:866
+[shared.cpp.changeChr():281] refid:867
+Charnge chr:867
+[shared.cpp.changeChr():281] refid:868
+Charnge chr:868
+[shared.cpp.changeChr():281] refid:869
+Charnge chr:869
+[shared.cpp.changeChr():281] refid:870
+Charnge chr:870
+[shared.cpp.changeChr():281] refid:871
+Charnge chr:871
+[shared.cpp.changeChr():281] refid:872
+Charnge chr:872
+[shared.cpp.changeChr():281] refid:873
+Charnge chr:873
+[shared.cpp.changeChr():281] refid:874
+Charnge chr:874
+[shared.cpp.changeChr():281] refid:875
+Charnge chr:875
+[shared.cpp.changeChr():281] refid:876
+Charnge chr:876
+[shared.cpp.changeChr():281] refid:878
+Charnge chr:878
+[shared.cpp.changeChr():281] refid:879
+Charnge chr:879
+[shared.cpp.changeChr():281] refid:880
+Charnge chr:880
+	-> Printing at chr: NW_017859503.1 pos:19465 chunknumber 29000 contains 13816 sites
+[shared.cpp.changeChr():281] refid:883
+Charnge chr:883
+[shared.cpp.changeChr():281] refid:884
+Charnge chr:884
+[shared.cpp.changeChr():281] refid:885
+Charnge chr:885
+[shared.cpp.changeChr():281] refid:886
+Charnge chr:886
+[shared.cpp.changeChr():281] refid:887
+Charnge chr:887
+[shared.cpp.changeChr():281] refid:888
+Charnge chr:888
+[shared.cpp.changeChr():281] refid:889
+Charnge chr:889
+[shared.cpp.changeChr():281] refid:890
+Charnge chr:890
+[shared.cpp.changeChr():281] refid:891
+Charnge chr:891
+[shared.cpp.changeChr():281] refid:892
+Charnge chr:892
+[shared.cpp.changeChr():281] refid:893
+Charnge chr:893
+[shared.cpp.changeChr():281] refid:894
+Charnge chr:894
+[shared.cpp.changeChr():281] refid:895
+Charnge chr:895
+[shared.cpp.changeChr():281] refid:896
+Charnge chr:896
+
+	-> Allocated ~ 1390 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1400 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1410 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1420 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1430 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1440 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1450 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1460 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1470 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1480 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1490 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1500 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1510 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1520 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1530 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1540 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1550 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1560 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1570 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1580 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1590 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1600 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1610 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1620 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1630 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1640 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1650 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1660 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1670 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1680 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1690 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1700 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1710 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1720 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1730 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1740 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1750 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1760 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1770 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1780 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1790 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1800 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1810 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1820 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1830 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1840 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1850 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1860 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1870 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1880 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1890 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1900 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1910 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1920 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1930 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1940 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1950 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1960 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1970 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1980 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 1990 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2000 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2010 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2020 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2030 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2040 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2050 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2060 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2070 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2080 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2090 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2100 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2110 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2120 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2130 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2140 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2150 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2160 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2170 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2180 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2190 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2200 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2210 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2220 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2230 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2240 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2250 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2260 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2270 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2280 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2290 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2300 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2310 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2320 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2330 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2340 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2350 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2360 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2370 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2380 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2390 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2400 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2410 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2420 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2430 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2440 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2450 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2460 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2470 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2480 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2490 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2500 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2510 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2520 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2530 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2540 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2550 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2560 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2570 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2580 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2590 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2600 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2610 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2620 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2630 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2640 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2650 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2660 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2670 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2680 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2690 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2700 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2710 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2720 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2730 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2740 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2750 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2760 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2770 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2780 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2790 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2800 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2810 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2820 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2830 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2840 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2850 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2860 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2870 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2880 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2890 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2900 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2910 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2920 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2930 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2940 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2950 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2960 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2970 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2980 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 2990 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 3000 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 3010 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 3020 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 3030 million nodes to the nodepool, this is not an estimate of the memory usage
+
+	-> Allocated ~ 3040 million nodes to the nodepool, this is not an estimate of the memory usage
+[shared.cpp.changeChr():281] refid:897
+Charnge chr:897
+[shared.cpp.changeChr():281] refid:898
+Charnge chr:898
+[shared.cpp.changeChr():281] refid:899
+Charnge chr:899
+[shared.cpp.changeChr():281] refid:900
+Charnge chr:900
+[shared.cpp.changeChr():281] refid:901
+Charnge chr:901
+	-> Printing at chr: NW_017859524.1 pos:139671 chunknumber 29100 contains 13 sites
+[shared.cpp.changeChr():281] refid:902
+Charnge chr:902
+[shared.cpp.changeChr():281] refid:903
+Charnge chr:903
+[shared.cpp.changeChr():281] refid:905
+Charnge chr:905
+[shared.cpp.changeChr():281] refid:906
+Charnge chr:906
+[shared.cpp.changeChr():281] refid:907
+Charnge chr:907
+[shared.cpp.changeChr():281] refid:908
+Charnge chr:908
+[shared.cpp.changeChr():281] refid:909
+Charnge chr:909
+[shared.cpp.changeChr():281] refid:910
+Charnge chr:910
+[shared.cpp.changeChr():281] refid:911
+Charnge chr:911
+[shared.cpp.changeChr():281] refid:912
+Charnge chr:912
+[shared.cpp.changeChr():281] refid:913
+Charnge chr:913
+[shared.cpp.changeChr():281] refid:914
+Charnge chr:914
+[shared.cpp.changeChr():281] refid:915
+Charnge chr:915
+[shared.cpp.changeChr():281] refid:916
+Charnge chr:916
+[shared.cpp.changeChr():281] refid:917
+Charnge chr:917
+[shared.cpp.changeChr():281] refid:918
+Charnge chr:918
+[shared.cpp.changeChr():281] refid:919
+Charnge chr:919
+[shared.cpp.changeChr():281] refid:920
+Charnge chr:920
+[shared.cpp.changeChr():281] refid:921
+Charnge chr:921
+[shared.cpp.changeChr():281] refid:923
+Charnge chr:923
+[shared.cpp.changeChr():281] refid:924
+Charnge chr:924
+	-> Printing at chr: NW_017859547.1 pos:913 chunknumber 29200 contains 14 sites
+[shared.cpp.changeChr():281] refid:925
+Charnge chr:925
+[shared.cpp.changeChr():281] refid:926
+Charnge chr:926
+[shared.cpp.changeChr():281] refid:928
+Charnge chr:928
+[shared.cpp.changeChr():281] refid:929
+Charnge chr:929
+[shared.cpp.changeChr():281] refid:930
+Charnge chr:930
+[shared.cpp.changeChr():281] refid:931
+Charnge chr:931
+[shared.cpp.changeChr():281] refid:932
+Charnge chr:932
+[shared.cpp.changeChr():281] refid:933
+Charnge chr:933
+[shared.cpp.changeChr():281] refid:934
+Charnge chr:934
+[shared.cpp.changeChr():281] refid:935
+Charnge chr:935
+[shared.cpp.changeChr():281] refid:936
+Charnge chr:936
+	-> Printing at chr: NW_017859559.1 pos:327343 chunknumber 29300 contains 539 sites
+[shared.cpp.changeChr():281] refid:937
+Charnge chr:937
+[shared.cpp.changeChr():281] refid:938
+Charnge chr:938
+[shared.cpp.changeChr():281] refid:939
+Charnge chr:939
+[shared.cpp.changeChr():281] refid:940
+Charnge chr:940
+[shared.cpp.changeChr():281] refid:941
+Charnge chr:941
+[shared.cpp.changeChr():281] refid:942
+Charnge chr:942
+[shared.cpp.changeChr():281] refid:943
+Charnge chr:943
+[shared.cpp.changeChr():281] refid:944
+Charnge chr:944
+[shared.cpp.changeChr():281] refid:945
+Charnge chr:945
+[shared.cpp.changeChr():281] refid:946
+Charnge chr:946
+[shared.cpp.changeChr():281] refid:947
+Charnge chr:947
+[shared.cpp.changeChr():281] refid:948
+Charnge chr:948
+[shared.cpp.changeChr():281] refid:949
+Charnge chr:949
+[shared.cpp.changeChr():281] refid:950
+Charnge chr:950
+[shared.cpp.changeChr():281] refid:951
+Charnge chr:951
+[shared.cpp.changeChr():281] refid:952
+Charnge chr:952
+[shared.cpp.changeChr():281] refid:954
+Charnge chr:954
+[shared.cpp.changeChr():281] refid:955
+Charnge chr:955
+	-> Printing at chr: NW_017859578.1 pos:940390 chunknumber 29400 contains 926 sites
+[shared.cpp.changeChr():281] refid:956
+Charnge chr:956
+[shared.cpp.changeChr():281] refid:957
+Charnge chr:957
+[shared.cpp.changeChr():281] refid:958
+Charnge chr:958
+[shared.cpp.changeChr():281] refid:959
+Charnge chr:959
+[shared.cpp.changeChr():281] refid:960
+Charnge chr:960
+[shared.cpp.changeChr():281] refid:961
+Charnge chr:961
+[shared.cpp.changeChr():281] refid:962
+Charnge chr:962
+[shared.cpp.changeChr():281] refid:963
+Charnge chr:963
+[shared.cpp.changeChr():281] refid:964
+Charnge chr:964
+[shared.cpp.changeChr():281] refid:966
+Charnge chr:966
+[shared.cpp.changeChr():281] refid:967
+Charnge chr:967
+[shared.cpp.changeChr():281] refid:968
+Charnge chr:968
+[shared.cpp.changeChr():281] refid:969
+Charnge chr:969
+[shared.cpp.changeChr():281] refid:970
+Charnge chr:970
+[shared.cpp.changeChr():281] refid:971
+Charnge chr:971
+[shared.cpp.changeChr():281] refid:972
+Charnge chr:972
+	-> Printing at chr: NW_017859595.1 pos:658584 chunknumber 29500 contains 125 sites
+[shared.cpp.changeChr():281] refid:973
+Charnge chr:973
+[shared.cpp.changeChr():281] refid:974
+Charnge chr:974
+[shared.cpp.changeChr():281] refid:975
+Charnge chr:975
+[shared.cpp.changeChr():281] refid:976
+Charnge chr:976
+[shared.cpp.changeChr():281] refid:977
+Charnge chr:977
+[shared.cpp.changeChr():281] refid:978
+Charnge chr:978
+[shared.cpp.changeChr():281] refid:979
+Charnge chr:979
+[shared.cpp.changeChr():281] refid:980
+Charnge chr:980
+[shared.cpp.changeChr():281] refid:981
+Charnge chr:981
+[shared.cpp.changeChr():281] refid:982
+Charnge chr:982
+[shared.cpp.changeChr():281] refid:983
+Charnge chr:983
+[shared.cpp.changeChr():281] refid:984
+Charnge chr:984
+[shared.cpp.changeChr():281] refid:985
+Charnge chr:985
+[shared.cpp.changeChr():281] refid:986
+Charnge chr:986
+[shared.cpp.changeChr():281] refid:987
+Charnge chr:987
+[shared.cpp.changeChr():281] refid:988
+Charnge chr:988
+[shared.cpp.changeChr():281] refid:989
+Charnge chr:989
+[shared.cpp.changeChr():281] refid:990
+Charnge chr:990
+	-> Printing at chr: NW_017859613.1 pos:1753 chunknumber 29600 contains 6814 sites
+[shared.cpp.changeChr():281] refid:991
+Charnge chr:991
+[shared.cpp.changeChr():281] refid:992
+Charnge chr:992
+[shared.cpp.changeChr():281] refid:993
+Charnge chr:993
+[shared.cpp.changeChr():281] refid:994
+Charnge chr:994
+[shared.cpp.changeChr():281] refid:995
+Charnge chr:995
+[shared.cpp.changeChr():281] refid:996
+Charnge chr:996
+[shared.cpp.changeChr():281] refid:997
+Charnge chr:997
+[shared.cpp.changeChr():281] refid:998
+Charnge chr:998
+[shared.cpp.changeChr():281] refid:999
+Charnge chr:999
+[shared.cpp.changeChr():281] refid:1000
+Charnge chr:1000
+[shared.cpp.changeChr():281] refid:1001
+Charnge chr:1001
+[shared.cpp.changeChr():281] refid:1002
+Charnge chr:1002
+[shared.cpp.changeChr():281] refid:1003
+Charnge chr:1003
+[shared.cpp.changeChr():281] refid:1005
+Charnge chr:1005
+[shared.cpp.changeChr():281] refid:1007
+Charnge chr:1007
+[shared.cpp.changeChr():281] refid:1008
+Charnge chr:1008
+[shared.cpp.changeChr():281] refid:1009
+Charnge chr:1009
+[shared.cpp.changeChr():281] refid:1010
+Charnge chr:1010
+	-> Printing at chr: NW_017859633.1 pos:130907 chunknumber 29700 contains 68 sites
+[shared.cpp.changeChr():281] refid:1011
+Charnge chr:1011
+[shared.cpp.changeChr():281] refid:1012
+Charnge chr:1012
+[shared.cpp.changeChr():281] refid:1013
+Charnge chr:1013
+[shared.cpp.changeChr():281] refid:1015
+Charnge chr:1015
+[shared.cpp.changeChr():281] refid:1016
+Charnge chr:1016
+[shared.cpp.changeChr():281] refid:1018
+Charnge chr:1018
+
+	-> Done reading data waiting for calculations to finish
+	-> Done waiting for threads
+	-> Output filenames:
+		->"/home/macampbell2/pike-time/outputs/102/197.arg"
+		->"/home/macampbell2/pike-time/outputs/102/197.beagle.gz"
+		->"/home/macampbell2/pike-time/outputs/102/197.mafs.gz"
+	-> Thu Sep  5 17:59:43 2019
+	-> Arguments and parameters for all analysis are located in .arg file
+	-> Total number of sites analyzed: 200785718
+	-> Number of sites retained after filtering: 103279 
+	[ALL done] cpu-time used =  116177.20 sec
+	[ALL done] walltime used =  20078.00 sec
+Traceback (most recent call last):
+  File "/home/macampbell2/pcangsd/pcangsd.py", line 8, in <module>
+    from emMAF import *
+  File "/home/macampbell2/pcangsd/emMAF.py", line 10, in <module>
+    from numba import jit
+ImportError: No module named numba
