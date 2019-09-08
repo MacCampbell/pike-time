@@ -3,6 +3,7 @@
 .RData
 .Ruserdata
 *.html
+*.out
 /bams/
 /vcfs/
 /outputs/
