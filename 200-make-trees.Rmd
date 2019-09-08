@@ -1,0 +1,15 @@
+---
+title: "200-make-trees"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Phylogenetic Trees
+Let's think of a way to do this. Have sorted *.bam files.
+
+https://github.com/vcflib/vcflib/blob/master/src/vcf2fasta.cpp ?
+https://github.com/popgenomics/vcf2fasta ?
+
