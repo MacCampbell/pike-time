@@ -112,3 +112,18 @@ ggsave("outputs/102/3-by-3-pcas.pdf", width = 10, height = 7)
 
 
 ```
+
+```{r, message=FALSE, warning=FALSE}
+sub<-pp_shape %>% filter(Region %in% c("Southcentral")) %>% filter( (PCx %in% sprintf("PC-%02d", 1:2)) & (PCy %in% sprintf("PC-%02d", 1:2)) )
+sub<- sub %>% filter(PCx=="PC-01") %>% filter(PCy=="PC-02")
+ggplot(sub, aes(x = val_x, y = val_y, fill = Site)) +
+  geom_point(size = 2, pch=21) +
+  scale_fill_discrete(na.value = "white") + 
+  #facet_grid(PCy ~ PCx, scales = "free")+
+  facet_wrap(.~Site)+
+  theme_bw()+
+  theme(panel.grid=element_blank())+
+  xlab("PC X")+
+  ylab("PC Y")
+
+```
