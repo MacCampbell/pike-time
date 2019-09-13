@@ -1,9 +1,10 @@
 #! /usr/local/bin/Rscript
 # Creates a file with population labels 
+args<-commandArgs(trailingOnly = TRUE)
 
 library(tidyverse)
 
-bams <- read_tsv("./bamlists/test.txt", col_names = FALSE) %>%
+bams <- read_tsv(paste("bamlists/", args[1],".txt", sep=""), col_names = FALSE) %>%
   mutate(vcf_name = str_replace_all(X1, pattern = "^data/|AN1711171/|BK1703222/|_sorted.*$", "")) %>%
   mutate(index = 1:n())
 

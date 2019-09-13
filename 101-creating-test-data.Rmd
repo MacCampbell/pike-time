@@ -148,3 +148,35 @@ bamlist<-samples %>% select(`Sequencing project`, `RAD identifier`, Region, Site
 write(bamlist$String, file="bamlists/197.txt")
 save(bamlist, file="./outputs/101/197-with-Region-Site-BAMInfo.rda")
 ```
+
+
+### Now, let's characterize average coverage. Hmmm.... May take a long time like this, but I have other things to entertain me, hahaha.
+
+```{sh, eval=FALSE}
+#samtools depth data/BK1703222/D-002_S67_sorted.bam | head -n 1000 | awk '{sum+=$3} END { print sum/NR}'
+#cat bamlists/test.txt | while read line; do samtools depth $line | head -n 1000 | awk '{sum+=$3} END { print sum/NR}' >> bamlists/test.cov; done;
+cat bamlists/test.txt | while read line; do samtools depth $line | awk '{sum+=$3} END { print sum/NR}' >> bamlists/test.cov; done;
+cat bamlists/197.txt  | while read line; do samtools depth $line | awk '{sum+=$3} END { print sum/NR}' >> bamlists/197.cov; done;
+```
+
+Now we can read in the coverage and create a histogram, eventually removing samples with low coverage.
+
+```{r, warning=FALSE, message=FALSE}
+coverage<-read_tsv("./bamlists/197.cov", col_names = FALSE)
+
+samples$Coverage<-coverage$X1
+
+ggplot(samples)+
+  geom_histogram(aes(x=Coverage))+
+  facet_grid(.~Region)
+```
+
+```{r, warning=FALSE, message=FALSE}
+filtered<- top_frac(samples, .90, Coverage)
+filtered %>% group_by(Region) %>% summarize(Count=n())
+
+filteredbams<-filtered %>% select(`Sequencing project`, `RAD identifier`, Region, Site) %>% separate(`Sequencing project`, c("GW", "Project")) %>% mutate(String=paste("data/",Project,"/",`RAD identifier`,"_sorted.bam", sep=""))
+
+write(filteredbams$String, file="bamlists/177.txt")
+write(filteredbams$String, file="bamlists/177.bamlist")
+```

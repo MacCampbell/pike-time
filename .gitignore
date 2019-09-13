@@ -4,6 +4,9 @@
 .Ruserdata
 *.html
 *.out
+/data/
+/data/AN1711171/
+/data/BK1703222/
 /bams/
 /vcfs/
 /outputs/
