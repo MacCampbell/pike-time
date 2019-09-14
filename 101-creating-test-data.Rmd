@@ -177,6 +177,7 @@ filtered %>% group_by(Region) %>% summarize(Count=n())
 
 filteredbams<-filtered %>% select(`Sequencing project`, `RAD identifier`, Region, Site) %>% separate(`Sequencing project`, c("GW", "Project")) %>% mutate(String=paste("data/",Project,"/",`RAD identifier`,"_sorted.bam", sep=""))
 
+save(filteredbams, file="metadata/filtered.rda")
 write(filteredbams$String, file="bamlists/177.txt")
 write(filteredbams$String, file="bamlists/177.bamlist")
 ```
