@@ -13,8 +13,9 @@
 
 #Printing individual genotypes
 ##4: print the called genotype as AA, AC, AG, ...
-#Including triallelic SNPS and creating a .vcf 
-angsd -P 24 -b bamlists/177.bamlist -ref genome/GCF_000721915.3_Eluc_V3_genomic.fna -dovcf 1 -out outputs/301/177-vcf -minMapQ 30 -minQ 20 -minInd 159 -GL 1 -doMajorMinor 1 -doMaf 1 -skipTriallelic 0 -SNP_pval 1e-6 -doGeno 4 -doPost 1 > outputs/301/301.out 2> outputs/301/301.err
+#Including triallelic SNPS and creating a .vcf.
+#Experience seg fault. Removing -doVcf 1 and just using -doGeno 4 
+angsd -P 24 -b bamlists/177.bamlist -ref genome/GCF_000721915.3_Eluc_V3_genomic.fna -out outputs/301/177-vcf -minMapQ 30 -minQ 20 -minInd 159 -GL 1 -doMajorMinor 1 -doMaf 1 -skipTriallelic 0 -SNP_pval 1e-6 -doGeno 4 -doPost 1 > outputs/301/301.out 2> outputs/301/301.err
 
 
 
