@@ -53,10 +53,10 @@ colnames(data)<-loci$Locus
 
 #Make a genind
 ```{r, warning=FALSE, message=FALSE}
-gdf<-as.loci(data, sep="/", ploidy=2)
+gdf<-as.loci(data[1:500], sep="/", ploidy=2)
 genind<-df2genind(gdf, sep="/")
 genind@pop<-as.factor(ad_meta$Population)
-save(genind, file="outputs/400/genind.rda")
+save(genind, file="outputs/400/genind-sub.rda")
 ```
 
 #Basic stats
@@ -75,7 +75,7 @@ pairwise.fst(genind)
 
 tree1<-aboot(genind, strata=genind@pop, tree="nj",distance="edwards.dist",missing="mean", cutoff=50, sample=1000) 
 
-pdf("outputs/400/tree.pdf")
+pdf("outputs/400/tree-sub.pdf")
 plot.phylo(tree1, type="unrooted",show.node.label = TRUE)
 dev.off()
 ```
