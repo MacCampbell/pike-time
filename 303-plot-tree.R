@@ -29,12 +29,14 @@ df$Region<- factor(df$Region, levels=c("Southeast","Southcentral", "Southwest", 
  
 
 
-t1 %<+% df + geom_tippoint(aes(shape=Region, angle=angle, fill=Region), cex=4) +  scale_shape_manual(values=c(24,21,22,22,22,22,23)) 
+t1 %<+% df + geom_tippoint(aes(shape=Region, angle=angle, fill=Region), cex=4) +  scale_shape_manual(values=c(24,21,22,22,22,22,23)) +
+  geom_treescale(x=0, y=-.1)
 ggsave("outputs/303/iqtree.pdf")
 
 ggtree(tree) %<+% df + geom_tippoint(aes(shape=Region, angle=angle, fill=Region), cex=4) +
                        geom_tiplab(aes(label=Site), align=TRUE, linetype = "dashed", linesize=0.3, size=3) +
-                        scale_shape_manual(values=c(24,21,22,22,22,22,23)) + geom_nodelab2() +
-                       xlim(0,0.25)
+                       scale_shape_manual(values=c(24,21,22,22,22,22,23)) + geom_nodelab2() +
+                       xlim(0,0.25)+
+                       geom_treescale()
 
 ggsave("outputs/303/iqtree.rectangular.pdf", width=11, height=22)

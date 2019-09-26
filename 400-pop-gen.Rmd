@@ -75,7 +75,5 @@ pairwise.fst(genind)
 
 tree1<-aboot(genind, strata=genind@pop, tree="nj",distance="edwards.dist",missing="mean", cutoff=50, sample=1000) 
 
-pdf("outputs/400/tree-sub.pdf")
 plot.phylo(tree1, type="unrooted",show.node.label = TRUE)
-dev.off()
 ```

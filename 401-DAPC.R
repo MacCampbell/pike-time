@@ -33,6 +33,6 @@ ggplot(df, aes(Var1, Var2))+
   theme(axis.text.y= element_text(face="bold", size=10))+
   geom_point(aes(x=Var1, y=Var2, size=Freq))+
   scale_size_area(limits=c(1,50), breaks=c(1,5,10,25,50))+
-  labs(size="Number\nof Indivuals")
+  labs(size="Number\nof Individuals")
 
 ggsave("outputs/401/assign-plot-ggplot.pdf")
