@@ -40,3 +40,19 @@ ggtree(tree) %<+% df + geom_tippoint(aes(shape=Region, angle=angle, fill=Region)
                        geom_treescale()
 
 ggsave("outputs/303/iqtree.rectangular.pdf", width=11, height=22)
+
+
+#dtree<-ggtree(tree, layout="daylight")
+#save(dtree, file="outputs/303/dtree.rda")
+
+load(file="outputs/303/dtree.rda")
+d <- dtree$data
+d <- d[!d$isTip,]
+d$label <- as.numeric(d$label)
+d <- d[d$label > 90,]
+
+dtree %<+% df + geom_point(data=d, alpha=0.5, cex=3) +
+  geom_tippoint(aes(shape=Region, angle=angle, fill=Region), cex=4) +
+  scale_shape_manual(values=c(24,21,21,22,22,22,23)) 
+
+ggsave("outputs/303/iqtree.daylight.pdf", width=7, height=5.5)
