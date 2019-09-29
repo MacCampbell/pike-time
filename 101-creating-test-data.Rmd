@@ -167,6 +167,9 @@ coverage<-read_tsv("./bamlists/197.cov", col_names = FALSE)
 samples$Coverage<-coverage$X1
 
 ggplot(samples)+
+  geom_histogram(aes(x=Coverage))
+
+ggplot(samples)+
   geom_histogram(aes(x=Coverage))+
   facet_grid(.~Region)
 ```
