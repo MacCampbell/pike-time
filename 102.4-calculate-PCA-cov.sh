@@ -26,8 +26,8 @@ mkdir /home/macampbell2/pike-time/outputs/102
 # required Beagle format {says the manual}.
 
 #Do the calculations (putting in absolute paths). Making sure sites are present in 90% of individuals.
-#A minDepth of 10 added here. Considering -geno_maxDepth
-/home/macampbell2/angsd/angsd -minInd 159 -geno_minDepth 10 -GL 1 -out /home/macampbell2/pike-time/outputs/102/177cov -nThreads 24 -doGlf 2 -doMajorMinor 1 -doMaf 2 -SNP_pval 1e-6 -minMapQ 30 -minQ 20 -bam /home/macampbell2/pike-time/bamlists/177.txt
+#A minDepth of 10 added here.
+/home/macampbell2/angsd/angsd -minInd 159 -setMinDepthInd 10 -GL 1 -out /home/macampbell2/pike-time/outputs/102/177cov -nThreads 24 -doGlf 2 -doMajorMinor 1 -doMaf 2 -SNP_pval 1e-6 -minMapQ 30 -minQ 20 -bam /home/macampbell2/pike-time/bamlists/177.txt
 
 # Step 3
 # Generate a covariance matrix
