@@ -13,7 +13,7 @@ library(tidyverse)
 
 Let's get the covariance matrix, sample list, and metadata
 ```{r, warning=FALSE, message=FALSE}
-cov<-read_tsv("./outputs/102/177.cov", col_names=FALSE) %>% as.matrix()
+cov<-read_tsv("./outputs/102/177cov.cov", col_names=FALSE) %>% as.matrix()
 
 bams <- read_tsv("./bamlists/177.txt", col_names = FALSE) %>%
   mutate(vcf_name = str_replace_all(X1, pattern = "^data/|AN1711171/|BK1703222/|_sorted.*$", "")) %>%
@@ -124,5 +124,22 @@ ggplot(sub, aes(x = val_x, y = val_y, fill = Site)) +
   theme(panel.grid=element_blank())+
   xlab("PC X")+
   ylab("PC Y")
+
+```
+## What about those Southwest Samples?
+```{r, message=FALSE, warning=FALSE}
+library(ggrepel)
+pp_sw <- pp_meta %>%
+  filter( (PCx %in% sprintf("PC-%02d", 1:1)) & 
+            (PCy %in% sprintf("PC-%02d", 1:1)) ) %>%
+  filter(Region == "Southwest")
+
+ggplot(pp_sw, aes(x = val_x, y = val_y, fill = group)) +
+  geom_point(pch = 21, size = 2) +
+  geom_text_repel(aes(label=X1)) +
+  scale_fill_discrete(na.value = "white") + 
+  facet_grid(PCy ~ PCx, scales = "free")
+
+
 
 ```
