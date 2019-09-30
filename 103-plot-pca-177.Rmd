@@ -13,9 +13,9 @@ library(tidyverse)
 
 Let's get the covariance matrix, sample list, and metadata
 ```{r, warning=FALSE, message=FALSE}
-cov<-read_tsv("./outputs/102/177cov.cov", col_names=FALSE) %>% as.matrix()
+cov<-read_tsv("./outputs/102/175cov.cov", col_names=FALSE) %>% as.matrix()
 
-bams <- read_tsv("./bamlists/177.txt", col_names = FALSE) %>%
+bams <- read_tsv("./bamlists/175.txt", col_names = FALSE) %>%
   mutate(vcf_name = str_replace_all(X1, pattern = "^data/|AN1711171/|BK1703222/|_sorted.*$", "")) %>%
   mutate(index = 1:n())
 
@@ -50,7 +50,7 @@ covar2pcs <- function(samples, cov) {
 }
 ```
 
-Shameless copied from Eric A. again.
+Shameless copying from Eric A. again.
 ```{r, warning=FALSE, message=FALSE}
 pca <- covar2pcs(pca_meta$vcf_name, cov)
 
