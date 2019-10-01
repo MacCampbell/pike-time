@@ -19,8 +19,8 @@ library(hierfstat)
 # Let's load in some data!
 ```{r, warning=FALSE, message=FALSE}
 
-genos<-read_tsv(file="outputs/301/177-vcf.geno.gz", col_names = FALSE)
-data <-as_tibble(t(genos[3:179]))
+genos<-read_tsv(file="outputs/301/175.geno.gz", col_names = FALSE)
+data <-as_tibble(t(genos[3:177]))
 loci <- genos %>% dplyr::select(X1, X2) 
 loci$X1<-gsub("\\.","_", loci$X1)
 loci$X1<-gsub("_","", loci$X1)
@@ -29,7 +29,7 @@ loci<- loci %>% dplyr::mutate(Locus=paste(X1, X2, sep="-"))
 
 # We need to include individual/population names
 load("outputs/103/pca-meta.rda")
-bams <- read_tsv("bamlists/177.bamlist", col_names = FALSE) %>%
+bams <- read_tsv("bamlists/175.bamlist", col_names = FALSE) %>%
   mutate(vcf_name = str_replace_all(X1, pattern = "^data/|AN1711171/|BK1703222/|_sorted.*$", "")) %>%
   mutate(index = 1:n())
 ad_meta <- left_join(bams, pca_meta)

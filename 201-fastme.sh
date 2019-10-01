@@ -48,4 +48,4 @@ fastme -D 1 -i ./outputs/201/$bamlist.dist -o ./outputs/201/$bamlist.tree -m n -
 
 ## Bootstrap
 # not sure what to do about this option at the moment -boot_block_size 20
-ngsDist -verbose 1 -geno ./outputs/201/$bamlist.geno.gz -probs -n_ind $inds -n_sites $sites -labels ./outputs/201/popdata.txt -o ./outputs/201/$bamlist.boot.dist -n_threads $threads -n_boot_rep $bootreps -boot_block_size 20 &> /dev/null
+#ngsDist -verbose 1 -geno ./outputs/201/$bamlist.geno.gz -probs -n_ind $inds -n_sites $sites -labels ./outputs/201/popdata.txt -o ./outputs/201/$bamlist.boot.dist -n_threads $threads -n_boot_rep $bootreps -boot_block_size 20 &> /dev/null

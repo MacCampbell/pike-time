@@ -1,12 +1,12 @@
 library(tidyverse)
 
-genos<-read_tsv(file="outputs/301/177-vcf.geno.gz", col_names = FALSE)
+genos<-read_tsv(file="outputs/301/175cov.geno.gz", col_names = FALSE)
 #Load pca_meta
 labels<-read_tsv(file="outputs/201/popdata.txt", col_names = FALSE)
 
 seq<-select(genos, -1:-2)
 colnames(seq)<-labels$X1
-seq<-seq[1:177]
+seq<-seq[1:175]
 
 #Hmm, I can do this with lapply tediously...
 
@@ -44,6 +44,6 @@ conv<-as.data.frame(seq)
 trans<-t(conv)
 rownames(trans)<-paste(paste(rownames(trans), "\t", sep="\t"))
 
-write.table(trans, file="outputs/302/177.phy", quote = FALSE, sep="", row.names = TRUE, col.names=FALSE)
+write.table(trans, file="outputs/302/175cov.phy", quote = FALSE, sep="", row.names = TRUE, col.names=FALSE)
 
 #Does require a little annotation to get the final phylip format (inds/sites)
