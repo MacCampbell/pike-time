@@ -1,7 +1,7 @@
 library(tidyverse)
 library(ggtree)
 
-tree<-read.tree(file="outputs/302/177.phy.con.tree")
+tree<-read.tree(file="outputs/302/175.phy.con.tree")
 
 df<-as_tibble(as.data.frame(cbind(tree$tip.label))) %>%
   rename(Tip = V1) %>%
@@ -9,7 +9,7 @@ df<-as_tibble(as.data.frame(cbind(tree$tip.label))) %>%
 
 # get meta
 load("outputs/103/pca-meta.rda")
-bams <- read_tsv("bamlists/177.bamlist", col_names = FALSE) %>%
+bams <- read_tsv("bamlists/175.bamlist", col_names = FALSE) %>%
   mutate(vcf_name = str_replace_all(X1, pattern = "^data/|AN1711171/|BK1703222/|_sorted.*$", "")) %>%
   mutate(index = 1:n())
 ad_meta <- left_join(bams, pca_meta)
@@ -51,7 +51,7 @@ d <- d[!d$isTip,]
 d$label <- as.numeric(d$label)
 d <- d[d$label > 90,]
 
-dtree %<+% df + geom_point(data=d, alpha=0.5, cex=3) +
+dt<-dtree %<+% df + geom_point(data=d, alpha=0.5, cex=3) +
   geom_tippoint(aes(shape=Region, angle=angle, fill=Region), cex=4) +
   scale_shape_manual(values=c(24,21,21,22,22,22,23)) 
 
