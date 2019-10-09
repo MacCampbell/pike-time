@@ -1,0 +1,50 @@
+---
+title: "600-SVDQuartets"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+## SVDQuartets
+
+I'm seeing how hard it is to take the same input as used in our iqtree analysis and put that into a quartet analysis... But, well want to have the samples renamed to sample locations, either beforehand or in the nexus file.
+
+First off
+```{sh, eval=FALSE}
+ seqConverter.pl -d175.phy -on
+```
+
+
+```{r, echo=FALSE, warning=FALSE}
+
+# We need to include individual/population names
+load("outputs/103/pca-meta.rda")
+bams <- read_tsv("bamlists/175.bamlist", col_names = FALSE) %>%
+  mutate(vcf_name = str_replace_all(X1, pattern = "^data/|AN1711171/|BK1703222/|_sorted.*$", "")) %>%
+  mutate(index = 1:n())
+ad_meta <- left_join(bams, pca_meta)
+
+# remove spaces
+ad_meta <- ad_meta %>% mutate(Name = paste(gsub(Region, pattern=" ",
+                                                   replacement=""), index, sep="_"))
+# Separate Kenai
+ad_meta <- ad_meta %>% mutate(Population = ifelse(Site == "StormyLake", "Kenai",
+                                           ifelse(Site == "TinyLake", "Kenai",
+                                           ifelse(Site %in% c("Tyonek", "ShellLake", "AndersonLake",
+                                                              "OtterLake", "BulchitnaLake",
+                                                              "AlexanderLake",
+                                                              "YentnaIndianCreek", "DeshkaRiver"), 
+                                                              "AnchorageBowl",
+                                            Site)
+)))
+
+
+descriptions<-ad_meta %>% select(Site, Name) %>% arrange(Site)
+
+write_tsv(descriptions, "outputs/600/descriptions.txt")
+```
+
+Wrote a working nexus file, and then I can execute with the new PAUP* binary.
