@@ -47,4 +47,62 @@ descriptions<-ad_meta %>% select(Site, Name) %>% arrange(Site)
 write_tsv(descriptions, "outputs/600/descriptions.txt")
 ```
 
-Wrote a working nexus file, and then I can execute with the new PAUP* binary.
+Wrote a working nexus file, and then I can execute with the new PAUP* binary.  
+
+It is interesting....
+
+Let's try a run with the filter for MAF
+
+```{r MAF, warning=FALSE, missing=FALSE}
+genos<-read_tsv(file="outputs/301/175.geno.gz", col_names = FALSE) %>% mutate(Locus=paste(X1,X2,sep="-"))
+genos$Locus<-gsub("_", "", genos$Locus)
+genos$Locus<-gsub("\\.","", genos$Locus)
+load("outputs/400/genMaf.rda")
+
+genos<-genos %>% filter(Locus %in% genMaf$loc.fac) %>% select(-Locus)
+#Load pca_meta
+labels<-read_tsv(file="outputs/201/popdata.txt", col_names = FALSE)
+
+seq<-select(genos, -1:-2)
+colnames(seq)<-labels$X1
+seq<-seq[1:175]
+
+#Hmm, I can do this with lapply tediously...
+
+seq<-lapply(seq, function(x) { gsub("AA", "A", x) } )
+seq<-lapply(seq, function(x) { gsub("GG", "G", x) } )
+seq<-lapply(seq, function(x) { gsub("CC", "C", x) } )
+seq<-lapply(seq, function(x) { gsub("TT", "T", x) } )
+
+#IUPAC Ambigs 
+#M	A or C
+seq<-lapply(seq, function(x) { gsub("AC", "M", x) } )
+seq<-lapply(seq, function(x) { gsub("CA", "M", x) } )
+
+#R	A or G	
+seq<-lapply(seq, function(x) { gsub("AG", "R", x) } )
+seq<-lapply(seq, function(x) { gsub("GA", "R", x) } )
+
+#W	A or T	
+seq<-lapply(seq, function(x) { gsub("AT", "W", x) } )
+seq<-lapply(seq, function(x) { gsub("TA", "W", x) } )
+
+#S	C or G	
+seq<-lapply(seq, function(x) { gsub("CG", "S", x) } )
+seq<-lapply(seq, function(x) { gsub("GC", "S", x) } )
+
+#Y	C or T	
+seq<-lapply(seq, function(x) { gsub("CT", "Y", x) } )
+seq<-lapply(seq, function(x) { gsub("TC", "Y", x) } )
+
+#K	G or T
+seq<-lapply(seq, function(x) { gsub("GT", "K", x) } )
+seq<-lapply(seq, function(x) { gsub("TG", "K", x) } )
+
+conv<-as.data.frame(seq)
+trans<-t(conv)
+rownames(trans)<-paste(paste(rownames(trans), "\t", sep="\t"))
+
+write.table(trans, file="outputs/600/175maf.phy", quote = FALSE, sep="", row.names = TRUE, col.names=FALSE)
+
+```
