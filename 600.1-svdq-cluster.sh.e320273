@@ -1,0 +1,18 @@
+
+Error(#152): Command "being" is unrecognized.
+                 If it is spelled correctly, look for problems in a previous command, such as an
+                 unintentional semicolon.
+
+Error occurred while processing line 216 of file 175.nex
+paup>
+Error(#161): Expected input not found or invalid. If you are not running interactively you should
+             specify the -n (-Noninteractive) flag at program startup.
+
+Error(#152): Command "being" is unrecognized.
+                 If it is spelled correctly, look for problems in a previous command, such as an
+                 unintentional semicolon.
+
+Error occurred while processing line 217 of file 175maf.nex
+paup>
+Error(#161): Expected input not found or invalid. If you are not running interactively you should
+             specify the -n (-Noninteractive) flag at program startup.
