@@ -1,15 +1,16 @@
 library(adegenet)
 library(tidyverse)
-load(file="outputs/400/genind.rda")
+load(file="outputs/400/genMaf.rda")
+genind<-genMaf
 
-dapc<-dapc(genind, n.pca=175, var.contrib = TRUE, n.da=nPop(genind)-1)
-pdf("outputs/401/dapc-location-as-prior.pdf")
-scatter(dapc)
-dev.off()
+#dapc<-dapc(genind, n.pca=175, var.contrib = TRUE, n.da=nPop(genind)-1)
+#pdf("outputs/401/dapc-location-as-prior.pdf")
+#scatter(dapc)
+#dev.off()
+pcs<-150
+grp <- find.clusters(genind, max.n.clust = 20, n.pca=pcs)
 
-grp <- find.clusters(genind, max.n.clust = 30, n.pca=125)
-
-assign<-dapc(genind, n.pca=175, var.contrib = TRUE, n.da=length(levels(grp$grp))-1, pop=grp$grp)
+assign<-dapc(genind, var.contrib = TRUE, n.pca=pcs, n.da=length(levels(grp$grp))-1, pop=grp$grp)
 
 pdf("outputs/401/assign-plot.pdf", height=20, width=11)
 assignplot(assign)

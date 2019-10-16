@@ -111,6 +111,28 @@ ggsave("outputs/103/3-by-3-pcas.pdf", width = 10, height = 7)
 
 
 ```
+## Computing Proportion of Variance
+```{r, message=FALSE, warning=FALSE}
+eig <- eigen(cov, symm = TRUE)
+var<-eig$values/sum(eig$values)
+cumvar<-cumsum(eig$values)/sum(eig$values)
+
+head(var)
+head(cumvar)
+
+sub12<-pp_shape %>% filter( (PCx =="PC-01") & (PCy =="PC-02") )
+ggplot(sub12, aes(x = val_x, y = val_y, fill = Region, shape= Region)) +
+  geom_point(size = 2) +
+  scale_fill_discrete(na.value = "white") + 
+  theme_bw()+
+  theme(panel.grid=element_blank())+
+  xlab(paste("PC1", " ", round((100*var[1]),2), "%", sep = ""))+
+  ylab(paste("PC2", " ", round((100*var[2]),2), "%", sep = ""))+
+  scale_shape_manual(values=c(24,21,21,22,22,22,23))
+
+ggsave("outputs/103/PCA-12.pdf", width = 5, height = 3.5)
+
+```
 
 ```{r, message=FALSE, warning=FALSE}
 sub<-pp_shape %>% filter(Region %in% c("Southcentral")) %>% filter( (PCx %in% sprintf("PC-%02d", 1:2)) & (PCy %in% sprintf("PC-%02d", 1:2)) )
@@ -126,6 +148,10 @@ ggplot(sub, aes(x = val_x, y = val_y, fill = Site)) +
   ylab("PC Y")
 
 ```
+
+
+
+
 ## What about those Southwest Samples?
 ```{r, message=FALSE, warning=FALSE}
 library(ggrepel)
@@ -139,7 +165,5 @@ ggplot(pp_sw, aes(x = val_x, y = val_y, fill = group)) +
   geom_text_repel(aes(label=X1)) +
   scale_fill_discrete(na.value = "white") + 
   facet_grid(PCy ~ PCx, scales = "free")
-
-
 
 ```
