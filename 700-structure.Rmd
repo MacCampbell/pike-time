@@ -1,0 +1,28 @@
+---
+title: "700-structure"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Let's import our genindMAF and filter our SNPs in LD
+
+```{r import, warning=FALSE, message=FALSE}
+library("tidyverse")
+library("poppr")
+library("magrittr")
+
+load(file="outputs/400/genMaf.rda")
+```
+
+### Calculate LD
+```{r LD, warning=FALSE, message=FALSE, eval=FALSE}
+genc<-as.genclone(genMaf)
+ia(gid = genc, sample = 100)
+```
+Test reveals.... No linkage?
+|======================================================================|100% ~0 s remaining     
+          Ia         p.Ia        rbarD         p.rD 
+208.06405006   0.00990099   0.03349214   0.00990099 
