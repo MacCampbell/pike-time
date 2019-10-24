@@ -29,8 +29,11 @@ Test reveals.... No linkage?
 
 We need a STRUCTURE file
 ```{r STR, warning=FALSE, message=FALSE, eval=FALSE}
+library(adegenet)
 library(pegas)
-df <- as.loci(genMaf) ###CONVERSION OF GENIND OBJECT TO LOCI OBJECT####
+library(poppr)
+
+df <- as.loci(genMac, allele.sep="\t") ###CONVERSION OF GENIND OBJECT TO LOCI OBJECT####
 write.loci(df, file = "outputs/700/175.str", loci.sep ="\t", quote = FALSE,
            allele.sep ="\t", na ="-9\t-9", col.names = FALSE) ###WRITE STRUCTURE DATA FILE####
 ```
@@ -95,5 +98,32 @@ genind2structure <- function(obj, file="", pops=FALSE){
   write.table(tab, file=file, sep="\t", quote=FALSE, row.names=FALSE)
 }
 
-genind2structure(genMaf, file="outputs/700/genMaf-alt-str.txt", pops=TRUE)
+genind2structure(kenai, file="outputs/700/genMaf-alt-str.txt", pops=TRUE)
 ```
+
+Example file:
+016	1	1	1	4	4	4	4	2	2	2	2	4	4	4	4
+017	1	1	1	4	4	4	4	2	2	2	3	4	4	4	3
+018	1	1	1	4	4	4	4	2	2	2	2	4	4	4	4
+019	1	1	1	4	4	4	4	2	2	2	3	4	4	4	3
+033	1	1	1	4	4	4	4	2	2	2	2	4	4	4	4
+034	2	1	1	4	4	4	4	2	2	2	2	4	4	4	4
+035	2	1	1	4	4	4	4	2	2	2	2	4	4	4	4
+036	2	1	1	4	4	4	4	2	2	2	2	4	4	4	4
+037	2	1	1	4	4	4	4	2	2	2	2	4	4	4	4
+038	2	1	1	4	4	4	4	2	2	2	2	4	4	4	4
+
+Create a header, add pops, and do some fiddling to make numeric
+```{sh header, eval=FALSE}
+for i in {1..6336}; do echo Locus$i | perl -pe 's/\n/\t/' >> outputs/700/header.txt; done;
+cat structure.str | cut -f 1,2 | awk '{print $2 $1}' >> indNames.txt
+cat structure.str | perl -pe 's/A/1/g' | perl -pe 's/G/2/g' | perl -pe 's/C/3/g' | perl -pe 's/T/4/g' > out.txt
+
+cat structure.str | perl -pe 's/(1|2|3|4)(1|2|3|4)/$1\t$2/g' > str2.txt
+cat names.txt | perl -pe 's/^\w+(\d\d\d)/$1/g' > numeric.txt
+#see str3.txt
+paste namespops.txt str2.txt > str3.txt
+
+```
+
+
