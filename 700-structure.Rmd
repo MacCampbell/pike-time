@@ -126,4 +126,23 @@ paste namespops.txt str2.txt > str3.txt
 
 ```
 
+##Read in Structure output
+```{r, message=FALSE, warning=FALSE}
+qdata<-read_delim("outputs/700/results_job_T1_q", col_names = FALSE, delim=" ")
+qdata$Individual<-gsub("\\s+", "", qdata$X1)
+qdata$Population<-gsub("\\s+", "", qdata$X2)
+qdata<-qdata %>% rename(Q1=X3, Q2=X4) %>% select(Population, Individual, Q1, Q2)
 
+pops<-read_tsv("outputs/700/popList.txt", col_names = FALSE)
+qdata$Pop<-pops$X1
+
+df<-qdata %>% select(Population, Pop, Individual, Q1, Q2) %>% gather(key=Ancestry, value=Q, 4:5)
+
+ggplot(df)+geom_col(aes(x=Individual,y=Q, fill=Ancestry))+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())+
+  scale_fill_brewer(palette ="Spectral")+
+  facet_wrap(. ~ Pop, ncol=4, scales="free_x")
+
+```
