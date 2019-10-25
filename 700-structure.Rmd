@@ -24,8 +24,8 @@ ia(gid = genc, sample = 100)
 ```
 Test reveals.... No linkage?
 |======================================================================|100% ~0 s remaining     
-          Ia         p.Ia        rbarD         p.rD 
-208.06405006   0.00990099   0.03349214   0.00990099 
+          Ia         p.Ia        rbarD         p.rD   
+208.06405006   0.00990099   0.03349214   0.00990099   
 
 We need a STRUCTURE file
 ```{r STR, warning=FALSE, message=FALSE, eval=FALSE}
@@ -98,20 +98,20 @@ genind2structure <- function(obj, file="", pops=FALSE){
   write.table(tab, file=file, sep="\t", quote=FALSE, row.names=FALSE)
 }
 
-genind2structure(kenai, file="outputs/700/genMaf-alt-str.txt", pops=TRUE)
+#genind2structure(kenai, file="outputs/700/genMaf-alt-str.txt", pops=TRUE)
 ```
 
-Example file:
-016	1	1	1	4	4	4	4	2	2	2	2	4	4	4	4
-017	1	1	1	4	4	4	4	2	2	2	3	4	4	4	3
-018	1	1	1	4	4	4	4	2	2	2	2	4	4	4	4
-019	1	1	1	4	4	4	4	2	2	2	3	4	4	4	3
-033	1	1	1	4	4	4	4	2	2	2	2	4	4	4	4
-034	2	1	1	4	4	4	4	2	2	2	2	4	4	4	4
-035	2	1	1	4	4	4	4	2	2	2	2	4	4	4	4
-036	2	1	1	4	4	4	4	2	2	2	2	4	4	4	4
-037	2	1	1	4	4	4	4	2	2	2	2	4	4	4	4
-038	2	1	1	4	4	4	4	2	2	2	2	4	4	4	4
+Example file:  
+016	1	1	1	4	4	4	4	2	2	2	2	4	4	4	4  
+017	1	1	1	4	4	4	4	2	2	2	3	4	4	4	3  
+018	1	1	1	4	4	4	4	2	2	2	2	4	4	4	4  
+019	1	1	1	4	4	4	4	2	2	2	3	4	4	4	3  
+033	1	1	1	4	4	4	4	2	2	2	2	4	4	4	4  
+034	2	1	1	4	4	4	4	2	2	2	2	4	4	4	4  
+035	2	1	1	4	4	4	4	2	2	2	2	4	4	4	4  
+036	2	1	1	4	4	4	4	2	2	2	2	4	4	4	4  
+037	2	1	1	4	4	4	4	2	2	2	2	4	4	4	4  
+038	2	1	1	4	4	4	4	2	2	2	2	4	4	4	4  
 
 Create a header, add pops, and do some fiddling to make numeric
 ```{sh header, eval=FALSE}
@@ -128,15 +128,15 @@ paste namespops.txt str2.txt > str3.txt
 
 ##Read in Structure output
 ```{r, message=FALSE, warning=FALSE}
-qdata<-read_delim("outputs/700/results_job_T1_q", col_names = FALSE, delim=" ")
+qdata<-read_delim("outputs/700/results_job_T4_q", col_names = FALSE, delim=" ")
 qdata$Individual<-gsub("\\s+", "", qdata$X1)
 qdata$Population<-gsub("\\s+", "", qdata$X2)
-qdata<-qdata %>% rename(Q1=X3, Q2=X4) %>% select(Population, Individual, Q1, Q2)
+qdata<-qdata %>% rename(Q1=X3, Q2=X4, Q3=X5) %>% select(Population, Individual, Q1, Q2, Q3)
 
 pops<-read_tsv("outputs/700/popList.txt", col_names = FALSE)
 qdata$Pop<-pops$X1
 
-df<-qdata %>% select(Population, Pop, Individual, Q1, Q2) %>% gather(key=Ancestry, value=Q, 4:5)
+df<-qdata %>% select(Population, Pop, Individual, Q1, Q2, Q3) %>% gather(key=Ancestry, value=Q, 4:6)
 
 ggplot(df)+geom_col(aes(x=Individual,y=Q, fill=Ancestry))+
   theme(axis.title.x=element_blank(),
