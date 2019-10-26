@@ -22,7 +22,7 @@ load(file="outputs/400/genMaf.rda")
 genc<-as.genclone(genMaf)
 ia(gid = genc, sample = 100)
 ```
-Test reveals.... No linkage?
+Test reveals.... No linkage?  
 |======================================================================|100% ~0 s remaining     
           Ia         p.Ia        rbarD         p.rD   
 208.06405006   0.00990099   0.03349214   0.00990099   
