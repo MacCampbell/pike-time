@@ -134,9 +134,16 @@ qdata$Population<-gsub("\\s+", "", qdata$X2)
 qdata<-qdata %>% rename(Q1=X3, Q2=X4, Q3=X5) %>% select(Population, Individual, Q1, Q2, Q3)
 
 pops<-read_tsv("outputs/700/popList.txt", col_names = FALSE)
+pops$X1<- factor(pops$X1, levels=c("AntlinRiver","EagleLake",
+                                                         "MintoFlats","YukonFlats",
+                                                         "Fairbanks", "AnchorageBowl",
+                                                         "Kenai","LakeClark","LakeNerka",
+                                                         "NorthSlope","Selawik"))
+
 qdata$Pop<-pops$X1
 
 df<-qdata %>% select(Population, Pop, Individual, Q1, Q2, Q3) %>% gather(key=Ancestry, value=Q, 4:6)
+
 
 ggplot(df)+geom_col(aes(x=Individual,y=Q, fill=Ancestry))+
   theme(axis.title.x=element_blank(),
@@ -153,7 +160,6 @@ qdata$Individual<-gsub("\\s+", "", qdata$X1)
 qdata$Population<-gsub("\\s+", "", qdata$X2)
 qdata<-qdata %>% rename(Q1=X3, Q2=X4, Q3=X5, Q4=X6) %>% select(Population, Individual, Q1, Q2, Q3, Q4)
 
-pops<-read_tsv("outputs/700/popList.txt", col_names = FALSE)
 qdata$Pop<-pops$X1
 
 df<-qdata %>% select(Population, Pop, Individual, Q1, Q2, Q3, Q4) %>% gather(key=Ancestry, value=Q, 4:7)
@@ -173,7 +179,6 @@ qdata$Individual<-gsub("\\s+", "", qdata$X1)
 qdata$Population<-gsub("\\s+", "", qdata$X2)
 qdata<-qdata %>% rename(Q1=X3, Q2=X4, Q3=X5, Q4=X6, Q5=X7) %>% select(Population, Individual, Q1, Q2, Q3, Q4, Q5)
 
-pops<-read_tsv("outputs/700/popList.txt", col_names = FALSE)
 qdata$Pop<-pops$X1
 
 df<-qdata %>% select(Population, Pop, Individual, Q1, Q2, Q3, Q4, Q5) %>% gather(key=Ancestry, value=Q, 4:8)
