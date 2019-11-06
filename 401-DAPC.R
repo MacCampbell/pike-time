@@ -2,7 +2,8 @@ library(adegenet)
 library(tidyverse)
 load(file="outputs/400/genMaf.rda")
 genind<-genMaf
-
+genind<-genind[genind@pop %in% c("MintoFlats", "YukonFlats", "Fairbanks","AnchorageBowl", "Kenai",
+                                 "LakeClark","LakeNerka", "NorthSlope", "Selawik")]
 #dapc<-dapc(genind, n.pca=175, var.contrib = TRUE, n.da=nPop(genind)-1)
 #pdf("outputs/401/dapc-location-as-prior.pdf")
 #scatter(dapc)
@@ -37,3 +38,24 @@ ggplot(df, aes(Var1, Var2))+
   labs(size="Number\nof Individuals")
 
 ggsave("outputs/401/assign-plot-ggplot.pdf")
+
+df2<-as_tibble(assign$posterior) %>% mutate(Population=genind@pop) %>% mutate(Individual = row_number())
+df3<-df2 %>% arrange(Population) %>% mutate(Index= row_number()) %>% gather(K, Q, 1:4)
+df3$Population<- factor(df3$Population, levels=c("AntlinRiver","EagleLake",
+                                                         "MintoFlats","YukonFlats",
+                                                         "Fairbanks", "AnchorageBowl",
+                                                         "Kenai","LakeClark","LakeNerka",
+                                                         "NorthSlope","Selawik"))
+df4<-df3 %>% arrange(factor(Population, levels = c("AntlinRiver","EagleLake",
+                                                   "MintoFlats","YukonFlats",
+                                                   "Fairbanks", "AnchorageBowl",
+                                                   "Kenai","LakeClark","LakeNerka",
+                                                   "NorthSlope","Selawik")))
+ggplot(df4)+geom_col(aes(x=Index, y=Q, fill=K))+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())+
+  scale_fill_brewer(palette ="Spectral")+
+  facet_wrap(. ~ Population, ncol=4, scales="free_x")
+
+ggsave("outputs/400/posterior-plot.pdf")
