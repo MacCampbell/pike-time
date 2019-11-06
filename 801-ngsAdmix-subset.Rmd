@@ -1,0 +1,63 @@
+---
+title: "801-ngsAdmix-subset"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Let's get a few fish together from a subset of pops:
+
+"AntlinRiver"
+"EagleLake"
+"Fairbanks"
+"MintoFlats"
+"YukonFlats"
+"LakeClark"
+"LakeNerka"  
+
+```{r bamlist, warning=FALSE, message=FALSE}
+library("tidyverse")
+#Meta
+load("outputs/103/pca-meta.rda")
+bams <- read_tsv("bamlists/175.bamlist", col_names = FALSE) %>%
+  mutate(vcf_name = str_replace_all(X1, pattern = "^data/|AN1711171/|BK1703222/|_sorted.*$", "")) %>%
+  mutate(index = 1:n())
+ad_meta <- left_join(bams, pca_meta)
+
+# remove spaces
+ad_meta <- ad_meta %>% mutate(Name = paste(gsub(Region, pattern=" ",
+                                                   replacement=""), index, sep="_"))
+# Separate Kenai
+ad_meta <- ad_meta %>% mutate(Population = ifelse(Site == "StormyLake", "Kenai",
+                                           ifelse(Site == "TinyLake", "Kenai",
+                                           ifelse(Site %in% c("Tyonek", "ShellLake", "AndersonLake",
+                                                              "OtterLake", "BulchitnaLake",
+                                                              "AlexanderLake",
+                                                              "YentnaIndianCreek", "DeshkaRiver"), 
+                                                              "AnchorageBowl",
+                                            Site)
+)))
+
+ad_meta$Population<- factor(ad_meta$Population, levels=c("AntlinRiver","EagleLake",
+                                                         "MintoFlats","YukonFlats",
+                                                         "Fairbanks", "AnchorageBowl",
+                                                         "Kenai","LakeClark","LakeNerka",
+                                                         "NorthSlope","Selawik"))
+
+sub_meta<-filter(ad_meta, Population %in% c("AntlinRiver","EagleLake","Fairbanks",
+                                            "MintoFlats","YukonFlats","LakeClark",
+                                            "LakeNerka"))
+save(sub_meta, file="outputs/sub_meta.rda")
+
+#Write a bamlist
+
+subbams<-sub_meta %>% select(`Sequencing project`, `RAD identifier`, Region, Site) %>% separate(`Sequencing project`, c("GW", "Project")) %>% mutate(String=paste("data/",Project,"/",`RAD identifier`,"_sorted.bam", sep=""))
+
+write(subbams$String, file="bamlists/133.txt")
+write(subbams$String, file="bamlists/133.bamlist")
+
+```
+
+# Now a short aside with 801.1-generate-pca-133.sh
