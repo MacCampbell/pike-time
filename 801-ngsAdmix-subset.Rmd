@@ -66,7 +66,7 @@ outputs/800 now has beagle file and .cov/.qopt
 Let's look at the PCA! Does it check out?  
 
 
-```{r, warning=FAlSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE}
 #' @param samples character vector with the individuals IDs in the order in which
 #' they were passed in the bamlist to angsd.
 #' @param cov covariance matrix
@@ -177,7 +177,7 @@ q<-q[1:(length(colnames(q)-1))]
 }
 ```
 
-```{r k3, message=FAlSE, warning=FALSE}
+```{r k3, message=FALSE, warning=FALSE}
 
 q3<-read_delim("outputs/800/133-k3.qopt", delim=" ", col_names=FALSE) %>% select(X1, X2, X3) %>%
   rename(Q1=X1, Q2=X2, Q3=X3)
