@@ -36,7 +36,7 @@ Now I can follow: http://www.popgen.dk/angsd/index.php/Thetas,Tajima,Neutrality_
 Except, I will deviate and calculate a folded SFS.  
 
   __1__ Estimate an site frequency spectrum. Output is out.sfs file. This is what is being used as the -pest argument in step2.  
-  __2__ Calculate per-site thetas. Output is a .thetas.idx/.thetas.gz files. This contains the binary per site estimates of the thetas.  
+  __2__ Calculate per-site thetas. Output is a .thetas.idx/.thetas.gz files. This contains the binary per-site estimates of the thetas.  
   __3__ Calculate neutrality tests statistics. Output is a .thetas.idx.pestPG file.  
 
 #### Step 1 Folded SFS  
@@ -45,13 +45,13 @@ Copying from chinook-wgs/102-generate-folded-SFS.sh
 ```{sh, eval=FALSE}
 /Users/mac/angsd/angsd -bam data/test/bam.filelist -doSaf 1 -out outputs/900/test -anc ./genome/chimpHg19.fa.gz -GL 2 -fold 1 -nThreads 2
 
-/Users/mac/angsd/misc/realSFS outputs/900/test.saf.idx -maxIter 100 -P 2 > outputs/900/test-realSFS.stdout >> outputs/900/test-realSFS.stderr
+/Users/mac/angsd/misc/realSFS outputs/900/test.saf.idx -maxIter 100 -P 2 > outputs/900/test-realSFS.stdout 2> outputs/900/test-realSFS.stderr
 ```
 
 #### Step 2 Per-Site Thetas  
 
 ```{sh, eval=FALSE}
-/Users/mac/angsd/angsd -bam data/test/bam.filelist -out outputs/900/test-realSFS.stdout -doThetas 1 -doSaf 1 -pest outputs/900/test.sfs -anc genome/chimpHg19.fa -GL 1
+/Users/mac/angsd/angsd -bam data/test/bam.filelist -out outputs/900/per-site -doThetas 1 -doSaf 1 -pest outputs/900/test-realSFS.stdout -anc genome/chimpHg19.fa.gz -GL 1
 
 ```
 
