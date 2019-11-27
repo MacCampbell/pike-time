@@ -24,11 +24,11 @@ cat $poplist | while IFS=$'\n' read -r line || [[ -n "$line" ]]; do
 # saf line
     echo "/home/macampbell2/angsd/angsd -bam /home/macampbell2/pike-time/bamlists/pops/$line.bamlist -doSaf 1 -out /home/macampbell2/pike-time/outputs/902/$line -anc /home/macampbell2/pike-time/genome/$3 -GL 2 -fold 1 -nThreads $2 -minMapQ 30 -minQ 20" >> /home/macampbell2/pike-time/temp1.txt
 # sfs line    
-    echo "/home/macampbell2/angsd/misc/realSFS /home/macampbell2/pike-time/outputs/902/$line.saf.idx -maxIter 100 -P $2 > /home/macampbell2/pike-time/outputs/902/$line.sfs" >> /home/macampbell2/pike-time/temp2.txt
+    echo "/home/macampbell2/angsd/misc/realSFS -fold 1 /home/macampbell2/pike-time/outputs/902/$line.saf.idx -maxIter 100 -P $2 > /home/macampbell2/pike-time/outputs/902/$line.sfs" >> /home/macampbell2/pike-time/temp2.txt
 done
 
 # kick off gnu parallel, except not on Chinook
-bash /home/macampbell2/pike-time/temp1.txt
+#bash /home/macampbell2/pike-time/temp1.txt
 bash /home/macampbell2/pike-time/temp2.txt
 
 # remove temporary files
