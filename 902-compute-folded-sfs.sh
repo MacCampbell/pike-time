@@ -29,10 +29,7 @@ cat $poplist | while IFS=$'\n' read -r line || [[ -n "$line" ]]; do
 # sfs line    
     echo "/home/macampbell2/angsd/misc/realSFS -fold 1 /home/macampbell2/pike-time/outputs/902/$line.saf.idx -maxIter 100 -P $2 > /home/macampbell2/pike-time/outputs/902/$line.sfs" >> /home/macampbell2/pike-time/temp2.txt
 # thetas line
-    echo "/home/macampbell2/angsd/angsd -bam /home/macampbell2/pike-time/bamlists/pops/$line.bamlist \
-    -out /home/macampbell2/pike-time/outputs/902/$line-per-site -doThetas 1 -doSaf 1 \ 
-    -pest /home/macampbell2/pike-time/outputs/902/$line.sfs -fold 1 -GL 2 \
-    -anc /home/macampbell2/pike-time/genome/$3" >> /home/macampbell2/pike-time/temp3.txt
+    echo "/home/macampbell2/angsd/angsd -bam /home/macampbell2/pike-time/bamlists/pops/$line.bamlist -out /home/macampbell2/pike-time/outputs/902/$line-per-site -doThetas 1 -doSaf 1 -pest /home/macampbell2/pike-time/outputs/902/$line.sfs -fold 1 -GL 2 -anc /home/macampbell2/pike-time/genome/$3" >> /home/macampbell2/pike-time/temp3.txt
 
 # print thetas line
     echo "/home/macampbell2/angsd/misc/thetaStat print /home/macampbell2/pike-time/outputs/902/$line-per-site.thetas.idx \
