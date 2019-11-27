@@ -1,0 +1,15 @@
+data/BK1703222/D-001_S66_sorted.bam
+data/BK1703222/D-004_S69_sorted.bam
+data/BK1703222/D-005_S70_sorted.bam
+data/BK1703222/D-006_S71_sorted.bam
+data/BK1703222/D-012_S77_sorted.bam
+data/BK1703222/D-015_S80_sorted.bam
+data/BK1703222/D-016_S81_sorted.bam
+data/BK1703222/D-017_S82_sorted.bam
+data/BK1703222/D-018_S83_sorted.bam
+data/BK1703222/D-019_S84_sorted.bam
+data/BK1703222/D-020_S85_sorted.bam
+data/BK1703222/D-021_S86_sorted.bam
+data/BK1703222/D-022_S87_sorted.bam
+data/BK1703222/D-023_S88_sorted.bam
+data/BK1703222/D-024_S89_sorted.bam

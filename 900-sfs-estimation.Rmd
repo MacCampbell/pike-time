@@ -43,7 +43,7 @@ Except, I will deviate and calculate a folded SFS.
 
 Copying from chinook-wgs/102-generate-folded-SFS.sh
 ```{sh, eval=FALSE}
-/Users/mac/angsd/angsd -bam data/test/bam.filelist -doSaf 1 -out outputs/900/test -anc ./genome/chimpHg19.fa.gz -GL 2 -fold 1 -nThreads 2
+/Users/mac/angsd/angsd -bam data/test/bam.filelist -doSaf 1 -out outputs/900/test -anc ./genome/chimpHg19.fa.gz -GL 2 -fold 1 -nThreads 2 minMapQ 1 -minQ 20
 
 /Users/mac/angsd/misc/realSFS outputs/900/test.saf.idx -maxIter 100 -P 2 > outputs/900/test-realSFS.stdout 2> outputs/900/test-realSFS.stderr
 ```
