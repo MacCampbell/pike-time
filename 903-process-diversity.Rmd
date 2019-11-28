@@ -1,0 +1,58 @@
+---
+title: "903-process-diversity"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Watterson's Theta and Tajima's D
+Can calculate like so:  
+`~/angsd/misc/thetaStat do_stat AnchorageBowl-per-site.thetas.idx`
+
+Format is:
+
+(indexStart,indexStop)(posStart,posStop)(regStat,regStop) chrname wincenter tW tP tF tH tL tajD fulif fuliD fayH zengsE numSites
+
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)
+df<-read_tsv("outputs/902/AnchorageBowl-per-site.thetas.idx.pestPG")
+```
+
+Hmmm.. .This does not provide actual numbers for the chromos. Switiching to a sliding window appraoch.
+
+`~/angsd/misc/thetaStat do_stat AnchorageBowl-per-site.thetas.idx -win 50000 -step 10000 -outnames theta.thetasWindow.gz`
+
+```{r, warning=FALSE, message=FALSE}
+df2<-read_tsv("outputs/902/theta.thetasWindow.gz.pestPG")
+```
+
+Looking good! Now for some weighted means based on the number of sites used to calculate stats in the window.
+
+```{r, warning=FALSE, message=FALSE}
+library(matrixStats)
+df2<-df2 %>% select(-`#(indexStart,indexStop)(firstPos_withData,lastPos_withData)(WinStart,WinStop)`) %>%
+  select(Chr, WinCenter, tW, tP, Tajima, nSites)
+df3<-df2 %>% filter(tW != "NaN") %>% filter(tP != "NaN")
+
+tWWeight<-weightedMedian(df3$tW, w=df3$nSites)
+tPWeight<-weightedMedian(df3$tP, w=df3$nSites)
+TajimaWeight<-weightedMedian(df3$Tajima, w=df3$nSites)
+```
+
+Plot
+```{r, warning=FALSE, message=FALSE}
+df4<-mutate(df3, Population="Anchorage Bowl")
+ggplot(df4)+geom_boxplot(aes(x=Population, y=tW, weight=nSites),
+                          outlier.size=0.1, outlier.alpha=0.5, outlier.shape=15,
+                          alpha=0.5)+
+  theme_classic()
+
+ggplot(df4)+geom_boxplot(aes(x=Population, y=Tajima, weight=nSites),
+                          outlier.size=0.1, outlier.alpha=0.5, outlier.shape=15,
+                          alpha=0.5)+
+  theme_classic()
+```
