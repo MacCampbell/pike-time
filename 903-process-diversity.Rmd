@@ -27,7 +27,7 @@ Hmmm.. .This does not provide actual numbers for the chromos. Switiching to a sl
 `~/angsd/misc/thetaStat do_stat AnchorageBowl-per-site.thetas.idx -win 50000 -step 10000 -outnames theta.thetasWindow.gz`
 
 ```{r, warning=FALSE, message=FALSE}
-df2<-read_tsv("outputs/902/theta.thetasWindow.gz.pestPG")
+df2<-read_tsv("outputs/902/AnchorageBowl.thetas-windows.gz.pestPG")
 ```
 
 Looking good! Now for some weighted means based on the number of sites used to calculate stats in the window.
@@ -55,4 +55,56 @@ ggplot(df4)+geom_boxplot(aes(x=Population, y=Tajima, weight=nSites),
                           outlier.size=0.1, outlier.alpha=0.5, outlier.shape=15,
                           alpha=0.5)+
   theme_classic()
+```
+
+#Everybody!
+
+```{r tidyall, warning=FALSE, message=FALSE}
+#Copied from here: https://serialmentor.com/blog/2016/6/13/reading-and-combining-many-tidy-data-files-in-R
+
+#files<-c("AntlinRiver.thetas-windows.gz.pestPG", "NorthSlope.thetas-windows.gz.pestPG")
+data_path<-"outputs/902"
+files<-dir(data_path, pattern="*.thetas-windows.gz.pestPG")
+
+data <- data_frame(filename = files) %>% # create a data frame
+                                         # holding the file names
+  mutate(file_contents = map(filename,          # read files into
+           ~ read_tsv(file.path(data_path, .))) # a new data column
+        ) 
+
+```
+
+Now, let's filter "data" to have what we want.
+.thetas-windows.gz.pestPG
+
+```{r filter, warning=FALSE, message=FALSE}
+data2<- unnest(data) %>% select(-`#(indexStart,indexStop)(firstPos_withData,lastPos_withData)(WinStart,WinStop)`) %>% mutate(Population=gsub(".thetas-windows.gz.pestPG", "", filename)) %>%
+  select(Population, Chr, WinCenter, nSites, tW, tP, Tajima) %>% filter(tW != "NaN") %>% filter(tP != "NaN")
+
+#Reorder population
+data2$Population<- factor(data2$Population, levels=c("AntlinRiver","EagleLake",
+                                                         "MintoFlats","YukonFlats",
+                                                         "Fairbanks", "AnchorageBowl",
+                                                         "Kenai","LakeClark","LakeNerka",
+                                                         "NorthSlope","Selawik"))
+
+
+#compute stats
+data2 %>% group_by(Population) %>% mutate(medianTW=weightedMedian(tW, w = nSites)) %>% mutate(medianD=weightedMedian(Tajima, w=nSites)) %>% select(Population, medianTW, medianD) %>% 
+  summarize(ThetaW=unique(medianTW), Tajimas=unique(medianD), Count=n())
+#tidy up
+tidy<-data2 %>% select(Population, Chr, WinCenter, nSites, tW, Tajima) %>% gather(Statistic, Value, 5:6)
+
+```
+
+Snazzy plot!!!
+```{r snazzyplot, warning=FALSE, message=FALSE}
+tidy$Statistic<-factor(tidy$Statistic, levels=c("tW","Tajima"))
+ggplot(tidy)+geom_boxplot(aes(x=Population, y=Value, weight=nSites),
+                          outlier.size=0.1, outlier.alpha=0.5, outlier.shape=15,
+                          alpha=0.5)+
+  theme_bw() +
+  theme(panel.grid=element_blank())+
+  facet_grid(Statistic ~ ., scales="free_y")
+ggsave(filename = "outputs/903/diversity-stats.pdf", width=11, height=8.5)
 ```
