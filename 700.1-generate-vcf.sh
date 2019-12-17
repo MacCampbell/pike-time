@@ -11,7 +11,7 @@
 #SBATCH --mail-type=END
 #SBATCH --mail-type=FAIL
 
-angsd -P 24 -b bamlists/175.bamlist -ref genome/GCF_000721915.3_Eluc_V3_genomic.fna -out outputs/700/175 -minMapQ 30 -minQ 20 -minInd 157 -GL 1 -doMajorMinor 1 -doMaf 1 -skipTriallelic 0 -SNP_pval 1e-6 -doVcf 1 -doPost 1 > outputs/700/700.1.out 2> outputs/700/700.1.err
+angsd -P 24 -b bamlists/175.bamlist -out outputs/700/175 -minMapQ 30 -minQ 20 -minInd 157 -GL 1 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -doVcf 1 -doPost 1 -postCutoff 0.95 > outputs/700/700.1.out 2> outputs/700/700.1.err
 
 
-angsd -P 24 -b bamlists/175.bamlist -ref genome/GCF_000721915.3_Eluc_V3_genomic.fna -out outputs/700/175maf -minMapQ 30 -minQ 20 -minInd 157 -GL 1 -doMajorMinor 1 -doMaf 1 -skipTriallelic 0 -SNP_pval 1e-6 -doVcf 1 -doPost 1 -minMaf 0.05 > outputs/700/700.1.maf.out 2> outputs/700/700.1.maf.err
+angsd -P 24 -b bamlists/175.bamlist -out outputs/700/175maf -minMapQ 30 -minQ 20 -minInd 157 -GL 1 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -doVcf 1 -doPost 1 -minMaf 0.05 -postCutoff 0.95  > outputs/700/700.1.maf.out 2> outputs/700/700.1.maf.err
