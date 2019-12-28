@@ -1,7 +1,6 @@
 #! /bin/bash
 
-#SBATCH -J angsd-vcfs
-#SBATCH --time=1-01:00:00 #run for a day and an hour
+#SBATCH -J angsd
 
 #SBATCH --partition=bio
 #SBATCH --ntasks=24
@@ -13,14 +12,6 @@
 #SBATCH --mail-type=BEGIN
 #SBATCH --mail-type=END
 #SBATCH --mail-type=FAIL
-
-#SBATCH -o bench-%j.stdout
-#SBATCH -e bench-%j.stderr
-
-# hostname is just for debugging
-hostname
-export OMP_NUM_THREADS=$SLURM_NTASKS
-module load benchmarks
 
 
 #Printing individual genotypes
