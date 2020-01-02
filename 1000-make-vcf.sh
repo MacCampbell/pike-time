@@ -21,12 +21,12 @@
 /home/macampbell2/angsd/angsd -P 24 -b bamlists/175.bamlist -out outputs/1000/175geno -minMapQ 30 -minQ 20 -minInd 157 -GL 1 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -doGeno 4 -doPost 1 -postCutoff 0.95 > outputs/1000/1000.out 2> outputs/1000/1000.err
 
 # -setMinDepthInd 5
-#/home/macampbell2/angsd/angsd -P 24 -b bamlists/175.bamlist -out outputs/1000/175geno-cov -minMapQ 30 -minQ 20 -minInd 157 -GL 1 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -doGeno 4 -doPost 1 -setMinDepthInd 5 -postCutoff 0.95 > outputs/1000/1000.out 2> outputs/1000/1000.err
+/home/macampbell2/angsd/angsd -P 24 -b bamlists/175.bamlist -out outputs/1000/175geno-cov -minMapQ 30 -minQ 20 -minInd 157 -GL 1 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -doGeno 4 -doPost 1 -setMinDepthInd 5 -postCutoff 0.95 > outputs/1000/1000.out 2> outputs/1000/1000.err
 
 
 #Excluding triallelic SNPS and creating a .vcf.
-#/home/macampbell2/angsd/angsd  -P 24 -b bamlists/175.bamlist -out outputs/1000/175vcf -minMapQ 30 -minQ 20 -minInd 157 -GL 1 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -doGeno 4 -doPost 1 -postCutoff 0.95 -dovcf 1 > outputs/1000/1000.out 2> outputs/1000/1000.err
+/home/macampbell2/angsd/angsd  -P 24 -b bamlists/175.bamlist -out outputs/1000/175vcf -minMapQ 30 -minQ 20 -minInd 157 -GL 1 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -doGeno 4 -doPost 1 -postCutoff 0.95 -dovcf 1 > outputs/1000/1000.out 2> outputs/1000/1000.err
 
 # -setMinDepthInd 5
-#/home/macampbell2/angsd/angsd  -P 24 -b bamlists/175.bamlist -out outputs/1000/175vcf-cov -minMapQ 30 -minQ 20 -minInd 157 -GL 1 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -doGeno 4 -doPost 1 -setMinDepthInd 5 -postCutoff 0.95 -dovcf 1 > outputs/1000/1000cov.out 2> outputs/1000/1000cov.err
+/home/macampbell2/angsd/angsd  -P 24 -b bamlists/175.bamlist -out outputs/1000/175vcf-cov -minMapQ 30 -minQ 20 -minInd 157 -GL 1 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -doGeno 4 -doPost 1 -setMinDepthInd 5 -postCutoff 0.95 -dovcf 1 > outputs/1000/1000cov.out 2> outputs/1000/1000cov.err
 
