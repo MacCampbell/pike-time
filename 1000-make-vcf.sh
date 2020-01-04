@@ -5,6 +5,7 @@
 #SBATCH --partition=bio
 #SBATCH --ntasks=24
 #SBATCH --tasks-per-node=24
+#SBATCH --time=2-01:00:00 #run for two days and an hour
 #If running on the bio or analysis queue add:
 #SBATCH --mem=214G
 
