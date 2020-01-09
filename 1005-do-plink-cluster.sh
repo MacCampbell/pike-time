@@ -16,13 +16,15 @@
 #SBATCH --mail-type=END
 #SBATCH --mail-type=FAIL
 
-$HOME/angsd/angsd -P 24 -b $HOME/pike-time/bamlists/175.bamlist -minInd 157  -out $HOME/pike-time/outputs/1000/175-plink1 \
+$HOME/angsd/angsd -P 24 -b $HOME/pike-time/bamlists/175.bamlist -minInd 157  -out $HOME/pike-time/outputs/1000/175-plink \
 -minMaf 0.05 -minMapQ 30 -minQ 20 -GL 1 -doMajorMinor 1 -doMaf 1 \
--SNP_pval 1e-6 -doGeno 4 -doPost 1 -postCutoff 0.95 -doPlink 1 > $HOME/pike-time/outputs/1000/plink1.out \
-2> $HOME/pike-time/outputs/1000/plink1.err
+-SNP_pval 1e-6 -doGeno 4 -doPost 1 -postCutoff 0.95 -doPlink 2 > $HOME/pike-time/outputs/1000/plink.out \
+2> $HOME/pike-time/outputs/1000/plink.err
+
 
 #Then maybe I can recode
-# https://www.cog-genomics.org/plink/1.9/data#recode
-# plink --ped my.ped --map my.map \
-#      --recode vcf \
- #     --out my
+#plink --tped plink.tped --tfam plink.tfam  --out binary --recode --noweb
+
+#Had old version of plink,
+
+#new one ~/bin/plink --ped binary.ped --map binary.map --recode vcf -out recode
