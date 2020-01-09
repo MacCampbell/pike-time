@@ -16,9 +16,9 @@
 #SBATCH --mail-type=END
 #SBATCH --mail-type=FAIL
 
-$HOME/angsd/angsd -P 24 -b $HOME/pike-time/bamlists/175.bamlist -minInd 157  -out $HOME/pike-time/outputs/1000/175-plink \
+$HOME/angsd/angsd -P 24 -b $HOME/pike-time/bamlists/175.bamlist -minInd 157  -out $HOME/pike-time/outputs/1000/175-plink1 \
 -minMaf 0.05 -minMapQ 30 -minQ 20 -GL 1 -doMajorMinor 1 -doMaf 1 \
--SNP_pval 1e-6 -doGeno 4 -doPost 1 -postCutoff 0.95 -doPlink 2 > $HOME/pike-time/outputs/1000/plink.out \
+-SNP_pval 1e-6 -doGeno 4 -doPost 1 -postCutoff 0.95 -doPlink 1 > $HOME/pike-time/outputs/1000/plink.out \
 2> $HOME/pike-time/outputs/1000/plink.err
 
 #Then maybe I can recode
