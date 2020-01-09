@@ -148,7 +148,6 @@ data/BK1703222/E-022_S112_sorted.bam
 data/BK1703222/E-024_S114_sorted.bam
 data/BK1703222/F-003_S118_sorted.bam
 data/AN1711171/W-001_sorted.bam
-data/AN1711171/E-026_sorted.bam
 data/AN1711171/J-022_sorted.bam
 data/AN1711171/F-021_sorted.bam
 data/AN1711171/Q-014_sorted.bam
@@ -174,4 +173,3 @@ data/BK1703222/F-015_S130_sorted.bam
 data/BK1703222/F-020_S135_sorted.bam
 data/BK1703222/F-002_S117_sorted.bam
 data/BK1703222/E-007_S97_sorted.bam
-data/AN1711171/D-026_sorted.bam

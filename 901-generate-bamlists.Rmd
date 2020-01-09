@@ -1,0 +1,44 @@
+---
+title: "901-generate-bamlists"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# For all sampling locations, calculate diversity stats. 
+
+We'll need bamlists for all
+
+```{r, warning=FALSE, message=FALSE}
+library(dplyr)
+load(file="outputs/103/pca-meta.rda")
+meta <- pca_meta %>% mutate(Population = ifelse(Site == "StormyLake", "Kenai",
+                                           ifelse(Site == "TinyLake", "Kenai",
+                                           ifelse(Site %in% c("Tyonek", "ShellLake", "AndersonLake",
+                                                              "OtterLake", "BulchitnaLake",
+                                                              "AlexanderLake",
+                                                              "YentnaIndianCreek", "DeshkaRiver"), 
+                                                              "AnchorageBowl",
+                                            Site)
+)))
+
+
+```
+
+#Group by population and create separate bamlists.
+```{r, warning=FALSE, message=FALSE}
+#For loopin'!
+pops<-unique(meta$Population)
+
+for (pop in pops) {
+
+bams <- meta %>% filter(Population==pop)
+
+write(bams$X1, file=paste("bamlists/pops/", pop, ".txt", sep =""))
+write(bams$X1, file=paste("bamlists/pops/", pop, ".bamlist", sep =""))
+  
+}
+
+```

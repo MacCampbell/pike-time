@@ -1,0 +1,169 @@
+---
+title: "103-plot-pca-177"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, warning=FALSE, echo=FALSE, message=FALSE}
+library(tidyverse)
+```
+
+Let's get the covariance matrix, sample list, and metadata
+```{r, warning=FALSE, message=FALSE}
+cov<-read_tsv("./outputs/102/175cov.cov", col_names=FALSE) %>% as.matrix()
+
+bams <- read_tsv("./bamlists/175.txt", col_names = FALSE) %>%
+  mutate(vcf_name = str_replace_all(X1, pattern = "^data/|AN1711171/|BK1703222/|_sorted.*$", "")) %>%
+  mutate(index = 1:n())
+
+load("outputs/101/samples-to-analyze.rda")
+meta<-samples %>% mutate(vcf_name=`RAD identifier`)
+
+# Order metadata by bamlist
+pca_meta <- left_join(bams, meta, by = "vcf_name")
+
+save(pca_meta, file="outputs/103/pca-meta.rda")
+```
+
+###Thanks Eric A. for this handy function!!!
+```{r, warning=FAlSE, message=FALSE}
+#' @param samples character vector with the individuals IDs in the order in which
+#' they were passed in the bamlist to angsd.
+#' @param cov covariance matrix
+covar2pcs <- function(samples, cov) {
+  
+  
+  eig <- eigen(cov, symm = TRUE)
+  PC <- as.data.frame(eig$vectors) %>%
+    as_tibble() %>%
+    setNames(sprintf("PC-%02d", 1:ncol(.)))
+  
+  samtib <- tibble(sample = samples)
+  
+  list(
+    PCs = bind_cols(samtib, PC),
+    eigevalues = eig$values
+  )
+}
+```
+
+Shameless copying from Eric A. again.
+```{r, warning=FALSE, message=FALSE}
+pca <- covar2pcs(pca_meta$vcf_name, cov)
+
+pca_long <- pca$PCs %>%
+  tidyr::gather(., key = "PC", "val", -sample)
+
+# then expand a grid of the possible comparisons (ordered)
+expg <- expand.grid(sample = pca$PCs$sample,
+                    PCx = sprintf("PC-%02d", 1:6),
+                    PCy = sprintf("PC-%02d", 1:6),
+                    stringsAsFactors = FALSE) %>%
+  tibble::as_tibble()
+
+# then left join the pca results onto that
+pca_pairs <- dplyr::left_join(expg, pca_long, by = c("sample", "PCx" = "PC")) %>%
+  dplyr::rename(val_x = val) %>%
+  dplyr::left_join(pca_long, by = c("sample", "PCy" = "PC")) %>%
+  dplyr::rename(val_y = val)
+
+pp_meta <- pca_pairs %>%   # just keep the first 6 PCs around
+  left_join(., pca_meta, by = c("sample" = "vcf_name")) %>%
+  mutate(group = Region)  # put a group column in there
+
+# now, that has the first 6 PCs in it.  If we want to focus on the just the
+# first 3, we could do 
+npc <- 3
+pp_meta2 <- pp_meta %>%
+  filter( (PCx %in% sprintf("PC-%02d", 1:npc)) & 
+            (PCy %in% sprintf("PC-%02d", 1:npc)) )
+
+ggplot(pp_meta2, aes(x = val_x, y = val_y, fill = group)) +
+  geom_point(pch = 21, size = 2) +
+  scale_fill_discrete(na.value = "white") + 
+  facet_grid(PCy ~ PCx, scales = "free")
+
+
+```
+###Making it Pretty
+```{r, warning=FALSE, message=FALSE}
+pp_shape<-pp_meta2
+
+#Reordering for plotting
+pp_shape$Region<- factor(pp_shape$Region, levels=c("Southeast","Southcentral", "Southwest", "Interior", "Northwest",
+                                                   "North","Midwest"))        
+
+ggplot(pp_shape, aes(x = val_x, y = val_y, fill = Region, shape= Region)) +
+  geom_point(size = 2) +
+  scale_fill_discrete(na.value = "white") + 
+  facet_grid(PCy ~ PCx, scales = "free")+
+  theme_bw()+
+  theme(panel.grid=element_blank())+
+  xlab("PC X")+
+  ylab("PC Y")+
+  scale_shape_manual(values=c(24,21,21,22,22,22,23))
+  
+
+ggsave("outputs/103/3-by-3-pcas.pdf", width = 10, height = 7)
+
+
+```
+## Computing Proportion of Variance
+```{r, message=FALSE, warning=FALSE}
+eig <- eigen(cov, symm = TRUE)
+var<-eig$values/sum(eig$values)
+cumvar<-cumsum(eig$values)/sum(eig$values)
+
+head(var)
+head(cumvar)
+
+sub12<-pp_shape %>% filter( (PCx =="PC-01") & (PCy =="PC-02") )
+ggplot(sub12, aes(x = val_x, y = val_y, fill = Region, shape= Region)) +
+  geom_point(size = 2) +
+  scale_fill_discrete(na.value = "white") + 
+  theme_bw()+
+  theme(panel.grid=element_blank())+
+  xlab(paste("PC1", " ", round((100*var[1]),2), "%", sep = ""))+
+  ylab(paste("PC2", " ", round((100*var[2]),2), "%", sep = ""))+
+  scale_shape_manual(values=c(24,21,21,22,22,22,23))
+
+ggsave("outputs/103/PCA-12.pdf", width = 5, height = 3.5)
+
+```
+
+```{r, message=FALSE, warning=FALSE}
+sub<-pp_shape %>% filter(Region %in% c("Southcentral")) %>% filter( (PCx %in% sprintf("PC-%02d", 1:2)) & (PCy %in% sprintf("PC-%02d", 1:2)) )
+sub<- sub %>% filter(PCx=="PC-01") %>% filter(PCy=="PC-02")
+ggplot(sub, aes(x = val_x, y = val_y, fill = Site)) +
+  geom_point(size = 2, pch=21) +
+  scale_fill_discrete(na.value = "white") + 
+  #facet_grid(PCy ~ PCx, scales = "free")+
+  facet_wrap(.~Site)+
+  theme_bw()+
+  theme(panel.grid=element_blank())+
+  xlab("PC X")+
+  ylab("PC Y")
+
+```
+
+
+
+
+## What about those Southwest Samples?
+```{r, message=FALSE, warning=FALSE}
+library(ggrepel)
+pp_sw <- pp_meta %>%
+  filter( (PCx %in% sprintf("PC-%02d", 1:1)) & 
+            (PCy %in% sprintf("PC-%02d", 1:1)) ) %>%
+  filter(Region == "Southwest")
+
+ggplot(pp_sw, aes(x = val_x, y = val_y, fill = group)) +
+  geom_point(pch = 21, size = 2) +
+  geom_text_repel(aes(label=X1)) +
+  scale_fill_discrete(na.value = "white") + 
+  facet_grid(PCy ~ PCx, scales = "free")
+
+```

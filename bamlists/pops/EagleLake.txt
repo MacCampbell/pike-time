@@ -1,0 +1,10 @@
+data/AN1711171/V-001_sorted.bam
+data/AN1711171/V-002_sorted.bam
+data/AN1711171/V-003_sorted.bam
+data/AN1711171/V-004_sorted.bam
+data/AN1711171/V-005_sorted.bam
+data/AN1711171/V-006_sorted.bam
+data/AN1711171/V-007_sorted.bam
+data/AN1711171/V-009_sorted.bam
+data/AN1711171/V-010_sorted.bam
+data/AN1711171/V-011_sorted.bam

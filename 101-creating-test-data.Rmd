@@ -167,17 +167,25 @@ coverage<-read_tsv("./bamlists/197.cov", col_names = FALSE)
 samples$Coverage<-coverage$X1
 
 ggplot(samples)+
+  geom_histogram(aes(x=Coverage))
+
+ggplot(samples)+
   geom_histogram(aes(x=Coverage))+
   facet_grid(.~Region)
 ```
 
 ```{r, warning=FALSE, message=FALSE}
-filtered<- top_frac(samples, .90, Coverage)
+
+#Removing two "odd" samples, D-026_R1_001.fastq.gz, E-026_R1_001.fastq.gz
+
+filtered<- samples %>% filter(`Sequencing file name` != ("D-026_R1_001.fastq.gz")) %>%
+                       filter(`Sequencing file name` != ("E-026_R1_001.fastq.gz")) %>%
+                       top_frac(.90, Coverage)
+
 filtered %>% group_by(Region) %>% summarize(Count=n())
 
 filteredbams<-filtered %>% select(`Sequencing project`, `RAD identifier`, Region, Site) %>% separate(`Sequencing project`, c("GW", "Project")) %>% mutate(String=paste("data/",Project,"/",`RAD identifier`,"_sorted.bam", sep=""))
 
-save(filteredbams, file="metadata/filtered.rda")
-write(filteredbams$String, file="bamlists/177.txt")
-write(filteredbams$String, file="bamlists/177.bamlist")
+write(filteredbams$String, file="bamlists/175.txt")
+write(filteredbams$String, file="bamlists/175.bamlist")
 ```

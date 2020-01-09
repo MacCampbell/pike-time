@@ -1,0 +1,5 @@
+data/AN1711171/W-002_sorted.bam
+data/AN1711171/W-003_sorted.bam
+data/AN1711171/W-004_sorted.bam
+data/AN1711171/W-006_sorted.bam
+data/AN1711171/W-001_sorted.bam

@@ -1,0 +1,265 @@
+---
+title: "801-ngsAdmix-subset"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Let's get a few fish together from a subset of pops:
+
+"AntlinRiver"
+"EagleLake"
+"Fairbanks"
+"MintoFlats"
+"YukonFlats"
+"LakeClark"
+"LakeNerka"  
+
+```{r bamlist, warning=FALSE, message=FALSE}
+library("tidyverse")
+#Meta
+load("outputs/103/pca-meta.rda")
+bams <- read_tsv("bamlists/175.bamlist", col_names = FALSE) %>%
+  mutate(vcf_name = str_replace_all(X1, pattern = "^data/|AN1711171/|BK1703222/|_sorted.*$", "")) %>%
+  mutate(index = 1:n())
+ad_meta <- left_join(bams, pca_meta)
+
+# remove spaces
+ad_meta <- ad_meta %>% mutate(Name = paste(gsub(Region, pattern=" ",
+                                                   replacement=""), index, sep="_"))
+# Separate Kenai
+ad_meta <- ad_meta %>% mutate(Population = ifelse(Site == "StormyLake", "Kenai",
+                                           ifelse(Site == "TinyLake", "Kenai",
+                                           ifelse(Site %in% c("Tyonek", "ShellLake", "AndersonLake",
+                                                              "OtterLake", "BulchitnaLake",
+                                                              "AlexanderLake",
+                                                              "YentnaIndianCreek", "DeshkaRiver"), 
+                                                              "AnchorageBowl",
+                                            Site)
+)))
+
+ad_meta$Population<- factor(ad_meta$Population, levels=c("AntlinRiver","EagleLake",
+                                                         "MintoFlats","YukonFlats",
+                                                         "Fairbanks", "AnchorageBowl",
+                                                         "Kenai","LakeClark","LakeNerka",
+                                                         "NorthSlope","Selawik"))
+
+sub_meta<-filter(ad_meta, Population %in% c("AntlinRiver","EagleLake","Fairbanks",
+                                            "MintoFlats","YukonFlats","LakeClark",
+                                            "LakeNerka"))
+save(sub_meta, file="outputs/sub_meta.rda")
+
+#Write a bamlist
+
+subbams<-sub_meta %>% select(`Sequencing project`, `RAD identifier`, Region, Site) %>% separate(`Sequencing project`, c("GW", "Project")) %>% mutate(String=paste("data/",Project,"/",`RAD identifier`,"_sorted.bam", sep=""))
+
+write(subbams$String, file="bamlists/133.txt")
+write(subbams$String, file="bamlists/133.bamlist")
+
+```
+
+# Now a short aside with 801.1-generate-pca-133.sh
+Done....  
+outputs/800 now has beagle file and .cov/.qopt  
+Let's look at the PCA! Does it check out?  
+
+
+```{r, warning=FALSE, message=FALSE}
+#' @param samples character vector with the individuals IDs in the order in which
+#' they were passed in the bamlist to angsd.
+#' @param cov covariance matrix
+covar2pcs <- function(samples, cov) {
+  
+  
+  eig <- eigen(cov, symm = TRUE)
+  PC <- as.data.frame(eig$vectors) %>%
+    as_tibble() %>%
+    setNames(sprintf("PC-%02d", 1:ncol(.)))
+  
+  samtib <- tibble(sample = samples)
+  
+  list(
+    PCs = bind_cols(samtib, PC),
+    eigevalues = eig$values
+  )
+}
+```
+
+Shameless copying from Eric A. again.
+```{r, warning=FALSE, message=FALSE}
+cov<-read_tsv("outputs/800/133.cov", col_names=FALSE) %>% as.matrix()
+
+pca <- covar2pcs(sub_meta$vcf_name, cov)
+
+pca_long <- pca$PCs %>%
+  tidyr::gather(., key = "PC", "val", -sample)
+
+# then expand a grid of the possible comparisons (ordered)
+expg <- expand.grid(sample = pca$PCs$sample,
+                    PCx = sprintf("PC-%02d", 1:6),
+                    PCy = sprintf("PC-%02d", 1:6),
+                    stringsAsFactors = FALSE) %>%
+  tibble::as_tibble()
+
+# then left join the pca results onto that
+pca_pairs <- dplyr::left_join(expg, pca_long, by = c("sample", "PCx" = "PC")) %>%
+  dplyr::rename(val_x = val) %>%
+  dplyr::left_join(pca_long, by = c("sample", "PCy" = "PC")) %>%
+  dplyr::rename(val_y = val)
+
+pp_meta <- pca_pairs %>%   # just keep the first 6 PCs around
+  left_join(., pca_meta, by = c("sample" = "vcf_name")) %>%
+  mutate(group = Region)  # put a group column in there
+
+# now, that has the first 6 PCs in it.  If we want to focus on the just the
+# first 3, we could do 
+npc <- 3
+pp_meta2 <- pp_meta %>%
+  filter( (PCx %in% sprintf("PC-%02d", 1:npc)) & 
+            (PCy %in% sprintf("PC-%02d", 1:npc)) )
+
+ggplot(pp_meta2, aes(x = val_x, y = val_y, fill = group)) +
+  geom_point(pch = 21, size = 2) +
+  scale_fill_discrete(na.value = "white") + 
+  facet_grid(PCy ~ PCx, scales = "free")
+
+
+```
+
+#On to ngsAdmix!
+Let's plot K = 2,3,4,5,6 while we are at it.  
+
+```{sh, eval=FALSE}
+/Users/mac/angsd/misc/NGSadmix -likes outputs/800/133.beagle.gz -K 2 -o outputs/800/133-k2 -P 3
+/Users/mac/angsd/misc/NGSadmix -likes outputs/800/133.beagle.gz -K 3 -o outputs/800/133-k3 -P 3
+/Users/mac/angsd/misc/NGSadmix -likes outputs/800/133.beagle.gz -K 4 -o outputs/800/133-k4 -P 3
+/Users/mac/angsd/misc/NGSadmix -likes outputs/800/133.beagle.gz -K 5 -o outputs/800/133-k5 -P 3
+/Users/mac/angsd/misc/NGSadmix -likes outputs/800/133.beagle.gz -K 6 -o outputs/800/133-k6 -P 3
+```
+
+Here we can split things into runs, or somehow combine it all.  I think I will generate separate ggplot objects and plot with ggarrange of the ggpubr library.  Should be beautiful.
+
+```{r k2, warning=FALSE, message=FALSE}
+#Get metadata together, looks like factor levels of Population were retained from sub_meta into df2 below.
+Population<-sub_meta %>% select(index, Name, Population)
+
+q2<-read_delim("outputs/800/133-k2.qopt", delim=" ", col_names=FALSE) %>% select(X1, X2) %>%
+  rename(Q1=X1, Q2=X2)
+
+df2<-cbind(q2, Population)                               
+
+q2s<-df2 %>% select(Population, Name, index, Q1, Q2) %>% gather(key=Ancestry, value=Q, 4:5)
+
+p2<-ggplot(q2s)+geom_col(aes(x=Name,y=Q, fill=Ancestry))+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())+
+  scale_fill_brewer(palette ="Spectral")+
+  facet_wrap(. ~ Population, ncol=7, scales="free_x")
+
+p2
+```
+
+Can I generalize this to a function?  
+Let's copy Eric's grammar, but not his function.  
+
+```{r myplotfun, warning=FALSE, message=FALSE}
+#' @param file what file to read in
+#' @param meta data frame with metadata
+#' returns a ggplot object for plotting
+admixPlot <- function(file, meta) {
+q <-read_delim(paste(file), delim=" ", col_names=FALSE) 
+q<-q[1:(length(colnames(q)-1))]
+
+#And I'm bored. Also, we'll need to adjust the colors manually in the end to get them looking logical anywho. 
+}
+```
+
+```{r k3, message=FALSE, warning=FALSE}
+
+q3<-read_delim("outputs/800/133-k3.qopt", delim=" ", col_names=FALSE) %>% select(X1, X2, X3) %>%
+  rename(Q1=X1, Q2=X2, Q3=X3)
+q4<-read_delim("outputs/800/133-k4.qopt", delim=" ", col_names=FALSE) %>% select(X1, X2, X3, X4) %>%
+  rename(Q1=X1, Q2=X2, Q3=X3, Q4=X4)
+q5<-read_delim("outputs/800/133-k5.qopt", delim=" ", col_names=FALSE) %>% select(X1, X2, X3, X4, X5) %>%
+  rename(Q1=X1, Q2=X2, Q3=X3, Q4=X4, Q5=X5)
+q6<-read_delim("outputs/800/133-k6.qopt", delim=" ", col_names=FALSE) %>% select(X1, X2, X3, X4, X5, X6) %>%
+  rename(Q1=X1, Q2=X2, Q3=X3, Q4=X4, Q5=X5, Q6=X6)
+
+df3<-cbind(q3, Population)                               
+df4<-cbind(q4, Population)
+df5<-cbind(q5, Population)                               
+df6<-cbind(q6, Population)
+
+
+q3s<-df3 %>% select(Population, Name, index, Q1, Q2, Q3) %>% 
+  gather(key=Ancestry, value=Q, 4:6)
+q4s<-df4 %>% select(Population, Name, index, Q1, Q2, Q3, Q4) %>% 
+  gather(key=Ancestry, value=Q, 4:7)
+q5s<-df5 %>% select(Population, Name, index, Q1, Q2, Q3, Q4, Q5) %>% 
+  gather(key=Ancestry, value=Q, 4:8)
+q6s<-df6 %>% select(Population, Name, index, Q1, Q2, Q3, Q4, Q5, Q6) %>% 
+  gather(key=Ancestry, value=Q, 4:9)
+
+```
+
+```{r plots, warning=FALSE, message=FALSE}
+p3<-ggplot(q3s)+geom_col(aes(x=Name,y=Q, fill=Ancestry))+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())+
+  scale_fill_brewer(palette ="Spectral")+
+  facet_wrap(. ~ Population, ncol=7, scales="free_x")
+
+p4<-ggplot(q4s)+geom_col(aes(x=Name,y=Q, fill=Ancestry))+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())+
+  scale_fill_brewer(palette ="Spectral")+
+  facet_wrap(. ~ Population, ncol=7, scales="free_x")
+
+p5<-ggplot(q5s)+geom_col(aes(x=Name,y=Q, fill=Ancestry))+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())+
+  scale_fill_brewer(palette ="Spectral")+
+  facet_wrap(. ~ Population, ncol=7, scales="free_x")
+
+p6<-ggplot(q6s)+geom_col(aes(x=Name,y=Q, fill=Ancestry))+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())+
+  scale_fill_brewer(palette ="Spectral")+
+  facet_wrap(. ~ Population, ncol=7, scales="free_x")
+```
+
+#Now for the one plot to bind them all.
+
+```{r plotting, warning=FALSE, message=FALSE}
+library(ggpubr)
+
+ggarrange(p2,p3,p4,p5,p6, ncol=1)
+
+ggsave("outputs/800/133-k2-k6.pdf", units="in", width=11, height=8.5)
+```
+
+#Now to recolor manually
+
+```{r colors, warning=FALSE, message=FALSE}
+library(RColorBrewer)
+cols<-brewer.pal(6, "Spectral")
+ggplot()+geom_point(aes(x=c(1,2,3,4,5,6), y=c(1,1,1,1,1,1)), col=cols, cex=5)
+```
+
+```{r p2, warning=FALSE}
+x2<-p2+scale_fill_manual(values=c(cols[3], cols[1]))+theme(legend.position = "none")
+x3<-p3+scale_fill_manual(values=c(cols[1], cols[3], cols[2]))+theme(legend.position = "none")
+x4<-p4+scale_fill_manual(values=c(cols[3], cols[6], cols[1], cols[2]))+theme(legend.position = "none")
+x5<-p5+scale_fill_manual(values=c(cols[1], cols[3], cols[4], cols[6], cols[2])) +theme(legend.position = "none")
+
+ggarrange(x2,x3,x4,x5, ncol=1)
+
+ggsave("outputs/800/133-k2-k5.pdf", units="in", width=11, height=6)
+```

@@ -1,0 +1,26 @@
+Figure 1 - Map: Chase or me with ggplot, range map of pike?
+Figure 2 - PCA with axes depending on %variation
+Seems to be:
+
+proportion of variance: 0.18686813 0.08942267 0.08317768 0.06567129 0.05243199 0.04269522
+cumulative proportion : 0.1868681 0.2762908 0.3594685 0.4251398 0.4775718 0.5202670
+
+#Keep at least the first three
+# Two panel PC1 vs PC2
+# Two panel PC1 vs PC3
+
+#Introduced to solids?
+#Single shape
+
+Figure 3 - Tree
+
+Figure 4 - Objective clustering, with K=2, objective 
+
+#STRUCTURE K={2..10}
+
+Table 1 Pop Origins, sample size and stats (heterozygosity and pi)
+
+Mac to do: update methods for these figures.
+
+----
+

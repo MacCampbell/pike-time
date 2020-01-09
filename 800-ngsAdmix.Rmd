@@ -1,0 +1,244 @@
+---
+title: "800-ngsAdmix"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## NGSadmix k=2
+
+
+NGSadmix -likes inputBeagleFile.gz -K 3 -o outFileName -P 10
+```{sh, eval=FALSE}
+/Users/mac/angsd/misc/NGSadmix -likes outputs/102/175cov.beagle.gz -K 2 -o outputs/800/175cov-k2 -P 3
+
+```
+
+The default includes:  
+Filters: misTol=0.050000 minMaf=0.050000 minLrt=0.000000 minInd=0  
+Input file has dim: nsites=21523 nind=175  
+Input file has dim (AFTER filtering): nsites=5694 nind=175  
+
+### What does our qopt look like?
+
+```{R k2, warning=FALSE, message=FALSE}
+library(tidyverse)
+q2<-read_delim("outputs/800/175cov-k2.qopt", delim=" ", col_names=FALSE) %>% select(X1, X2) %>%
+  rename(Q1=X1, Q2=X2)
+
+#Meta
+load("outputs/103/pca-meta.rda")
+bams <- read_tsv("bamlists/175.bamlist", col_names = FALSE) %>%
+  mutate(vcf_name = str_replace_all(X1, pattern = "^data/|AN1711171/|BK1703222/|_sorted.*$", "")) %>%
+  mutate(index = 1:n())
+ad_meta <- left_join(bams, pca_meta)
+
+# remove spaces
+ad_meta <- ad_meta %>% mutate(Name = paste(gsub(Region, pattern=" ",
+                                                   replacement=""), index, sep="_"))
+# Separate Kenai
+ad_meta <- ad_meta %>% mutate(Population = ifelse(Site == "StormyLake", "Kenai",
+                                           ifelse(Site == "TinyLake", "Kenai",
+                                           ifelse(Site %in% c("Tyonek", "ShellLake", "AndersonLake",
+                                                              "OtterLake", "BulchitnaLake",
+                                                              "AlexanderLake",
+                                                              "YentnaIndianCreek", "DeshkaRiver"), 
+                                                              "AnchorageBowl",
+                                            Site)
+)))
+
+ad_meta$Population<- factor(ad_meta$Population, levels=c("AntlinRiver","EagleLake",
+                                                         "MintoFlats","YukonFlats",
+                                                         "Fairbanks", "AnchorageBowl",
+                                                         "Kenai","LakeClark","LakeNerka",
+                                                         "NorthSlope","Selawik"))
+Population<-ad_meta %>% select(index, Name, Population)
+df2<-cbind(q2, Population)                                                   
+```
+
+Plot it!
+
+```{r ggplotk2, warning=FALSE, message=FALSE}
+
+q2s<-df2 %>% select(Population, Name, index, Q1, Q2) %>% gather(key=Ancestry, value=Q, 4:5)
+
+ggplot(q2s)+geom_col(aes(x=Name,y=Q, fill=Ancestry))+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())+
+  scale_fill_brewer(palette ="Spectral")+
+  facet_wrap(. ~ Population, ncol=4, scales="free_x")
+
+```
+
+## NGSadmix k=3
+
+NGSadmix -likes inputBeagleFile.gz -K 3 -o outFileName -P 10
+```{sh, eval=FALSE}
+/Users/mac/angsd/misc/NGSadmix -likes outputs/102/175cov.beagle.gz -K 3 -o outputs/800/175cov-k3 -P 3
+```
+```{R k3, warning=FALSE, message=FALSE}
+
+q3<-read_delim("outputs/800/175cov-k3.qopt", delim=" ", col_names=FALSE) %>% 
+  select(X1, X2, X3) %>%rename(Q1=X1, Q2=X2, Q3=X3)
+
+df3<-cbind(q3, Population)     
+
+q3s<-df3 %>% select(Population, Name, index, Q1, Q2, Q3) %>% gather(key=Ancestry, value=Q, 4:6)
+
+ggplot(q3s)+geom_col(aes(x=Name,y=Q, fill=Ancestry))+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())+
+  scale_fill_brewer(palette ="Spectral")+
+  facet_wrap(. ~ Population, ncol=4, scales="free_x")
+```
+
+
+## NGSadmix k=4
+
+```{sh, eval=FALSE}
+/Users/mac/angsd/misc/NGSadmix -likes outputs/102/175cov.beagle.gz -K 4 -o outputs/800/175cov-k4 -P 3
+```
+
+```{R k4, warning=FALSE, message=FALSE}
+
+q4<-read_delim("outputs/800/175cov-k4.qopt", delim=" ", col_names=FALSE) %>% 
+  select(X1, X2, X3, X4) %>%rename(Q1=X1, Q2=X2, Q3=X3, Q4=X4)
+
+df4<-cbind(q4, Population)     
+
+q4s<-df4 %>% select(Population, Name, index, Q1, Q2, Q3, Q4) %>% 
+  gather(key=Ancestry, value=Q, 4:7)
+
+ggplot(q4s)+geom_col(aes(x=Name,y=Q, fill=Ancestry))+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())+
+  scale_fill_brewer(palette ="Spectral")+
+  facet_wrap(. ~ Population, ncol=4, scales="free_x")
+```
+
+## NGSadmix k=5
+
+```{sh, eval=FALSE}
+/Users/mac/angsd/misc/NGSadmix -likes outputs/102/175cov.beagle.gz -K 5 -o outputs/800/175cov-k5 -P 3
+```
+
+```{R k5, warning=FALSE, message=FALSE}
+
+q5<-read_delim("outputs/800/175cov-k5.qopt", delim=" ", col_names=FALSE) %>% 
+  select(X1, X2, X3, X4, X5) %>%rename(Q1=X1, Q2=X2, Q3=X3, Q4=X4, Q5=X5)
+
+df5<-cbind(q5, Population)     
+
+q5s<-df5 %>% select(Population, Name, index, Q1, Q2, Q3, Q4, Q5) %>% 
+  gather(key=Ancestry, value=Q, 4:8)
+
+ggplot(q5s)+geom_col(aes(x=Name,y=Q, fill=Ancestry))+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())+
+  scale_fill_brewer(palette ="Spectral")+
+  facet_wrap(. ~ Population, ncol=4, scales="free_x")
+```
+
+## NGSadmix k=6
+
+```{sh, eval=FALSE}
+/Users/mac/angsd/misc/NGSadmix -likes outputs/102/175cov.beagle.gz -K 6 -o outputs/800/175cov-k6 -P 3
+```
+
+```{R k6, warning=FALSE, message=FALSE}
+
+q6<-read_delim("outputs/800/175cov-k6.qopt", delim=" ", col_names=FALSE) %>% 
+  select(X1, X2, X3, X4, X5, X6) %>%rename(Q1=X1, Q2=X2, Q3=X3, Q4=X4, Q5=X5, Q6=X6)
+
+df6<-cbind(q6, Population)     
+
+q6s<-df6 %>% select(Population, Name, index, Q1, Q2, Q3, Q4, Q5, Q6) %>% 
+  gather(key=Ancestry, value=Q, 4:9)
+
+ggplot(q6s)+geom_col(aes(x=Name,y=Q, fill=Ancestry))+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())+
+  scale_fill_brewer(palette ="Spectral")+
+  facet_wrap(. ~ Population, ncol=4, scales="free_x")
+```
+
+## NGSadmix k=7
+
+```{sh, eval=FALSE}
+/Users/mac/angsd/misc/NGSadmix -likes outputs/102/175cov.beagle.gz -K 7 -o outputs/800/175cov-k7 -P 3
+```
+
+```{R k7, warning=FALSE, message=FALSE}
+
+q7<-read_delim("outputs/800/175cov-k7.qopt", delim=" ", col_names=FALSE) %>% 
+  select(X1, X2, X3, X4, X5, X6, X7) %>%rename(Q1=X1, Q2=X2, Q3=X3, Q4=X4, Q5=X5, Q6=X6, Q7=X7)
+
+df7<-cbind(q7, Population)     
+
+q7s<-df7 %>% select(Population, Name, index, Q1, Q2, Q3, Q4, Q5, Q6, Q7) %>% 
+  gather(key=Ancestry, value=Q, 4:10)
+
+ggplot(q7s)+geom_col(aes(x=Name,y=Q, fill=Ancestry))+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())+
+  scale_fill_brewer(palette ="Spectral")+
+  facet_wrap(. ~ Population, ncol=4, scales="free_x")
+```
+
+## NGSadmix k=8
+
+```{sh, eval=FALSE}
+/Users/mac/angsd/misc/NGSadmix -likes outputs/102/175cov.beagle.gz -K 8 -o outputs/800/175cov-k8 -P 3
+```
+
+
+```{R k8, warning=FALSE, message=FALSE}
+
+q8<-read_delim("outputs/800/175cov-k8.qopt", delim=" ", col_names=FALSE) %>% 
+  select(X1, X2, X3, X4, X5, X6, X7, X8) %>%rename(Q1=X1, Q2=X2, Q3=X3, Q4=X4, Q5=X5, Q6=X6, Q7=X7, Q8=X8)
+
+df8<-cbind(q8, Population)     
+
+q8s<-df8 %>% select(Population, Name, index, Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8) %>% 
+  gather(key=Ancestry, value=Q, 4:11)
+
+ggplot(q8s)+geom_col(aes(x=Name,y=Q, fill=Ancestry))+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())+
+  scale_fill_brewer(palette ="Spectral")+
+  facet_wrap(. ~ Population, ncol=4, scales="free_x")
+```
+
+## NGSadmix k=9
+
+```{sh, eval=FALSE}
+/Users/mac/angsd/misc/NGSadmix -likes outputs/102/175cov.beagle.gz -K 9 -o outputs/800/175cov-k9 -P 3
+```
+
+
+```{R k9, warning=FALSE, message=FALSE}
+
+q9<-read_delim("outputs/800/175cov-k9.qopt", delim=" ", col_names=FALSE) %>% 
+  select(X1, X2, X3, X4, X5, X6, X7, X8, X9) %>%rename(Q1=X1, Q2=X2, Q3=X3, Q4=X4, Q5=X5, Q6=X6, Q7=X7, Q8=X8, Q9=X9)
+
+df9<-cbind(q9, Population)     
+
+q9s<-df9 %>% select(Population, Name, index, Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8, Q9) %>% 
+  gather(key=Ancestry, value=Q, 4:12)
+
+ggplot(q9s)+geom_col(aes(x=Name,y=Q, fill=Ancestry))+
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())+
+  scale_fill_brewer(palette ="Spectral")+
+  facet_wrap(. ~ Population, ncol=4, scales="free_x")
+```
