@@ -23,8 +23,8 @@ $HOME/angsd/angsd -P 24 -b $HOME/pike-time/bamlists/175.bamlist -minInd 157  -ou
 
 
 #Then maybe I can recode
-#plink --tped plink.tped --tfam plink.tfam  --out binary --recode --noweb
+#plink --tped plink.tped --tfam plink.tfam  --out binary --recode --allow-extra-chr --noweb
 
 #Had old version of plink,
 
-#new one ~/bin/plink --ped binary.ped --map binary.map --recode vcf -out recode
+#plink --ped binary.ped --map binary.map --recode vcf --allow-extra-chr -out recode
