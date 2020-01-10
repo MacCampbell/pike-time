@@ -1,0 +1,126 @@
+---
+title: "1006-create-tree"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Tree Making
+
+## First, convert plink output to a vcf and prune
+
+```{sh, eval=FALSE}
+#in outputs/1000
+plink --tped 175-plink.tped --tfam 175-plink.tfam  --out binary --recode --allow-extra-chr --noweb
+plink --ped binary.ped --map binary.map --recode vcf --allow-extra-chr -out recode
+bcftools +prune -l 0.9 -w 10000 recode.vcf  -Ov -o recode.prune.vcf
+```
+
+
+Should reheader it so we know what the samples are....
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)
+load("outputs/103/pca-meta.rda")
+
+bams <- read_tsv("bamlists/175.bamlist", col_names = FALSE) %>%
+  mutate(vcf_name = str_replace_all(X1, pattern = "^data/|AN1711171/|BK1703222/|_sorted.*$", "")) %>%
+  mutate(index = 1:n())
+ad_meta <- left_join(bams, pca_meta)
+labels<-ad_meta %>% select(index, Site) %>% mutate(Label=paste0(Site,"-",index)) %>% select(Label)
+write_tsv(labels,"outputs/1000/labels.txt", col_names = FALSE)
+```
+
+Reheader...
+
+```{sh, eval=FALSE}
+bcftools reheader --samples outputs/1000/labels.txt -o outputs/1000/recode.prune.reheadered.vcf outputs/1000/recode.prune.vcf
+```
+
+## Next, convert to phylip 
+```{sh, eval=FALSE}
+#in outputs/1000
+~/github/mccloud-rrt/vcf2phylip.py -i recode.prune.reheadered.vcf
+source activate py3; ~/github/mccloud-rrt/103-remove-invariant.py -p recode.prune.reheadered.min4.phy -o recode.prune.reheadered.min4.asc.phy; source deactivate;
+```
+
+## Infer ML tree
+```{sh, eval=FALSE}
+#still in outputs/1000
+iqtree -s recode.prune.reheadered.min4.asc.phy -st DNA -m GTR+G4+F+ASC -bb 1000 -alrt 1000
+```
+
+Plot ML tree
+```{r, warning=FALSE, message=FALSE}
+library(ggtree)
+
+tree<-read.tree(file="outputs/1000/recode.prune.reheadered.min4.asc.phy.contree")
+df<-as_tibble(as.data.frame(cbind(tree$tip.label))) %>%
+  rename(Tip = V1) %>%
+  mutate(Site = gsub("-\\d+", "", Tip))
+
+# get meta
+load("outputs/103/pca-meta.rda")
+bams <- read_tsv("bamlists/175.bamlist", col_names = FALSE) %>%
+  mutate(vcf_name = str_replace_all(X1, pattern = "^data/|AN1711171/|BK1703222/|_sorted.*$", "")) %>%
+  mutate(index = 1:n())
+ad_meta <- left_join(bams, pca_meta)
+
+# remove spaces
+ad_meta <- ad_meta %>% mutate(Tip = paste0(Site,"-",index))
+
+df<-left_join(df,ad_meta)
+
+t1<-ggtree(tree, layout="equal_angle") 
+
+#Reordering for plotting
+df$Region<- factor(df$Region, levels=c("Southeast","Southcentral", "Southwest", "Interior", "Northwest",
+                                                   "North","Midwest"))        
+
+ 
+
+
+t1 %<+% df + geom_tippoint(aes(shape=Region, angle=angle, fill=Region), cex=4) +  scale_shape_manual(values=c(24,21,22,22,22,22,23)) +  geom_treescale(x=0, y=-.1)
+
+ggsave("outputs/1000/iqtree.pdf")
+
+ggtree(tree) %<+% df + geom_tippoint(aes(shape=Region, angle=angle, fill=Region), cex=4) +
+                       geom_tiplab(aes(label=Site), align=TRUE, linetype = "dashed", linesize=0.3, size=3) +
+                       scale_shape_manual(values=c(24,21,22,22,22,22,23)) + geom_nodelab2() +
+                       xlim(0,0.25)+
+                       geom_treescale()
+
+ggsave("outputs/1000/iqtree.rectangular.pdf", width=11, height=22)
+
+#dtree<-ggtree(tree, layout="daylight")
+save(dtree, file="outputs/1000/dtree.rda")
+
+d <- dtree$data
+d <- d[!d$isTip,]
+d$label <- as.numeric(d$label)
+d <- d[d$label > 90,]
+
+dt<-dtree %<+% df + geom_point(data=d, alpha=0.5, cex=3) +
+  geom_tippoint(aes(shape=Region, angle=angle, fill=Region), cex=4) +
+  scale_shape_manual(values=c(24,21,21,22,22,22,23)) 
+
+ggsave("outputs/1000/iqtree.daylight.pdf", width=7, height=5.5)
+```
+
+#Network
+```{r, warning=FALSE, message=FALSE}
+library(phangorn)
+dat<-read.dna("outputs/1000/recode.prune.reheadered.min4.asc.phy", format="sequential")
+dat<-as.phyDat(dat)
+set.seed(1)
+bs <- bootstrap.phyDat(dat, FUN = function(x)nj(dist.hamming(x)), 
+    bs=100)
+tree <- nj(dist.hamming(dat))
+par("mar" = rep(1, 4))
+tree <- plotBS(tree, bs, "phylogram")
+
+cnet <- consensusNet(bs, .3)
+plot(cnet, "2D", show.edge.label=TRUE)
+```
