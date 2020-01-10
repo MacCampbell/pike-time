@@ -89,14 +89,14 @@ ggsave("outputs/1000/iqtree.pdf")
 ggtree(tree) %<+% df + geom_tippoint(aes(shape=Region, angle=angle, fill=Region), cex=4) +
                        geom_tiplab(aes(label=Site), align=TRUE, linetype = "dashed", linesize=0.3, size=3) +
                        scale_shape_manual(values=c(24,21,22,22,22,22,23)) + geom_nodelab2() +
-                       xlim(0,0.25)+
+                       xlim(0,2)+
                        geom_treescale()
 
 ggsave("outputs/1000/iqtree.rectangular.pdf", width=11, height=22)
 
 #dtree<-ggtree(tree, layout="daylight")
-save(dtree, file="outputs/1000/dtree.rda")
-
+#save(dtree, file="outputs/1000/dtree.rda")
+load("outputs/1000/dtree.rda")
 d <- dtree$data
 d <- d[!d$isTip,]
 d$label <- as.numeric(d$label)
@@ -106,10 +106,14 @@ dt<-dtree %<+% df + geom_point(data=d, alpha=0.5, cex=3) +
   geom_tippoint(aes(shape=Region, angle=angle, fill=Region), cex=4) +
   scale_shape_manual(values=c(24,21,21,22,22,22,23)) 
 
+dt
+
 ggsave("outputs/1000/iqtree.daylight.pdf", width=7, height=5.5)
 ```
 
 #Network
+
+First, generate a bootstrapped distance tree.
 ```{r, warning=FALSE, message=FALSE}
 library(phangorn)
 dat<-read.dna("outputs/1000/recode.prune.reheadered.min4.asc.phy", format="sequential")
@@ -119,8 +123,59 @@ bs <- bootstrap.phyDat(dat, FUN = function(x)nj(dist.hamming(x)),
     bs=100)
 tree <- nj(dist.hamming(dat))
 par("mar" = rep(1, 4))
-tree <- plotBS(tree, bs, "phylogram")
+tree <- plotBS(tree, bs, "unrooted", cex=0.5)
 
-cnet <- consensusNet(bs, .3)
-plot(cnet, "2D", show.edge.label=TRUE)
 ```
+
+Then, use that tree to make a network. Improve aesthetics and alter consensus levels if desired (0.3 also is default) here.
+
+```{r, warning=FALSE, message=FALSE}
+cnet <- consensusNet(bs, .3)
+edge.col <- createLabel(cnet, tree, "black", nomatch="red")
+
+#Looks bad here as it is so big, so will duplicate into file
+plot(cnet, show.edge.label = T, "2D", edge.color = edge.col,
+                  col.edge.label = "blue", cex=.5)
+
+pdf("outputs/1000/cnet.pdf", width=11, height=11)
+plot(cnet, show.edge.label = T, "2D", edge.color = edge.col,
+                  col.edge.label = "blue", cex=.5)
+dev.off()
+```
+
+## Neighbor-Net
+
+I can make one of these in splits tree, though needs to be agct coded and opened in splitstree. I don't want to try to plot it in r at the moment, though see https://cran.r-project.org/web/packages/phangorn/vignettes/IntertwiningTreesAndNetworks.html for how to to do that.   
+```{r, eval=FALSE}
+data<-read.dna("outputs/1000/recode.prune.reheadered.min4.asc.phy", format="sequential")
+write.nexus.data(data, file="outputs/1000/recode.prune.reheadered.min4.asc.nex")
+
+```
+
+# SVDQuartets
+Need a nice nexus file to append control block to. Control block previously "Region_index"
+```{r, eval=FALSE}
+names<-df %>% select(Region, index) %>% mutate(Names=paste0(Region,"_",index)) %>% select(Names)
+renamed<-data
+rownames(renamed)<-names$Names
+write.nexus.data(renamed, file="outputs/1000/svdq/data.nex", interleaved = FALSE)
+```
+
+Create file for svdquartets, using 100000 quartets and 10 bootstraps for testing
+```{sh, eval=FALSE}
+#ouputs/1000/svdq
+cat data.nex control.nex > input.nex
+paup4a166_osx input.nex 
+```
+
+Plot.   
+
+```{r, warning=FALSE, message=FALSE}
+svd<-read.nexus(file="outputs/1000/svdq/svdMAF.tre")
+ggtree(svd, layout="equal_angle")+geom_tiplab()+geom_nodelab2()
+```
+
+What about an exhaustive search with 100 bootstrap replicates?    
+In progress.
+
+
