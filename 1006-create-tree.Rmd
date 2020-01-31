@@ -176,6 +176,53 @@ ggtree(svd, layout="equal_angle")+geom_tiplab()+geom_nodelab2()
 ```
 
 What about an exhaustive search with 100 bootstrap replicates?    
-In progress.
+In progress.... Done!
+```{r, warning=FALSE, message=FALSE}
+svd<-read.nexus(file="outputs/1000/svdq/full-100.tre")
+ggtree(svd, layout="equal_angle")+geom_tiplab()+geom_nodelab2()
+```
+
+# Not Pruning
+While we needed to prune for SVDQuartets, we don't for a regular concatentated analysis.
+
+Let's reheader, make a .phy and infer the three
+```{sh, eval=FALSE}
+
+bcftools reheader --samples outputs/1000/labels.txt -o outputs/1000/recode.reheadered.vcf outputs/1000/recode.vcf
+
+~/github/mccloud-rrt/vcf2phylip.py -i outputs/1000/recode.reheadered.vcf
+
+source activate py3; ~/github/mccloud-rrt/103-remove-invariant.py -p outputs/1000/recode.reheadered.min4.phy -o outputs/1000/recode.reheadered.min4.asc.phy; source deactivate;
+
+#and the ML tree
+iqtree -s outputs/1000/recode.reheadered.min4.asc.phy -st DNA -m GTR+G4+F+ASC -bb 1000 -alrt 1000
 
 
+```
+
+Previously, the pruned data was like this: Alignment has 175 sequences with 1023 columns, 1020 distinct patterns
+965 parsimony-informative, 58 singleton sites, 0 constant sites.   
+
+Without pruning:  Alignment has 175 sequences with 1878 columns, 1764 distinct patterns
+1784 parsimony-informative, 94 singleton sites, 0 constant sites
+```{r, warning=FALSE, message=FALSE}
+tree2<-read.tree(file="outputs/1000/recode.reheadered.min4.asc.phy.contree")
+
+#dtree2<-ggtree(tree2, layout="daylight")
+#save(dtree2, file="outputs/1000/dtree2.rda")
+load("outputs/1000/dtree2.rda")
+
+d <- dtree2$data
+d <- d[!d$isTip,]
+d$label <- as.numeric(d$label)
+d <- d[d$label > 90,]
+
+dt<-dtree2 %<+% df + geom_point(data=d, alpha=0.5, cex=3) +
+  geom_tippoint(aes(shape=Region, angle=angle, fill=Region), cex=4) +
+  scale_shape_manual(values=c(24,21,21,22,22,22,23)) 
+
+dt
+
+ggsave("outputs/1000/iqtree.not.pruned.daylight.pdf", width=7, height=5.5)
+
+```
