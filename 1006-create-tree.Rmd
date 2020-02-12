@@ -49,7 +49,10 @@ source activate py3; ~/github/mccloud-rrt/103-remove-invariant.py -p recode.prun
 ## Infer ML tree
 ```{sh, eval=FALSE}
 #still in outputs/1000
-iqtree -s recode.prune.reheadered.min4.asc.phy -st DNA -m GTR+G4+F+ASC -bb 1000 -alrt 1000
+#iqtree -s recode.prune.reheadered.min4.asc.phy -st DNA -m GTR+G4+F+ASC -bb 1000 -alrt 1000
+
+#Redoing with a model test option....
+iqtree -s recode.prune.reheadered.min4.asc.phy -st DNA -m MFP+ASC -bb 1000 -alrt 1000 -redo
 ```
 
 Plot ML tree
@@ -92,7 +95,24 @@ ggtree(tree) %<+% df + geom_tippoint(aes(shape=Region, angle=angle, fill=Region)
                        xlim(0,2)+
                        geom_treescale()
 
-ggsave("outputs/1000/iqtree.rectangular.pdf", width=11, height=22)
+ggsave("outputs/1000/iqtree.rectangular-model-choice.pdf", width=11, height=22)
+
+#mtree<-ggtree(tree, layout="daylight")
+#save(mtree, file="outputs/1000/mtree.rda")
+load("outputs/1000/mtree.rda")
+
+m <- mtree$data
+m <- m[!m$isTip,]
+m$label <- as.numeric(m$label)
+m <- m[m$label > 90,]
+
+mt<-mtree %<+% df + geom_point(data=m, alpha=0.5, cex=3) +
+  geom_tippoint(aes(shape=Region, angle=angle, fill=Region), cex=4) +
+  scale_shape_manual(values=c(24,21,21,22,22,22,23)) 
+
+mt
+
+ggsave("outputs/1000/iqtree.daylight-model.pdf", width=7, height=5.5)
 
 #dtree<-ggtree(tree, layout="daylight")
 #save(dtree, file="outputs/1000/dtree.rda")

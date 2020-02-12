@@ -1,0 +1,46 @@
+---
+title: "1007-pop-stats"
+author: "Mac Campbell"
+date: "February 11, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Let's do some basic population statistics
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(vcfR)
+library(adegenet)
+library(poppr)
+
+```
+
+```{r, warning=FALSE, message=FALSE,eval=FALSE}
+data<-read.vcfR("outputs/1000/recode.prune.vcf")
+genind<-vcfR2genind(data)
+save(genind, file="outputs/1000/genind.rda")
+```
+
+
+```{r, warning=FALSE, message=FALSE}
+load("outputs/1000/genind.rda")
+#assign pop vector
+inds<-read_tsv("outputs/1000/labels.txt", col_names = FALSE) %>% rename(Individuals=X1)
+inds$Population<-gsub("-\\d+$","",inds$Individuals)
+inds$Population<-gsub("StormyLake|TinyLake","Kenai",inds$Population)
+inds$Population<-gsub("Tyonek|ShellLake|AndersonLake|DeshkaRiver|YentnaIndianCreek|AlexanderLake|OtterLake|BulchitnaLake","AnchorageArea",inds$Population)
+genind@pop<-as.factor(inds$Population)
+```
+
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
+popdata<-poppr(genind)
+save(popdata, file="outputs/1000/popdata.rda")
+```
+
+```{r, warning=FALSE, message=FALSE}
+load("ouputs/1000/popdata.rda")
+popdata
+```
