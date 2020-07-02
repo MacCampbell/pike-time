@@ -4,7 +4,7 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
 ```
 
 ```{r, warning=FALSE, message=FALSE}
@@ -114,7 +114,7 @@ ggplot()+geom_polygon(data=alaska, aes(x=long, y=lat, group=group))+
 
 For lack of a better idea, I'll randomly sample these guys. 
 eval = FALSE to prevent creating a new random set of samples.
-```{r, message=FALSE, warning=FAlSE, eval=FALSE}
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
 kenaiSamples<-data %>% filter(Site %in% c("StormyLake", "TinyLake")) %>% sample_n(15) 
 anchorageSamples<- data %>% filter(Region=="Southcentral") %>% 
   filter(!(Site %in% c("StormyLake", "TinyLake"))) %>% sample_n(20) 
@@ -126,12 +126,12 @@ samples<-rbind(rbind(kenaiSamples, anchorageSamples), natural)
 write_csv(samples, path="outputs/101/samples-to-analyze.csv")
 ```
 
-```{r, message=FALSE, warning=FAlSE, eval=FALSE}
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
 save(samples, file="./outputs/101/samples-to-analyze.rda")
 ```
 
 ### Let's figure out which *.bams we need.
-```{r, message=FALSE, warning=FAlSE}
+```{r, message=FALSE, warning=FALSE}
 load(file="./outputs/101/samples-to-analyze.rda")
 samples<-as_tibble(samples)
 ```
@@ -162,7 +162,7 @@ cat bamlists/197.txt  | while read line; do samtools depth $line | awk '{sum+=$3
 Now we can read in the coverage and create a histogram, eventually removing samples with low coverage.
 
 ```{r, warning=FALSE, message=FALSE}
-coverage<-read_tsv("./bamlists/197.cov", col_names = FALSE)
+coverage<-read_tsv("bamlists/197.cov", col_names = FALSE)
 
 samples$Coverage<-coverage$X1
 
