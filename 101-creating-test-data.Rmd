@@ -156,12 +156,12 @@ save(bamlist, file="./outputs/101/197-with-Region-Site-BAMInfo.rda")
 #samtools depth data/BK1703222/D-002_S67_sorted.bam | head -n 1000 | awk '{sum+=$3} END { print sum/NR}'
 #cat bamlists/test.txt | while read line; do samtools depth $line | head -n 1000 | awk '{sum+=$3} END { print sum/NR}' >> bamlists/test.cov; done;
 cat bamlists/test.txt | while read line; do samtools depth $line | awk '{sum+=$3} END { print sum/NR}' >> bamlists/test.cov; done;
-cat bamlists/197.txt  | while read line; do samtools depth $line | awk '{sum+=$3} END { print sum/NR}' >> bamlists/197.cov; done;
+srun -p t1small -t 8:00:00 --mem=8G --nodes=1 cat bamlists/197.txt  | while read line; do echo $line; samtools depth $line | awk '{sum+=$3} END { print sum/NR}' >> bamlists/197.cov; done;
 ```
 
 Now we can read in the coverage and create a histogram, eventually removing samples with low coverage.
-
-```{r, warning=FALSE, message=FALSE}
+This coverage was not recreated exactly, and a different 175 was generated.
+```{r, warning=FALSE, message=FALSE, warning=FALSE}
 coverage<-read_tsv("bamlists/197.cov", col_names = FALSE)
 
 samples$Coverage<-coverage$X1

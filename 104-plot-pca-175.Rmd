@@ -192,3 +192,32 @@ ggarrange(pc12, pc13, ncol = 2)
 ggsave("outputs/104/combinedPCs.pdf")
 ```
 
+Now just the introduced fish.
+```{r}
+sc <- filter(sub12, Population %in% c("Kenai","AnchorageBowl"))
+scp<-ggplot()+
+  geom_point(data=sc, aes(x = val_x, y = val_y), size=2, alpha=0.75) +
+  geom_text_repel(data=sc, aes(x=val_x, y=val_y, label=sample), fontface='bold', size=3) +
+  theme_bw()+
+  theme(panel.grid=element_blank())+
+  xlab(paste("PC1", " ", round((100*var[1]),2), "%", sep = ""))+
+  ylab(paste("PC2", " ", round((100*var[2]),2), "%", sep = ""))+
+  theme(legend.position = "")
+
+scp
+
+scp2<-ggplot()+
+  geom_point(data=sc, aes(x = val_x, y = val_y), size=2, alpha=0.75) +
+  geom_text_repel(data=sc, aes(x=val_x, y=val_y, label=Site), fontface='bold', size=3) +
+  theme_bw()+
+  theme(panel.grid=element_blank())+
+  xlab(paste("PC1", " ", round((100*var[1]),2), "%", sep = ""))+
+  ylab(paste("PC2", " ", round((100*var[2]),2), "%", sep = ""))+
+  theme(legend.position = "")
+
+scp2
+
+ggarrange(scp, scp2, ncol = 2)
+ggsave("outputs/104/southcentral-focused.pdf")
+
+```
