@@ -1,0 +1,13 @@
+---
+title: "1201-PCA-and-adxmiture"
+author: "Mac Campbell"
+date: "6/14/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+## PCA and Admixture
+I'm going to double check for non-related individuals.    

@@ -86,6 +86,7 @@ ggplot()+geom_polygon(data=alaska, aes(x=long, y=lat, group=group))+
   ylab("Latitude")+
   coord_fixed(1.3, xlim=c(-180,-90), ylim=c(45,80))
  
+ggsave("outputs/1200/basic-map.jpg")
 ```
 
 
@@ -96,7 +97,7 @@ Summarize:
 data %>% group_by(Site, Latitude, Longitude) %>% summarize(Count=n())
 ```
 
-We may want to pool the samples that have multiple collections in one area, e.g. Lake Clark
+We may want to pool the samples that have multiple collections in one area, e.g. Lake Clark. 
 
 ##Create a list of files to calculate coverage from
 ```{r}
@@ -108,6 +109,48 @@ write(bamlist$String, file="bamlists/400.bamlist")
 Now to calculate coverage and join that onto "bamlist"
 On Chinook:     
 ```{sh, eval=FALSE}
-srun -p t1small -t 8:00:00 --mem=8G --nodes=1 cat bamlists/400.txt  | while read line; do echo $line; samtools depth $line | awk '{sum+=$3} END { print sum/NR}' >> bamlists/400.cov; done;
+srun -p t1small -t 48:00:00 --mem=8G --nodes=1 cat bamlists/400.bamlist  | while read line; do echo $line; samtools depth -a $line | awk '{sum+=$3} END { print sum/NR}' >> bamlists/400.cov; done;
+```
+
+Note to self: figure out how to use gnu parallel on Chinook.
+
+```{r, warning=FALSE, message=FALSE, warning=FALSE}
+coverage<-read_tsv("bamlists/400.cov", col_names = c("Coverage"))
+
+samples<-bind_cols(bamlist, coverage)
+
+ggplot(samples)+
+  geom_histogram(aes(x=Coverage, fill=Region)) +
+  xlim(0,1.75)
 
 ```
+
+
+#Removing low-coverage inds
+
+Removing two "odd" samples, D-026_R1_001.fastq.gz, E-026_R1_001.fastq.gz
+
+```{r}
+filtered<- samples %>% filter(`Sequencing file name` != ("D-026_R1_001.fastq.gz")) %>%
+                       filter(`Sequencing file name` != ("E-026_R1_001.fastq.gz")) %>%
+                       top_frac(.90, Coverage)
+```
+
+```{r}
+ggplot(filtered)+
+  geom_histogram(aes(x=Coverage, fill=Region)) +
+  xlim(0,1.75)
+```
+
+Now have:     
+```{r}
+nrow(filtered)
+```
+
+Writing bamlist:   
+
+```{r}
+filtered %>% group_by(Region) %>% summarize(Count=n())
+write_csv(filtered, "metadata/358.csv")
+write(filtered$String, file="bamlists/358.bamlist")
+``` 
