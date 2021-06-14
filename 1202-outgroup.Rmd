@@ -1,0 +1,77 @@
+---
+title: "1202-outgroup"
+author: "Mac Campbell"
+date: "6/14/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+## Need an outgroup
+Matt aligned some pike bams. Getting with rclone.     
+
+`(base) chinook00.rcs.alaska.edu % rclone ls --drive-shared-with-me drive:Scandinavian\ Pike\ BAMs .`    
+
+Indexing      
+
+
+Creating a new bamlist
+
+```{r}
+meta<-read_csv("metadata/358.csv")
+new<-read_csv("bamlists/outgroup.bamlist", col_names=c("String")) %>% mutate(Region="Western Europe", Site="Western Europe")
+
+sub<-meta %>% select(String, Region, Site)
+sub<-bind_rows(sub, new)
+```
+
+Make a bamlist
+```{r}
+bamlist380<-select(sub, String)
+write_tsv(bamlist380, "bamlists/380.bamlist", col_names = FALSE)
+```
+
+Oh arghh, headers don't agree.     
+
+```{sh, eval=FALSE}
+for file in *sorted.bam
+do
+  filename=`echo $file | cut -d "." -f 1`
+  samtools view -H $file | \
+      sed -e 's/SN:gi|1134601161|ref|NC_025969.3|/SN:NC_025969.3/' | \
+      sed -e 's/SN:gi|1134601160|ref|NC_025970.3|/SN:NC_025970.3/' | \
+      sed -e 's/SN:gi|1134601159|ref|NC_025971.3|/SN:NC_025971.3/' | \
+      sed -e 's/SN:gi|1133447288|gb|CM002830.3|/SN:NC_025972.3/' | \
+      sed -e 's/SN:gi|1133447287|gb|CM002831.3|/SN:NC_025973.3/' | \
+      sed -e 's/SN:gi|1133447286|gb|CM002832.3|/SN:NC_025974.3/' | \
+      sed -e 's/SN:gi|1133447285|gb|CM002833.3|/SN:NC_025975.3/' | \
+      sed -e 's/SN:gi|1133447284|gb|CM002834.3|/SN:NC_025976.3/' | \
+      sed -e 's/SN:gi|1133447283|gb|CM002835.3|/SN:NC_025977.3/' | \
+      sed -e 's/SN:gi|1133447282|gb|CM002836.3|/SN:NC_025978.3/' | \
+      sed -e 's/SN:gi|1133447281|gb|CM002837.3|/SN:NC_025979.3/' | \
+      sed -e 's/SN:gi|1133447280|gb|CM002838.3|/SN:NC_025980.3/' | \
+      sed -e 's/SN:gi|1133447279|gb|CM002839.3|/SN:NC_025981.3/' | \
+      sed -e 's/SN:gi|1133447278|gb|CM002840.3|/SN:NC_025982.3/' | \
+      sed -e 's/SN:gi|1133447277|gb|CM002841.3|/SN:NC_025983.3/' | \
+      sed -e 's/SN:gi|1133447276|gb|CM002842.3|/SN:NC_025984.3/' | \
+      sed -e 's/SN:gi|1133447275|gb|CM002843.3|/SN:NC_025985.3/' | \
+      sed -e 's/SN:gi|1133447274|gb|CM002844.3|/SN:NC_025986.3/' | \
+      sed -e 's/SN:gi|1133447273|gb|CM002845.3|/SN:NC_025987.3/' | \
+      sed -e 's/SN:gi|1133447272|gb|CM002846.3|/SN:NC_025988.3/' | \
+      sed -e 's/SN:gi|1133447271|gb|CM002847.3|/SN:NC_025989.3/' | \
+      sed -e 's/SN:gi|1133447270|gb|CM002848.3|/SN:NC_025990.3/' | \
+      sed -e 's/SN:gi|1133447269|gb|CM002849.3|/SN:NC_025991.3/' | \
+      sed -e 's/SN:gi|1133447268|gb|CM002850.3|/SN:NC_025992.3/' | \
+      samtools reheader - $file > ${filename}-reheadered.bam
+done
+```
+
+Going back and reloading outgroup.bamlist.     
+
+There is an issue of overlap. We may have to be more stringent with the missing individual threshold? creating a region file, metadata/chroms.txt
+
+
+
+ 
