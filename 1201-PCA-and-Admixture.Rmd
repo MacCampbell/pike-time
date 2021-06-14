@@ -11,3 +11,5 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
 
 ## PCA and Admixture
 I'm going to double check for non-related individuals.    
+See 1201.1-calculate-pca.sh      
+

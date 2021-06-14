@@ -25,7 +25,7 @@ mkdir /home/macampbell2/pike-time/outputs/1201
 # required Beagle format {says the manual}.
 
 #Do the calculations (putting in absolute paths). Making sure sites are present in 90% of individuals.
-/home/macampbell2/angsd/angsd -P 24 -minInd 322 -GL 1 -out /home/macampbell2/pike-time/outputs/1201/358 -nThreads 24 -doGlf 2 -doMajorMinor 1 -doMaf 2 -SNP_pval 1e-6 -minMapQ 20 -minQ 20 -bam /home/macampbell2/pike-time/bamlists/358.bamlist
+/home/macampbell2/angsd/angsd -minInd 322 -GL 1 -out /home/macampbell2/pike-time/outputs/1201/358 -nThreads 24 -doGlf 2 -doMajorMinor 1 -doMaf 2 -SNP_pval 1e-6 -minMapQ 20 -minQ 20 -bam /home/macampbell2/pike-time/bamlists/358.bamlist
 
 # Step 3
 # Generate a covariance matrix and calculate kinship coefficient
