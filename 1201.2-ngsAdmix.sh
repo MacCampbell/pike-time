@@ -1,5 +1,3 @@
-#NGS Admix results tend to look "cleaner"
-
 #! /bin/bash
 
 #SBATCH --partition=bio
