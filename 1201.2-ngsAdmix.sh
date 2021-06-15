@@ -13,7 +13,6 @@
 #SBATCH --mail-type=END
 #SBATCH --mail-type=FAIL
 
-
 #Generate beagle file
 /home/macampbell2/angsd/angsd -minInd 317 -GL 1 -out /home/macampbell2/pike-time/outputs/1201/352 -nThreads 12 -doGlf 2 -doMajorMinor 1 -doMaf 2 -SNP_pval 1e-6 -minMapQ 20 -minQ 20 -bam /home/macampbell2/pike-time/bamlists/352.bamlist
 

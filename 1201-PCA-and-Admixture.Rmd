@@ -14,6 +14,7 @@ library(tidyverse)
 library(RcppCNPy)
 library(ggpubr)
 library(ggrepel)
+library(viridis)
 ```
 
 ## PCA and Admixture
@@ -69,6 +70,29 @@ df<-kindf %>% left_join(meta, by=c("Ind1"="Individual")) %>%
 df %>% filter(Kinship>0.0625) %>% group_by(Site.x, Site.y) %>% summarize(Count=n())
 ```
 
+```{r}
+popdf<-df %>% filter(Site.x==Site.y) %>% mutate(Site=Site.x)
+
+cols<-viridis(6)
+
+ggplot(popdf)+geom_histogram(aes(x=Kinship), bins=50, fill="grey", color="grey") +
+  geom_vline(xintercept =.25, col=cols[1]) + #Parent offspring/full sibs
+  geom_vline(xintercept =.125, col=cols[2]) + #2nd degree
+  geom_vline(xintercept =.0625, col=cols[3]) + # 3rd
+  geom_vline(xintercept = .0313, col=cols[4]) +
+  geom_vline(xintercept = .0156, col=cols[5]) +
+  geom_vline(xintercept = 0.0, col=cols[6]) +
+  scale_x_continuous(breaks=c(0,0.0156, 0.0313, 0.0625, 0.125, 0.25),
+                     labels=c("0 / Unrelated","5th Deg.","4th Deg.","3rd Deg.", "2nd Deg.", "1st Deg.")) +
+  theme_bw() +
+  theme(axis.text.x = element_text(hjust=1, angle=45)) +
+  theme(panel.grid=element_blank()) +
+  ylab("Count") +
+  xlab("Kinship Coefficient")+
+  facet_wrap(Site ~ ., ncol=3, scales="free_y")
+
+ggsave("outputs/1201/relatedness.jpg", width=12, height=14)
+```
 Let's look at the covariance matrix, must drop out related inds.
 
 ```{r}
