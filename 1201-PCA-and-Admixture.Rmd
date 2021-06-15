@@ -348,3 +348,11 @@ kplotsc
 ggsave("outputs/1201/pike-admix-k16-southcentral.jpeg", width=11, height=8.5)
 
 ```
+
+Finally, I save a reduced bamlist
+
+```{r}
+reduced<-kept %>% select(String)
+write_tsv(reduced, "bamlists/352.bamlist", col_names = FALSE)
+```
+
