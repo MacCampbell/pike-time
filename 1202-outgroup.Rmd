@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
 ## Need an outgroup
 Matt aligned some pike bams. Getting with rclone.     
 
-`(base) chinook00.rcs.alaska.edu % rclone ls --drive-shared-with-me drive:Scandinavian\ Pike\ BAMs .`    
+`(base) chinook00.rcs.alaska.edu % rclone copy --drive-shared-with-me drive:Scandinavian\ Pike\ BAMs .`    
 
 Indexing      
 
@@ -33,7 +33,7 @@ bamlist380<-select(sub, String)
 write_tsv(bamlist380, "bamlists/380.bamlist", col_names = FALSE)
 ```
 
-Oh arghh, headers don't agree.     
+Oh arghh, headers don't agree (now not doing this)     
 
 ```{sh, eval=FALSE}
 for file in *sorted.bam
@@ -68,10 +68,20 @@ do
 done
 ```
 
+Hmm... Now we need to add the header from our other bams onto these ones or subset our other bams to chromosomes.   
+
+```{sh, eval=FALSE}
+samtools view -H ../BK1703222/A-018_S18_sorted.bam > header.txt
+
+for file in temp/*orted-reheadered.bam
+do
+  echo $file;
+  samtools reheader header.txt $file > `basename "$file"`
+done;
+
+```
 Going back and reloading outgroup.bamlist.     
 
 There is an issue of overlap. We may have to be more stringent with the missing individual threshold? creating a region file, metadata/chroms.txt
 
 
-
- 

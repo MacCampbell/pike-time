@@ -31,11 +31,19 @@ mkdir /home/macampbell2/pike-time/outputs/1201
 # Step 3
 # Generate a covariance matrix and calculate kinship coefficient
 # For Linux
-python /home/macampbell2/pcangsd/pcangsd.py -beagle /home/macampbell2/pike-time/outputs/1201/358.beagle.gz  -kinship -admix -o /home/macampbell2/pike-time/outputs/102/358 -threads 24
+python /home/macampbell2/pcangsd/pcangsd.py -beagle /home/macampbell2/pike-time/outputs/1201/358.beagle.gz  -kinship -admix -o /home/macampbell2/pike-time/outputs/1201/358 -threads 24
+#Can do like this:
+#srun -p t1small -t 1:00:00 --mem=8G --nodes=1 python /home/macampbell2/pcangsd/pcangsd.py -beagle /home/macampbell2/pike-time/outputs/1201/358.beagle.gz  -kinship -admix -o /home/macampbell2/pike-time/outputs/1201/358 -threads 5
+
 
 # admixture proportions are in .qopt
 # covariance matrix is .cov
 # kinship matrix is .kinship.npy
 
 # Step 4 point to kinship and do it again
-python /home/macampbell2/pcangsd/pcangsd.py -beagle /home/macampbell2/pike-time/outputs/1201/358.beagle.gz  -relate /home/macampbell2/pike-time/outputs/102/358.kinship.npy  -admix -o /home/macampbell2/pike-time/outputs/102/358-relate -threads 24
+python /home/macampbell2/pcangsd/pcangsd.py -beagle /home/macampbell2/pike-time/outputs/1201/358.beagle.gz  \
+-relate /home/macampbell2/pike-time/outputs/1201/358.kinship.npy  -admix -o /home/macampbell2/pike-time/outputs/1201/358-relate -threads 24
+
+# Step 5 check out an altered minMaf
+python /home/macampbell2/pcangsd/pcangsd.py -beagle /home/macampbell2/pike-time/outputs/1201/358.beagle.gz  \
+-relate /home/macampbell2/pike-time/outputs/1201/358.kinship.npy  -admix -o /home/macampbell2/pike-time/outputs/1201/358-relate-minmaf01 -threads 24 -minMaf .01

@@ -1,8 +1,8 @@
 #! /bin/bash
 
 #SBATCH --partition=bio
-#SBATCH --ntasks=24
-#SBATCH --tasks-per-node=24
+#SBATCH --ntasks=1
+#SBATCH --tasks-per-node=1
 #If running on the bio or analysis queue add:
 #SBATCH --mem=214G
 
@@ -27,8 +27,10 @@ mkdir /home/macampbell2/pike-time/outputs/1202
 #Do the calculations (putting in absolute paths). Making sure sites are present in 90% of individuals.
 #Considering -P flag here, not sure how to set --ntasks --tasks-per-node and -P here for best performance on Chinook
 /home/macampbell2/angsd/angsd -minInd 370 -GL 1 -out /home/macampbell2/pike-time/outputs/1202/380 -nThreads 12 -doGlf 2 -doMajorMinor 1 -doMaf 2 \
--SNP_pval 1e-6 -minMapQ 20 -minQ 20 -bam /home/macampbell2/pike-time/bamlists/380.bamlist  \
--rf /home/macampbell2/pike-time/metadata/chroms.txt
+-SNP_pval 1e-6 -minMapQ 20 -minQ 20 -bam /home/macampbell2/pike-time/bamlists/380.bamlist 
+
+
+# -rf /home/macampbell2/pike-time/metadata/chroms.txt
 
 
 # Step 3
