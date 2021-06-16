@@ -10,9 +10,18 @@
 #SBATCH --mail-type=BEGIN
 #SBATCH --mail-type=END
 #SBATCH --mail-type=FAIL
+#SBATCH -o outputs/1201/1201.3.stdout
 
 #Generate beagle file
 /home/macampbell2/angsd/angsd -minInd 264 -GL 1 -out /home/macampbell2/pike-time/outputs/1201/352-75 -nThreads 12 -doGlf 2 -doMajorMinor 1 -doMaf 2 -SNP_pval 1e-6 -minMapQ 20 -minQ 20 -bam /home/macampbell2/pike-time/bamlists/352.bamlist
+
+#Generate covariance matrix
+python /home/macampbell2/pcangsd/pcangsd.py -beagle /home/macampbell2/pike-time/outputs/1201/352-75.beagle.gz  -kinship -admix -o /home/macampbell2/pike-time/outputs/1201/352-75 -threads 10
+
+#Do it again with covariance matrix
+python /home/macampbell2/pcangsd/pcangsd.py -beagle /home/macampbell2/pike-time/outputs/1201/358.beagle.gz  \
+-relate /home/macampbell2/pike-time/outputs/1201/358.kinship.npy  -admix -o /home/macampbell2/pike-time/outputs/1201/358-relate -threads 24
+
 
 # Run a bunch of NGSAdmix 1:16
 $HOME/angsd/misc/NGSadmix -likes outputs/1201/352-75.beagle.gz -K 2 -o outputs/1201/352-75-ngsadmix-k2 -P 3
