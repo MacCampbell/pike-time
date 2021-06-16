@@ -1,0 +1,15 @@
+---
+title: "1201.3-ngsAdmix-75"
+author: "Mac Campbell"
+date: "6/16/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+Expanding the number of sites at 75% threshold
+```{r}
+352*.75
+```

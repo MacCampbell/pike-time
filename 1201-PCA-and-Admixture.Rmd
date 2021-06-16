@@ -89,9 +89,9 @@ ggplot(popdf)+geom_histogram(aes(x=Kinship), bins=50, fill="grey", color="grey")
   theme(panel.grid=element_blank()) +
   ylab("Count") +
   xlab("Kinship Coefficient")+
-  facet_wrap(Site ~ ., ncol=3, scales="free_y")
+  facet_wrap(Site ~ ., ncol=4, scales="free_y")
 
-ggsave("outputs/1201/relatedness.jpg", width=12, height=14)
+ggsave("outputs/1201/relatedness.jpg", width=16, height=14)
 ```
 Let's look at the covariance matrix, must drop out related inds.
 
