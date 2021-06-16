@@ -85,3 +85,10 @@ Going back and reloading outgroup.bamlist.
 There is an issue of overlap. We may have to be more stringent with the missing individual threshold? creating a region file, metadata/chroms.txt
 
 
+## PCA/Admixture
+When keeping a high (97%) of individuals, found: keeping 339 individuals after filtering (removing 41)
+Read 339 samples and 900 sites
+
+Not going to work.
+
+

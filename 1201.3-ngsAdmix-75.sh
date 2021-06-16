@@ -18,9 +18,9 @@
 #Generate covariance matrix
 python /home/macampbell2/pcangsd/pcangsd.py -beagle /home/macampbell2/pike-time/outputs/1201/352-75.beagle.gz  -kinship -admix -o /home/macampbell2/pike-time/outputs/1201/352-75 -threads 10
 
-#Do it again with covariance matrix
-python /home/macampbell2/pcangsd/pcangsd.py -beagle /home/macampbell2/pike-time/outputs/1201/358.beagle.gz  \
--relate /home/macampbell2/pike-time/outputs/1201/358.kinship.npy  -admix -o /home/macampbell2/pike-time/outputs/1201/358-relate -threads 24
+#Do it again with covariance matrix Needs to be run again
+python /home/macampbell2/pcangsd/pcangsd.py -beagle /home/macampbell2/pike-time/outputs/1201/352-75.beagle.gz  \
+-relate /home/macampbell2/pike-time/outputs/1201/352-75.kinship.npy  -admix -o /home/macampbell2/pike-time/outputs/1201/352-75-relate -threads 24
 
 
 # Run a bunch of NGSAdmix 1:16
