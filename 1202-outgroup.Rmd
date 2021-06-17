@@ -248,6 +248,6 @@ pops2 %>% summarize(Count=n())
 Now we have 42 samples. 
 
 ```{r}
-bamlist42<-select(pops2, String)
+bamlist42<-select(pops2 %>% ungroup(), String)
 write_tsv(bamlist42, "bamlists/42.bamlist", col_names = FALSE)
 ```

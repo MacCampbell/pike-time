@@ -11,7 +11,7 @@
 #SBATCH --mail-type=END
 #SBATCH --mail-type=FAIL
 
-#SBATCH -o outputs/1202/1202.1.stdout
+#SBATCH -o outputs/1202/1202.3.stdout
 
 
 #Step one
