@@ -1,0 +1,42 @@
+Interior	data/AN1711171/Q-001_sorted.bam
+Interior	data/AN1711171/Q-020_sorted.bam
+Interior	data/BK1703222/F-002_S117_sorted.bam
+Interior	data/BK1703222/F-007_S122_sorted.bam
+Interior	data/AN1711171/Q-009_sorted.bam
+Interior	data/BK1703222/F-018_S133_sorted.bam
+Interior	data/BK1703222/F-015_S130_sorted.bam
+Midwest	data/AN1711171/V-007_sorted.bam
+Midwest	data/AN1711171/V-005_sorted.bam
+Midwest	data/AN1711171/V-002_sorted.bam
+Midwest	data/AN1711171/V-006_sorted.bam
+Midwest	data/AN1711171/V-009_sorted.bam
+Midwest	data/AN1711171/V-003_sorted.bam
+Midwest	data/AN1711171/V-001_sorted.bam
+Southcentral	data/BK1703222/G-015_S150_sorted.bam
+Southcentral	data/BK1703222/A-013_S13_sorted.bam
+Southcentral	data/AN1711171/R-013_sorted.bam
+Southcentral	data/BK1703222/I-021_S196_sorted.bam
+Southcentral	data/BK1703222/I-001_S176_sorted.bam
+Southcentral	data/AN1711171/T-009_sorted.bam
+Southcentral	data/AN1711171/R-005_sorted.bam
+Southeast	data/AN1711171/J-044_sorted.bam
+Southeast	data/AN1711171/J-021_sorted.bam
+Southeast	data/AN1711171/J-037_sorted.bam
+Southeast	data/AN1711171/J-031_sorted.bam
+Southeast	data/AN1711171/J-035_sorted.bam
+Southeast	data/AN1711171/J-043_sorted.bam
+Southeast	data/AN1711171/J-042_sorted.bam
+Southwest	data/BK1703222/D-024_S89_sorted.bam
+Southwest	data/BK1703222/D-020_S85_sorted.bam
+Southwest	data/BK1703222/E-016_S106_sorted.bam
+Southwest	data/BK1703222/D-015_S80_sorted.bam
+Southwest	data/BK1703222/E-021_S111_sorted.bam
+Southwest	data/BK1703222/D-021_S86_sorted.bam
+Southwest	data/BK1703222/E-001_S91_sorted.bam
+Western Europe	data/outgroup/SRR10377392_sorted.bam
+Western Europe	data/outgroup/SRR10377401_sorted.bam
+Western Europe	data/outgroup/SRR10377384_sorted.bam
+Western Europe	data/outgroup/SRR10377391_sorted.bam
+Western Europe	data/outgroup/SRR10377402_sorted.bam
+Western Europe	data/outgroup/SRR10377383_sorted.bam
+Western Europe	data/outgroup/SRR10377400_sorted.bam

@@ -8,8 +8,99 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
 ```
+```{r}
+library(tidyverse)
+library(RcppCNPy)
+library(ggpubr)
+library(ggrepel)
+library(viridis)
+```
 
 Expanding the number of sites at 75% threshold
 ```{r}
 352*.75
 ```
+
+This boots our sites to:
+Input file has dim (AFTER filtering): nsites=7335 nind=352, an increase from 5682 sites.
+
+```{r}
+meta<-read_csv("metadata/358.csv")
+vector<-npyLoad("outputs/1201/358-relate.unrelated.npy") %>% as.vector() %>% as_tibble()
+meta$Kept<-vector
+kept<-meta %>% filter(Kept != 0)
+
+cov<-read_delim("outputs/1201/352-75.cov", col_names=FALSE, delim=" ") %>% as.matrix()
+```
+
+```{r}
+#' @param samples character vector with the individuals IDs in the order in which
+#' they were passed in the bamlist to angsd.
+#' @param cov covariance matrix
+covar2pcs <- function(samples, cov) {
+  
+  
+  eig <- eigen(cov, symm = TRUE)
+  PC <- as.data.frame(eig$vectors) %>%
+    as_tibble() %>%
+    setNames(sprintf("PC-%02d", 1:ncol(.)))
+  
+  samtib <- tibble(sample = samples)
+  
+  list(
+    PCs = bind_cols(samtib, PC),
+    eigevalues = eig$values
+  )
+}
+```
+
+```{r}
+pca <- covar2pcs(kept$`RAD identifier`, cov)
+
+pca_long <- pca$PCs %>%
+  tidyr::gather(., key = "PC", "val", -sample)
+
+# then expand a grid of the possible comparisons (ordered)
+expg <- expand.grid(sample = pca$PCs$sample,
+                    PCx = sprintf("PC-%02d", 1:6),
+                    PCy = sprintf("PC-%02d", 1:6),
+                    stringsAsFactors = FALSE) %>%
+  tibble::as_tibble()
+
+# then left join the pca results onto that
+pca_pairs <- dplyr::left_join(expg, pca_long, by = c("sample", "PCx" = "PC")) %>%
+  dplyr::rename(val_x = val) %>%
+  dplyr::left_join(pca_long, by = c("sample", "PCy" = "PC")) %>%
+  dplyr::rename(val_y = val)
+
+pp_meta <- pca_pairs %>%   # just keep the first 6 PCs around
+  left_join(., kept, by = c("sample" = "RAD identifier")) %>%
+  mutate(group = Site) 
+```
+
+```{r}
+npc <- 4
+pp_meta2 <- pp_meta %>%
+  filter( (PCx %in% sprintf("PC-%02d", 1:npc)) & 
+            (PCy %in% sprintf("PC-%02d", 1:npc)) )
+
+eig <- eigen(cov, symm = TRUE)
+var<-eig$values/sum(eig$values)
+cumvar<-cumsum(eig$values)/sum(eig$values)
+
+head(var)
+head(cumvar)
+```
+
+```{r}
+ggplot(pp_meta2, aes(x = val_x, y = val_y, color=Region, shape=Region)) +
+  geom_point(alpha=0.75) +
+  facet_grid(PCx ~ PCy, scales="free") +
+  theme_bw() +
+  scale_shape_manual(values=c(15,16,17,18,19,8,7)) +
+  scale_fill_discrete(na.value = "white")
+  ggsave("outputs/1201/pcs-75.pdf", width=15, height=13)
+
+```
+
+This looks a lot like what we've seen earlier.

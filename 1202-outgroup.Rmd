@@ -9,6 +9,14 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
 ```
 
+```{r}
+library(tidyverse)
+library(RcppCNPy)
+library(ggpubr)
+library(ggrepel)
+library(viridis)
+```
+
 ## Need an outgroup
 Matt aligned some pike bams. Getting with rclone.     
 
@@ -23,7 +31,7 @@ Creating a new bamlist
 meta<-read_csv("metadata/358.csv")
 new<-read_csv("bamlists/outgroup.bamlist", col_names=c("String")) %>% mutate(Region="Western Europe", Site="Western Europe")
 
-sub<-meta %>% select(String, Region, Site)
+sub<-meta %>% select(String, Region, Site, `RAD identifier`)
 sub<-bind_rows(sub, new)
 ```
 
@@ -86,9 +94,160 @@ There is an issue of overlap. We may have to be more stringent with the missing 
 
 
 ## PCA/Admixture
-When keeping a high (97%) of individuals, found: keeping 339 individuals after filtering (removing 41)
-Read 339 samples and 900 sites
+When keeping a high (97%) of individuals, found: keeping 339 individauls if working with relatedness matrix :/
 
-Not going to work.
+Read 380 samples and 900 sites
+
+Estimating population allele frequencies
+EM (MAF) converged at iteration: 5
+
+Number of sites after MAF filtering (0.05): 222
 
 
+We have 3545 sites with coverage in our outgroup seqs. Trying something like this:
+chinook00.rcs.alaska.edu % cat sitelist| while read line; do grep $line sitelist352.txt >> sites-combined.txt ; done;
+43 sites that are present in the outgroup and variable in our sequencing.
+
+```{r}
+cov<-read_delim("outputs/1202/380.cov", col_names=FALSE, delim=" ") %>% as.matrix()
+```
+
+
+```{r}
+#' @param samples character vector with the individuals IDs in the order in which
+#' they were passed in the bamlist to angsd.
+#' @param cov covariance matrix
+covar2pcs <- function(samples, cov) {
+  
+  
+  eig <- eigen(cov, symm = TRUE)
+  PC <- as.data.frame(eig$vectors) %>%
+    as_tibble() %>%
+    setNames(sprintf("PC-%02d", 1:ncol(.)))
+  
+  samtib <- tibble(sample = samples)
+  
+  list(
+    PCs = bind_cols(samtib, PC),
+    eigevalues = eig$values
+  )
+}
+```
+
+```{r}
+pca <- covar2pcs(sub$`RAD identifier`, cov)
+
+pca_long <- pca$PCs %>%
+  tidyr::gather(., key = "PC", "val", -sample)
+
+# then expand a grid of the possible comparisons (ordered)
+expg <- expand.grid(sample = pca$PCs$sample,
+                    PCx = sprintf("PC-%02d", 1:6),
+                    PCy = sprintf("PC-%02d", 1:6),
+                    stringsAsFactors = FALSE) %>%
+  tibble::as_tibble()
+
+# then left join the pca results onto that
+pca_pairs <- dplyr::left_join(expg, pca_long, by = c("sample", "PCx" = "PC")) %>%
+  dplyr::rename(val_x = val) %>%
+  dplyr::left_join(pca_long, by = c("sample", "PCy" = "PC")) %>%
+  dplyr::rename(val_y = val)
+
+pp_meta <- pca_pairs %>%   # just keep the first 6 PCs around
+  left_join(., sub, by = c("sample" = "RAD identifier")) %>%
+  mutate(group = Site) 
+```
+
+```{r}
+npc <- 2
+pp_meta2 <- pp_meta %>%
+  filter( (PCx %in% sprintf("PC-%02d", 1:npc)) & 
+            (PCy %in% sprintf("PC-%02d", 1:npc)) )
+
+eig <- eigen(cov, symm = TRUE)
+var<-eig$values/sum(eig$values)
+cumvar<-cumsum(eig$values)/sum(eig$values)
+
+head(var)
+head(cumvar)
+```
+
+```{r}
+ggplot(pp_meta2, aes(x = val_x, y = val_y, color=Region)) +
+  geom_point() +
+  facet_grid(PCx ~ PCy)
+```
+
+
+
+Hmmm... What about alternative mafs?
+
+ python /home/macampbell2/pcangsd/pcangsd.py -beagle /home/macampbell2/pike-time/outputs/1202/380.beagle.gz  -kinship -o /home/macampbell2/pike-time/outputs/1202/380-minmaf -threads 12 -minMaf 0.1
+
+Number of sites after MAF filtering (0.1): 113
+Estimating admixture with K=16, alpha=0, batch=10, seed=0
+
+```{r}
+cov<-read_delim("outputs/1202/380-minmaf.cov", col_names=FALSE, delim=" ") %>% as.matrix()
+```
+
+
+```{r}
+pca <- covar2pcs(sub$`RAD identifier`, cov)
+
+pca_long <- pca$PCs %>%
+  tidyr::gather(., key = "PC", "val", -sample)
+
+# then expand a grid of the possible comparisons (ordered)
+expg <- expand.grid(sample = pca$PCs$sample,
+                    PCx = sprintf("PC-%02d", 1:6),
+                    PCy = sprintf("PC-%02d", 1:6),
+                    stringsAsFactors = FALSE) %>%
+  tibble::as_tibble()
+
+# then left join the pca results onto that
+pca_pairs <- dplyr::left_join(expg, pca_long, by = c("sample", "PCx" = "PC")) %>%
+  dplyr::rename(val_x = val) %>%
+  dplyr::left_join(pca_long, by = c("sample", "PCy" = "PC")) %>%
+  dplyr::rename(val_y = val)
+
+pp_meta <- pca_pairs %>%   # just keep the first 6 PCs around
+  left_join(., sub, by = c("sample" = "RAD identifier")) %>%
+  mutate(group = Site) 
+```
+
+```{r}
+npc <- 2
+pp_meta2 <- pp_meta %>%
+  filter( (PCx %in% sprintf("PC-%02d", 1:npc)) & 
+            (PCy %in% sprintf("PC-%02d", 1:npc)) )
+
+eig <- eigen(cov, symm = TRUE)
+var<-eig$values/sum(eig$values)
+cumvar<-cumsum(eig$values)/sum(eig$values)
+
+head(var)
+head(cumvar)
+```
+
+```{r}
+ggplot(pp_meta2, aes(x = val_x, y = val_y, color=Region)) +
+  geom_point() +
+  facet_grid(PCx ~ PCy)
+```
+
+Creating a smaller dataset....
+
+```{r}
+pops<-sub %>% group_by(Region) %>% summarize(Count=n()) %>% filter(Count >= 7)
+pops
+pops2<-sub %>% filter(Region %in% pops$Region) %>% group_by(Region) %>% sample_n(7)
+pops2 %>% summarize(Count=n())
+```
+
+Now we have 42 samples. 
+
+```{r}
+bamlist42<-select(pops2, String)
+write_tsv(bamlist42, "bamlists/42.bamlist", col_names = FALSE)
+```
