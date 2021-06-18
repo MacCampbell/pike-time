@@ -135,7 +135,7 @@ covar2pcs <- function(samples, cov) {
 ```
 
 ```{r}
-pca <- covar2pcs(sub$`RAD identifier`, cov)
+pca <- covar2pcs(sub$String, cov)
 
 pca_long <- pca$PCs %>%
   tidyr::gather(., key = "PC", "val", -sample)
@@ -154,7 +154,7 @@ pca_pairs <- dplyr::left_join(expg, pca_long, by = c("sample", "PCx" = "PC")) %>
   dplyr::rename(val_y = val)
 
 pp_meta <- pca_pairs %>%   # just keep the first 6 PCs around
-  left_join(., sub, by = c("sample" = "RAD identifier")) %>%
+  left_join(., sub, by = c("sample" = "String")) %>%
   mutate(group = Site) 
 ```
 
@@ -193,7 +193,7 @@ cov<-read_delim("outputs/1202/380-minmaf.cov", col_names=FALSE, delim=" ") %>% a
 
 
 ```{r}
-pca <- covar2pcs(sub$`RAD identifier`, cov)
+pca <- covar2pcs(sub$String, cov)
 
 pca_long <- pca$PCs %>%
   tidyr::gather(., key = "PC", "val", -sample)
@@ -212,12 +212,12 @@ pca_pairs <- dplyr::left_join(expg, pca_long, by = c("sample", "PCx" = "PC")) %>
   dplyr::rename(val_y = val)
 
 pp_meta <- pca_pairs %>%   # just keep the first 6 PCs around
-  left_join(., sub, by = c("sample" = "RAD identifier")) %>%
+  left_join(., sub, by = c("sample" = "String")) %>%
   mutate(group = Site) 
 ```
 
 ```{r}
-npc <- 2
+npc <- 3
 pp_meta2 <- pp_meta %>%
   filter( (PCx %in% sprintf("PC-%02d", 1:npc)) & 
             (PCy %in% sprintf("PC-%02d", 1:npc)) )
@@ -243,6 +243,8 @@ pops<-sub %>% group_by(Region) %>% summarize(Count=n()) %>% filter(Count >= 7)
 pops
 pops2<-sub %>% filter(Region %in% pops$Region) %>% group_by(Region) %>% sample_n(7)
 pops2 %>% summarize(Count=n())
+
+write_csv(pops2, "metadata/42.csv")
 ```
 
 Now we have 42 samples. 
@@ -250,4 +252,61 @@ Now we have 42 samples.
 ```{r}
 bamlist42<-select(pops2 %>% ungroup(), String)
 write_tsv(bamlist42, "bamlists/42.bamlist", col_names = FALSE)
+```
+
+ead 42 samples and 1159 sites
+
+Estimating population allele frequencies
+EM (MAF) converged at iteration: 6
+
+Number of sites after MAF filtering (0.05): 757
+Estimating admixture with K=3, alpha=0, batch=10, seed=0
+
+```{r}
+cov<-read_delim("outputs/1202/small.cov", col_names=FALSE, delim=" ") %>% as.matrix()
+```
+
+
+```{r}
+pca <- covar2pcs(pops2$String, cov)
+
+pca_long <- pca$PCs %>%
+  tidyr::gather(., key = "PC", "val", -sample)
+
+# then expand a grid of the possible comparisons (ordered)
+expg <- expand.grid(sample = pca$PCs$sample,
+                    PCx = sprintf("PC-%02d", 1:6),
+                    PCy = sprintf("PC-%02d", 1:6),
+                    stringsAsFactors = FALSE) %>%
+  tibble::as_tibble()
+
+# then left join the pca results onto that
+pca_pairs <- dplyr::left_join(expg, pca_long, by = c("sample", "PCx" = "PC")) %>%
+  dplyr::rename(val_x = val) %>%
+  dplyr::left_join(pca_long, by = c("sample", "PCy" = "PC")) %>%
+  dplyr::rename(val_y = val)
+
+pp_meta <- pca_pairs %>%   # just keep the first 6 PCs around
+  left_join(., pops2, by = c("sample" = "String")) %>%
+  mutate(group = Site) 
+```
+
+```{r}
+npc <- 2
+pp_meta2 <- pp_meta %>%
+  filter( (PCx %in% sprintf("PC-%02d", 1:npc)) & 
+            (PCy %in% sprintf("PC-%02d", 1:npc)) )
+
+eig <- eigen(cov, symm = TRUE)
+var<-eig$values/sum(eig$values)
+cumvar<-cumsum(eig$values)/sum(eig$values)
+
+head(var)
+head(cumvar)
+```
+
+```{r}
+ggplot(pp_meta2, aes(x = val_x, y = val_y, color=Region)) +
+  geom_point() +
+  facet_grid(PCx ~ PCy)
 ```
