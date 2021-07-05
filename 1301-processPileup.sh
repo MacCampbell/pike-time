@@ -13,7 +13,7 @@ ref=$2
 #	do
 #		samtools mpileup -f /home/mac/data/OmyGenomeV06/omyV6Chr.fasta  $f > "`basename $f .sorted.bam`.pileup"
 #	done
-for line in $1 ;
+for line in ${1} ;
 do 
   samtools mpileup -f ${2} $line > outputs/1300/"`basename $line .sorted.bam`.pileup"
 done
