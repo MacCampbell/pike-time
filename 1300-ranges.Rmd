@@ -1,0 +1,23 @@
+---
+title: "1300-ranges"
+author: "Mac Campbell"
+date: "7/5/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+## RAD loci
+Hmm...One thing we can do is compute rad loci and then use those ranges to restrict the SNP calling range for WGS. Also, keeping in mind overall coverage of the WGS data.
+
+We can use pileup formats, as in https://github.com/MacCampbell/swainysmoother/blob/master/bashScripts/processPileup.sh
+
+This handy script uses an awk line to identify sites with coverage >=10, (thanks, Eric A.!), cloning https://github.com/MacCampbell/swainysmoother
+
+

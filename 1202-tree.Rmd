@@ -1,0 +1,51 @@
+---
+title: "1202-Tree"
+author: "Mac Campbell"
+date: "6/14/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(ggtree)
+library(ggpubr)
+library(ggrepel)
+library(viridis)
+library(ape)
+```
+
+## SVDQuartets
+Let's create a small data set for phylogeny. Already did, cutting out pike from introduced pops, see 1006. Dropping Southcentral fish 142 samples. 
+
+```{r}
+tree<-read.nexus("outputs/1202/svdMAF.tre")
+t<-ggtree(tree, branch.length = "none")
+```
+
+```{r}
+t +
+  geom_tiplab(size=4, offset = 0.1) + 
+  geom_nodelab(fontface="bold") +
+  xlim(0,8)
+```
+
+Let's get sample sizes?
+
+```{r}
+load("outputs/103/pca-meta.rda")
+
+mm<-pca_meta %>% select(Site) %>% group_by(Site) %>% summarize(`Sample Size`=n())
+```
+
+```{r}
+t  %<+% mm +
+  geom_tiplab(size=4, offset = 0.2) + 
+  geom_nodelab(fontface="bold") +
+  geom_tippoint(aes(size=`Sample Size`, x=x+0.1), pch=21, alpha=0.85, fill="grey50") +
+  xlim(0,8)
+ggsave("outputs/1202/svdquartets-tree-142-samples.jpg")
+```

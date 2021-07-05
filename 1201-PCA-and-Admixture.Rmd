@@ -15,6 +15,7 @@ library(RcppCNPy)
 library(ggpubr)
 library(ggrepel)
 library(viridis)
+library(scatterpie)
 ```
 
 ## PCA and Admixture
@@ -391,6 +392,8 @@ I have hardcoded this, maybe I can figure it out a smarter way.
 
 
 ```{r}
+library(raster)
+library(ggsn)
 PlotAdmix<- function(file) {
   
 q<-read_delim(file, delim=" ", col_names=FALSE)
@@ -411,11 +414,11 @@ r<-bind_cols(kept,q) %>% arrange(Region, Site) %>% mutate(Index=1:n())
 
 r$Site<-factor(r$Site, levels=unique(r$Site))
 
-rdf<-r %>% select(Region, Site, Index,  colnames(q) ) %>% gather(key=Ancestry, value=Q, 4:(4+length(colnames(q))-1))
+rdf<-r %>% dplyr::select(Region, Site, Index,  colnames(q) ) %>% gather(key=Ancestry, value=Q, 4:(4+length(colnames(q))-1))
 
 #Make names for structure-like plot
 labels<-rdf  %>% group_by(Site) %>% mutate(Start=min(Index), Stop=max(Index)) %>% 
-  select(Site,Start,Stop) %>% unique() %>% 
+  dplyr::select(Site,Start,Stop) %>% unique() %>% 
   mutate(Position=round((Start+Stop)/2))
 
 #Plot
@@ -437,6 +440,53 @@ ggplot(rdf) +
 
 ggsave(paste0("outputs/1201/ngsd-admix-",qs,".jpg"), width=12, height=8)
 
+#Plot introduced pops Q
+intros<-r %>% dplyr::select(Region, Site, Latitude, Longitude, colnames(q)) %>% group_by(Region,Site) %>% summarise_all(list(mean)) %>% filter(Region=="Southcentral")
+
+domain <- c(-152, -149, 60, 63)
+
+# here eric implements something and I copy it
+tidy_subset <- function(x, longlat) {
+  x@data$id <- rownames(x@data)
+  x.f <- broom::tidy(x) %>%
+    dplyr::left_join(., x@data, by = "id") %>%
+    dplyr::tbl_df() %>%
+    filter(long > longlat[1],
+           long < longlat[2],
+           lat > longlat[3],
+           lat < longlat[4])
+}
+
+nat.earth<-stack("~/github/mccloud-rrt/outputs/1000/NE2_HR_LC_SR_W_DR/NE2_HR_LC_SR_W_DR.tif")
+
+nat.crop <- crop(nat.earth, y=extent(domain))
+
+rast.table <- data.frame(xyFromCell(nat.crop, 1:ncell(nat.crop)),
+                         getValues(nat.crop/255))
+
+
+rast.table$rgb <- with(rast.table, rgb(NE2_HR_LC_SR_W_DR.1,
+                                       NE2_HR_LC_SR_W_DR.2,
+                                       NE2_HR_LC_SR_W_DR.3,
+                                       1))
+
+pies<-ggplot(intros, aes(x=Longitude, y=Latitude)) +
+  geom_raster(data = rast.table, mapping = aes(x = x, y = y), fill = rast.table$rgb, interpolate = TRUE) +
+  geom_scatterpie(data=intros, 
+                    aes(x=Longitude, y=Latitude, group=Site, r=.1), 
+                           cols=colnames(q)) +
+  geom_text_repel(data=intros, aes(x=Longitude, y=Latitude, label=Site), color="black", fontface="bold", size=3) +
+    ggsn::scalebar(x.min = -152, x.max= -149, y.min=60, y.max=63,
+                 dist = 50, dist_unit = "km", st.size=4, height=.05, transform=TRUE, model = 'WGS84',
+                 st.color="black") +
+    scale_fill_viridis_d(option="magma") +
+    coord_fixed(ratio=1, xlim = c(-152, -149), ylim=c(60,63)) +
+  theme_bw()+
+  theme(panel.background = element_blank())+
+  theme(panel.grid=element_blank())
+
+pies              
+ggsave(paste0("outputs/1201/ngsd-admix-soutcentral-nodepies",qs,".jpg"), width=6, height=6)
 }
 ```
 
@@ -445,4 +495,65 @@ ggsave(paste0("outputs/1201/ngsd-admix-",qs,".jpg"), width=12, height=8)
 #PlotAdmix(file)
 files<-list.files("outputs/1201/", pattern="qopt", full.names = TRUE)
 lapply(files, PlotAdmix)
+```
+
+Likes.     
+```{sh, eval=FALSE}
+"yes" | rm outputs/1201/likes.txt;
+"yes" | rm outputs/1201/filenames.txt;
+
+ls outputs/1201/ | grep log >> outputs/1201/filenames.txt
+ls outputs/1201/ | grep log | while read line; do grep like outputs/1201/$line >> outputs/1201/likes.txt; done;
+
+```
+
+```{r}
+lfiles<-read_tsv("outputs/1201/filenames.txt", col_names=c("File"))
+lfiles$K<-gsub("352-ngsadmix-k|.log","",lfiles$File)
+likers<-read_tsv("outputs/1201/likes.txt", col_names=c("String")) %>% separate(String, into=c("One","Likes","Three","Four"), sep=" ") %>% select(Likes)
+likers$Likes<-gsub("like=","",likers$Likes)
+
+
+ddf<-bind_cols(lfiles,likers)
+ddf$K<-as.numeric(ddf$K)
+ddf$Likes<-as.numeric(ddf$Likes)
+ddf<-ddf %>% arrange(K) %>% mutate(DK=Likes-lag(Likes))
+
+ggplot(ddf) +
+  geom_point(aes(x=K, y=DK))
+```
+
+Geographic plot.
+
+```{r}
+file<-c("outputs/1201/352-ngsadmix-k8.qopt")
+q<-read_delim(file, delim=" ", col_names=FALSE)
+#Make generic colnames
+nums<-1:length(colnames(q))
+mynames<-paste0("Q",nums)
+
+qs<-length(colnames(q))-1
+
+colnames(q)<-mynames
+
+#Last col empty
+q<-q[1:length(colnames(q))-1]
+
+#Arrange Sites
+
+r<-bind_cols(kept,q) %>% arrange(Region, Site) %>% mutate(Index=1:n())
+
+r$Site<-factor(r$Site, levels=unique(r$Site))
+
+rdf<-r %>% dplyr::select(Region, Site, Index,  Latitude, Longitude, colnames(q) ) %>% gather(key=Ancestry, value=Q, 6:(6+length(colnames(q))-1))
+
+```
+
+Plotting again
+```{r}
+
+
+
+```
+
 ```
