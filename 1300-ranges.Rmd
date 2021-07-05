@@ -20,4 +20,6 @@ We can use pileup formats, as in https://github.com/MacCampbell/swainysmoother/b
 
 This handy script uses an awk line to identify sites with coverage >=10, (thanks, Eric A.!), cloning https://github.com/MacCampbell/swainysmoother
 
+Coverting to something compatible with Chinook, see 1301-processPileup.sh
+
 
