@@ -20,6 +20,111 @@ We can use pileup formats, as in https://github.com/MacCampbell/swainysmoother/b
 
 This handy script uses an awk line to identify sites with coverage >=10, (thanks, Eric A.!), cloning https://github.com/MacCampbell/swainysmoother
 
-Coverting to something compatible with Chinook, see 1301-processPileup.sh
+Coverting to something compatible with Chinook, see 1301-processPileup.sh, hmmm... it was being a pain queuing (node reserved for maintenance), so I am trying this:
+srun -p t1small --time=1:00:00 bash 1301-processPileup.sh bamlists/36.bamlist genome/GCF_000721915.3_Eluc_V3_genomic.fna
 
+Certainly seems to take a while.
+
+Now copying from : https://github.com/MacCampbell/swainysmoother/blob/master/R/swainyPrepper2.R
+
+Starting with some reduced files, head -n 10000 F-001_S116_sorted.bam.pileup > test.pileup
+.     
+for f in *.pileup; do awk -v thresh=10 '$4 >= thresh {if(on==1) {sum+=$4; n++; next;}  start = $2; on = 1; sum=$4; n=1;} $4<thresh {if(on==0) next; on=0; print $1, start, $2, sum/n}' $f > "`basename $f .pileup`.dat";   done;
+
+```{r}
+fileNames<-dir("./outputs/1300/",pattern=".dat")
+
+halfPop<-length(fileNames)/2
+popSize<-length(fileNames)
+
+
+df<-NULL
+myDiffs<-NULL
+myLefts<-NULL
+myRights<-NULL
+i<-1
+
+#create the first dataframe for later joining
+leftCoor<-paste("left",i,sep="")
+rightCoor<-paste("right",i,sep="")
+diff<-paste("diff",i,sep="")
+myDiffs[i]<-diff
+myLefts[i]<-leftCoor
+myRights[i]<-rightCoor
+
+
+
+#need to specify directory here
+data <- read.table(paste0("outputs/1300/",fileNames[i]),header=FALSE)
+d <- tbl_df(data)
+dd <- d %>% mutate(trunc1 = (V2 %/% 10000) * 10000, trunc2 = (V3 %/% 10000) * 10000, length = V3 - V2)
+
+#Begginning to define rad loci > 100 bp and less than 600 bp
+ddd <- dd %>% arrange(desc(length)) %>% group_by(V1, trunc1, trunc2) %>% summarise(left = min(V2), right = max(V3)) %>% mutate(diff = right - left) %>% filter(diff >100 & diff < 600)
+ddd<-ddd %>% rename(chrom=V1)
+names(ddd)[4]<-leftCoor
+names(ddd)[5]<-rightCoor
+names(ddd)[6]<-diff
+df<-ddd
+
+for(i in 2:length(fileNames)) {
+  #print(i)
+  leftCoor<-paste("left",i,sep="")
+  #print(leftCoor)
+  rightCoor<-paste("right",i,sep="")
+  #print(rightCoor)
+  diff<-paste("diff",i,sep="")
+  myDiffs[i]<-diff
+  myLefts[i]<-leftCoor
+  myRights[i]<-rightCoor
+  data <- read.table(paste0("outputs/1300/",fileNames[i]),header=FALSE)
+  d <- tbl_df(data)
+  dd <- d %>% mutate(trunc1 = (V2 %/% 10000) * 10000, trunc2 = (V3 %/% 10000) * 10000, length = V3 - V2)
+
+  ddd <- dd %>% arrange(desc(length)) %>% group_by(V1, trunc1, trunc2) %>% summarise(left = min(V2), right = max(V3)) %>% mutate(diff = right - left) %>% filter(diff >100 & diff < 600)
+  #ddd <- dd %>% arrange(desc(length)) %>% group_by(V1, trunc1, trunc2) %>% rename_("left" = "V2", "right" = "V3") %>% mutate(diff = right - left) %>% filter(diff >150 & diff < 600)
+
+  #These comments sometimes work and sometimes don't, I don't understand why. Line 68 and 75 that is. I think it has to do with plyr and dplyr
+  #ddd <- dd %>% arrange(desc(length)) %>% group_by(V1,trunc1,trunc2) %>% mutate(diff = V3 - V2) %>% filter(diff > 100 & diff < 600)
+  #ddd <- dd %>% arrange(desc(length)) %>% group_by(V1, trunc1, trunc2) %>% rename_("left" = "V2", "right"="V3") %>% mutate(diff = right - left) %>% filter(diff >150 & diff < 600)
+
+  #ddd<-plyr::rename(ddd, c(V1="chrom", "left"=leftCoor, "right"=rightCoor,"diff"=diff))
+  ddd<-ddd %>% rename(chrom=V1)
+  names(ddd)[4]<- leftCoor
+  names(ddd)[5]<-rightCoor
+  names(ddd)[6]<-diff
+   #ddd<-plyr::rename(ddd, c(V1="chrom", V2=leftCoor,V3=rightCoor, "diff"=diff))
+    assign(paste("table",i,sep=""),ddd)
+
+    #df<-merge(df,ddd,all=TRUE)
+    df<-full_join(df,ddd)
+}
+
+dft <- tbl_df(df)
+#get a unique list of chromosomes
+chromos<-unique(dft$chrom)
+#extract from dft those entries with data from at least 1/2 popsize for all diff columns
+#there are three entries, so 3 x NA threshold, left, right, diff
+#Edit on July 7 2021 by Mac
+#dfClean<-delete.na(df, (3 * halfPop))
+
+#https://stackoverflow.com/questions/31848156/delete-columns-rows-with-more-than-x-missing
+dfClean<-df[which(rowMeans(!is.na(df)) > 0.5), ]
+
+
+dfC<-tbl_df(dfClean)
+
+#now we need min/maxes for each row for left/right bounds
+dfC$leftEnd<-apply(dfC[myLefts],1,min,na.rm=TRUE)
+dfC$rightEnd<-apply(dfC[myRights],1,min,na.rm=TRUE)
+#and make a length column that has the maximum extent of the left and right bounds
+dfCC <- dfC %>% mutate(length=(rightEnd - leftEnd) )
+
+```
+
+Our RAD loci:
+```{r}
+dfCC %>% select(chrom, leftEnd, rightEnd, length)
+write_csv(dfCC, "outputs/1300/rad-loci.csv")
+```
 
