@@ -1,11 +1,13 @@
 #! /bin/bash 
 
 
-#SBATCH --partition=bio
-#SBATCH --ntasks=2
-#SBATCH --tasks-per-node=2
+#SBATCH --partition=t1standard
+#SBATCH --ntasks=1
+#SBATCH --tasks-per-node=1
+#SBATCH --time=08:00:00
+
 #If running on the bio or analysis queue add:
-#SBATCH --mem=214G
+##SBATCH --mem=214G
 
 #SBATCH --mail-user=macampbell2@alaska.edu
 #SBATCH --mail-type=BEGIN
