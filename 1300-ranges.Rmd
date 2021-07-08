@@ -21,15 +21,22 @@ We can use pileup formats, as in https://github.com/MacCampbell/swainysmoother/b
 This handy script uses an awk line to identify sites with coverage >=10, (thanks, Eric A.!), cloning https://github.com/MacCampbell/swainysmoother
 
 Coverting to something compatible with Chinook, see 1301-processPileup.sh, hmmm... it was being a pain queuing (node reserved for maintenance), so I am trying this:
-srun -p t1small --time=1:00:00 bash 1301-processPileup.sh bamlists/36.bamlist genome/GCF_000721915.3_Eluc_V3_genomic.fna
+srun -p t1small --time=24:00:00 bash 1301-processPileup.sh bamlists/36.bamlist genome/GCF_000721915.3_Eluc_V3_genomic.fna
 
-Certainly seems to take a while.
+Certainly seems to take a while, timed out.
 
 Now copying from : https://github.com/MacCampbell/swainysmoother/blob/master/R/swainyPrepper2.R
 
 Starting with some reduced files, head -n 10000 F-001_S116_sorted.bam.pileup > test.pileup
 .     
 for f in *.pileup; do awk -v thresh=10 '$4 >= thresh {if(on==1) {sum+=$4; n++; next;}  start = $2; on = 1; sum=$4; n=1;} $4<thresh {if(on==0) next; on=0; print $1, start, $2, sum/n}' $f > "`basename $f .pileup`.dat";   done;
+
+For 1301 it didn't work for:
+D-019_S84_sorted.bam.pileup
+E-013_S103_sorted.bam.pileup
+E-019_S109_sorted.bam.pileup
+
+(base) Macs-MacBook-Pro-2:1300 mac$ scp chinook:/archive/FISHPOPG/macampbell2/pileup/*.dat .   
 
 ```{r}
 fileNames<-dir("./outputs/1300/",pattern=".dat")
@@ -124,7 +131,10 @@ dfCC <- dfC %>% mutate(length=(rightEnd - leftEnd) )
 
 Our RAD loci:
 ```{r}
-dfCC %>% select(chrom, leftEnd, rightEnd, length)
-write_csv(dfCC, "outputs/1300/rad-loci.csv")
+locs<-dfCC %>% select(chrom, leftEnd, rightEnd, length)
+write_csv(locs, "outputs/1300/rad-loci.csv")
+regions<-locs %>% mutate(String=paste0(chrom,":",leftEnd,"-",rightEnd)) %>% select(String)
+write_tsv(regions, "metadata/regions.tsv", col_names=FALSE)
 ```
 
+WGS bamlist:
