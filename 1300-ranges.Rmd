@@ -138,3 +138,79 @@ write_tsv(regions, "metadata/regions.tsv", col_names=FALSE)
 ```
 
 WGS bamlist:
+
+Some problem with seg fault. Have a beage file from 1300.1 with 1813 sites...
+
+```{r}
+#' @param samples character vector with the individuals IDs in the order in which
+#' they were passed in the bamlist to angsd.
+#' @param cov covariance matrix
+covar2pcs <- function(samples, cov) {
+  
+  
+  eig <- eigen(cov, symm = TRUE)
+  PC <- as.data.frame(eig$vectors) %>%
+    as_tibble() %>%
+    setNames(sprintf("PC-%02d", 1:ncol(.)))
+  
+  samtib <- tibble(sample = samples)
+  
+  list(
+    PCs = bind_cols(samtib, PC),
+    eigevalues = eig$values
+  )
+}
+```
+
+Generating covariance matrix
+
+python ~/pcangsd/pcangsd.py -beagle wgs.beagle.gz -admix -o wgs -threads 10
+```{r}
+cov<-read_delim("outputs/1300/wgs.cov", col_names=FALSE, delim=" ") %>% as.matrix()
+meta<-read_csv("metadata/wgs.csv")
+pca_meta<-meta
+```
+
+```{r}
+pca <- covar2pcs(pca_meta$`RAD identifier`, cov)
+
+pca_long <- pca$PCs %>%
+  tidyr::gather(., key = "PC", "val", -sample)
+
+# then expand a grid of the possible comparisons (ordered)
+expg <- expand.grid(sample = pca$PCs$sample,
+                    PCx = sprintf("PC-%02d", 1:6),
+                    PCy = sprintf("PC-%02d", 1:6),
+                    stringsAsFactors = FALSE) %>%
+  tibble::as_tibble()
+
+# then left join the pca results onto that
+pca_pairs <- dplyr::left_join(expg, pca_long, by = c("sample", "PCx" = "PC")) %>%
+  dplyr::rename(val_x = val) %>%
+  dplyr::left_join(pca_long, by = c("sample", "PCy" = "PC")) %>%
+  dplyr::rename(val_y = val)
+
+pp_meta <- pca_pairs %>%   # just keep the first 6 PCs around
+  left_join(., pca_meta, by = c("sample" = "RAD identifier")) 
+```
+
+```{r}
+eig <- eigen(cov, symm = TRUE)
+var <-eig$values/sum(eig$values)
+cumvar <-cumsum(eig$values)/sum(eig$values)
+```
+
+
+```{r}
+
+npc <- 3
+pc <- pp_meta %>%
+  filter( (PCx %in% sprintf("PC-%02d", 1:npc)) & 
+            (PCy %in% sprintf("PC-%02d", 1:npc)) )
+```
+
+```{r}
+ggplot(pc) +
+  geom_point(aes(x=val_x, y=val_y, color=Region)) +
+  facet_grid(PCx ~ PCy)
+```
