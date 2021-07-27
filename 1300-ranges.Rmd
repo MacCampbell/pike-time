@@ -168,12 +168,11 @@ python ~/pcangsd/pcangsd.py -beagle wgs.beagle.gz -admix -o wgs -threads 10
 python ~/pcangsd/pcangsd.py -beagle wgs.beagle.gz -admix -minMaf .3 -o wgs3 -threads 10
 
 ```{r}
-#cov<-read_delim("outputs/1300/wgs.cov", col_names=FALSE, delim=" ") %>% as.matrix()
-#meta<-read_csv("metadata/wgs.csv")
+cov<-read_delim("outputs/1300/wgs.cov", col_names=FALSE, delim=" ") %>% as.matrix()
+meta<-read_csv("metadata/wgs.csv")
 
-cov<-read_delim("outputs/1300/wgs3.cov", col_names=FALSE, delim=" ") %>% as.matrix()
-
-meta<-read_csv("metadata/wgs-temp.csv")
+#cov<-read_delim("outputs/1300/wgs3.cov", col_names=FALSE, delim=" ") %>% as.matrix()
+#meta<-read_csv("metadata/wgs-temp.csv")
 pca_meta<-meta
 ```
 
@@ -217,6 +216,6 @@ pc <- pp_meta %>%
 
 ```{r}
 ggplot(pc) +
-  geom_point(aes(x=val_x, y=val_y, color=Region)) +
-  facet_grid(PCx ~ PCy)
+  geom_point(aes(x=val_x, y=val_y, color=Region, shape=DataType)) +
+  facet_grid(PCx ~ PCy) 
 ```
