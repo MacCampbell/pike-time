@@ -14,7 +14,12 @@
 
 
 #Generate plink file
-/home/macampbell2/angsd/angsd -minInd 42 -GL 1 -out /home/macampbell2/pike-time/outputs/1300/plink -nThreads 12 -doPlink 2 -doMajorMinor 1 -doMaf 1 \
+#/home/macampbell2/angsd/angsd -minInd 42 -GL 1 -out /home/macampbell2/pike-time/outputs/1300/plink -nThreads 12 -doPlink 2 -doMajorMinor 1 -doMaf 1 \
+#-SNP_pval 1e-6 -minMapQ 20 -minQ 20 -minMaf 0.3 -bam /home/macampbell2/pike-time/bamlists/wgs.bamlist \
+#-doGeno 4 -doPost 1 -postCutoff 0.95  > $HOME/pike-time/outputs/1300/plink.out \
+#2> $HOME/pike-time/outputs/1300/plink.err
+
+/home/macampbell2/angsd/angsd -minInd 40 -GL 1 -out /home/macampbell2/pike-time/outputs/1300/plink2 -nThreads 12 -doPlink 2 -doMajorMinor 1 -doMaf 1 \
 -SNP_pval 1e-6 -minMapQ 20 -minQ 20 -minMaf 0.3 -bam /home/macampbell2/pike-time/bamlists/wgs.bamlist \
--doGeno 4 -doPost 1 -postCutoff 0.95  > $HOME/pike-time/outputs/1300/plink.out \
+-doGeno 4 -doPost 1 -postCutoff 0.9  > $HOME/pike-time/outputs/1300/plink.out \
 2> $HOME/pike-time/outputs/1300/plink.err

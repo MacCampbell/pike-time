@@ -510,7 +510,7 @@ ls outputs/1201/ | grep log | while read line; do grep like outputs/1201/$line >
 ```{r}
 lfiles<-read_tsv("outputs/1201/filenames.txt", col_names=c("File"))
 lfiles$K<-gsub("352-ngsadmix-k|.log","",lfiles$File)
-likers<-read_tsv("outputs/1201/likes.txt", col_names=c("String")) %>% separate(String, into=c("One","Likes","Three","Four"), sep=" ") %>% select(Likes)
+likers<-read_tsv("outputs/1201/likes.txt", col_names=c("String")) %>% separate(String, into=c("One","Likes","Three","Four"), sep=" ") %>% dplyr::select(Likes)
 likers$Likes<-gsub("like=","",likers$Likes)
 
 
@@ -549,11 +549,16 @@ rdf<-r %>% dplyr::select(Region, Site, Index,  Latitude, Longitude, colnames(q) 
 
 ```
 
-Plotting again
+
+### Pull out "pure" pike
+We have q16, and can merge with meta based on Kept
+
 ```{r}
+keepers<-kept %>% mutate(Index=1:n()) %>% dplyr::select(-Site,-Region)
 
-
-
-```
+puredf<-q16 %>% filter(Q>0.90) %>% left_join(keepers)
+write_csv(puredf, "metadata/q16-90.csv")
+summarypuredf<-puredf %>% group_by(Site, Ancestry) %>% summarize(Count=n())
+write_csv(summarypuredf, "metadata/q16-90-summary.csv")
 
 ```

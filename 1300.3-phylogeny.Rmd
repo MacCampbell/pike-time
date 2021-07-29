@@ -1,0 +1,107 @@
+---
+title: "1300.3-phylogeny"
+author: "Mac Campbell"
+date: "7/28/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(adegenet)
+library(vcfR)
+library(ggtree)
+library(ape)
+```
+
+## Let's see how the SNPS hold up
+
+```{sh, eval=FALSE}
+plink --tped plink.tped --tfam plink.tfam  --out binary --recode --allow-extra-chr --noweb
+plink --ped binary.ped --map binary.map --recode vcf --allow-extra-chr -out recode
+bcftools +prune -l 0.9 -w 10000 recode.vcf  -Ov -o recode.prune.vcf
+cut -f 1 -d ',' ../../metadata/wgs.csv | perl -pe 's/String\n//g' > samples.txt 
+bcftools reheader --samples samples.txt -o recode.prune.reheadered.vcf recode.prune.vcf
+
+source activate py2; ~/github/mccloud-rrt/vcf2phylip.py -i recode.prune.reheadered.vcf; conda deactivate;
+ ~/github/mccloud-rrt/103-remove-invariant.py -p recode.prune.reheadered.min4.phy -o recode.prune.reheadered.min4.asc.phy
+iqtree -s recode.prune.reheadered.min4.asc.phy -st DNA -m MFP+ASC -bb 1000 -alrt 1000 -redo
+```
+
+
+```{r}
+meta<-read_csv("metadata/wgs.csv")
+meta$String<-gsub("/","_",meta$String)
+
+tree<-read.tree(file="outputs/1300/recode.prune.reheadered.min4.asc.phy.contree")
+t<-ggtree(tree, layout = "circular") 
+
+t %<+% meta +
+  geom_tiplab(aes(label=Site)) +
+  geom_tippoint(aes(shape=DataType))
+```
+
+#SVDQuartets
+See 1202.
+
+```{r}
+tree<-read.nexus("outputs/1300/svdMAF.tre")
+t<-ggtree(tree, branch.length = "none")
+```
+
+```{r}
+t +
+  geom_tiplab(size=4, offset = 0.1) + 
+  geom_nodelab(fontface="bold") +
+  xlim(0,8)
+
+ggsave("outputs/1300/wgs-test-tree.jpg")
+```
+
+###PCA
+Read in recode.prune.reheadered.vcf
+
+```{r}
+vcf<-read.vcfR(file="outputs/1300/recode.prune.reheadered.vcf")
+genind<-vcfR2genind(vcf)
+genind@pop<-as.factor(paste0(meta$Site,"-",meta$DataType))
+```
+
+PCA
+
+```{r}
+gen<-genind
+X <- tab(gen, NA.method="mean")
+
+pca1 <- dudi.pca(X,scannf=FALSE,scale=FALSE,nf=3)
+plot(pca1$li)
+```
+
+```{r}
+pcdf<-as_tibble(pca1$l1) %>% rename(PC1=RS1, PC2=RS2, PC3=RS3)
+pcdf$Site<-pop(gen)
+pcdf<-pcdf %>% separate(Site, into=c("Site","DataType"))
+
+eigens<-as_tibble(pca1$eig) %>% rename(Eigen=value) %>% mutate(Porportion=Eigen/sum(Eigen)*100)
+
+ggplot(pcdf)+geom_point(aes(x=PC1, y=PC2, color=Site, shape=DataType), alpha=0.75, size=2)+
+  xlab(paste0("PC1 ", round(eigens$Porportion[1],2),"%")) +
+  ylab(paste0("PC2 ", round(eigens$Porportion[2],2),"%")) +
+  theme_bw()+
+  theme(panel.grid=element_blank()) +
+  theme(axis.title = element_text(face="bold")) +
+  theme(legend.title = element_text(face="bold"))
+```
+
+```{r}
+ggplot(pcdf)+geom_point(aes(x=PC1, y=PC3, color=Site, shape=DataType), alpha=0.75, size=2)+
+  xlab(paste0("PC1 ", round(eigens$Porportion[1],2),"%")) +
+  ylab(paste0("PC3 ", round(eigens$Porportion[3],2),"%")) +
+  theme_bw()+
+  theme(panel.grid=element_blank()) +
+  theme(axis.title = element_text(face="bold")) +
+  theme(legend.title = element_text(face="bold"))
+```
