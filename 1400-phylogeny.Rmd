@@ -1,0 +1,36 @@
+---
+title: "1400-phylogeny"
+author: "Mac Campbell"
+date: "August 10, 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+## Generate a list of all wild samples
+
+```{r}
+bamlist<-read_tsv("bamlists/352.bamlist", col_names=c("String"))
+meta<-read_csv("metadata/358.csv")
+meta<-left_join(bamlist, meta)
+```
+
+```{r}
+wgs<-read_csv("metadata/wgs-only.csv")
+
+sub<-meta %>% select(String, Region, Site, `RAD identifier`) %>% mutate(DataType="RAD") %>%
+  bind_rows(wgs)
+
+write_tsv(select(sub,String), "bamlists/wgs-phy.bamlist", col_names=FALSE)
+```
+
+We have 361 samples.
+
+Generating a plink file, see 1400.1-plink.sh.
+
