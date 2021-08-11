@@ -25,12 +25,17 @@ meta<-left_join(bamlist, meta)
 wgs<-read_csv("metadata/wgs-only.csv")
 
 sub<-meta %>% select(String, Region, Site, `RAD identifier`) %>% mutate(DataType="RAD") %>%
+  filter(Region !="Southcentral") %>%
   bind_rows(wgs)
 
 write_tsv(select(sub,String), "bamlists/wgs-phy.bamlist", col_names=FALSE)
 ```
 
-We have 361 samples.
+```{r}
+sub %>% group_by(Site, DataType) %>% summarize(Count=n())
+```
+
+We have 139 samples.
 
 Generating a plink file, see 1400.1-plink.sh.
 

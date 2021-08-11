@@ -19,13 +19,13 @@
 #-doGeno 4 -doPost 1 -postCutoff 0.95  > $HOME/pike-time/outputs/1300/plink.out \
 #2> $HOME/pike-time/outputs/1300/plink.err
 
-/home/macampbell2/angsd/angsd -minInd 343 -GL 1 -out /home/macampbell2/pike-time/outputs/1400/plink -nThreads 12 -doPlink 2 -doMajorMinor 1 -doMaf 1 \
+/home/macampbell2/angsd/angsd -minInd 132 -GL 1 -out /home/macampbell2/pike-time/outputs/1400/plink -nThreads 12 -doPlink 2 -doMajorMinor 1 -doMaf 1 \
 -SNP_pval 1e-6 -minMapQ 20 -minQ 20 -minMaf 0.3 -bam /home/macampbell2/pike-time/bamlists/wgs-phy.bamlist \
 -doGeno 4 -doPost 1 -postCutoff 0.95  > $HOME/pike-time/outputs/1400/plink.out \
 2> $HOME/pike-time/outputs/1400/plink.err
 
 #A more relaxed version
-/home/macampbell2/angsd/angsd -minInd 325 -GL 1 -out /home/macampbell2/pike-time/outputs/1400/plink2 -nThreads 12 -doPlink 2 -doMajorMinor 1 -doMaf 1 \
+/home/macampbell2/angsd/angsd -minInd 125 -GL 1 -out /home/macampbell2/pike-time/outputs/1400/plink2 -nThreads 12 -doPlink 2 -doMajorMinor 1 -doMaf 1 \
 -SNP_pval 1e-2 -minMapQ 20 -minQ 20 -minMaf 0.3 -bam /home/macampbell2/pike-time/bamlists/wgs-phy.bamlist \
 -doGeno 4 -doPost 1 -postCutoff 0.9  > $HOME/pike-time/outputs/1400/plink2.out \
 2> $HOME/pike-time/outputs/1400/plink2.err
