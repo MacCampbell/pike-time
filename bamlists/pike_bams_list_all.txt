@@ -64,7 +64,7 @@ bams/C-017_S62_sorted.bam
 bams/C-018_S63_sorted.bam
 bams/C-019_S64_sorted.bam
 bams/C-020_S65_sorted.bam
-bam/C-021_sorted.bam
+bams/C-021_sorted.bam
 bams/I-001_S176_sorted.bam
 bams/I-002_S177_sorted.bam
 bams/I-003_S178_sorted.bam
