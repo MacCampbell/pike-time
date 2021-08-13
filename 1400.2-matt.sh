@@ -15,4 +15,4 @@
 
 #CMD ./angsd -nThreads 12 -out Pike_SC_AK2 -doMaf 2 -minMaf 0.05 -minInd 155 -doPost 1 -bam pike_bams_list.txt -doMajorMinor 1 -snp_pval 1e-5 -doGeno 2 -GL 1 -minQ 20 -minMapQ 20 -doPlink 2 -doCounts 1
 /home/macampbell2/angsd/angsd -nThreads 12 -out outputs/1400/Pike_SC_AK2 -doMaf 2 -minMaf 0.05 -minInd 155 -doPost 1 \
--bam bamlists/pike_bams_list.txt -doMajorMinor 1 -snp_pval 1e-5 -doGeno 2 -GL 1 -minQ 20 -minMapQ 20 -doPlink 2 -doCounts 1
+-bam bamlists/pike_bams_list_all.txt -doMajorMinor 1 -snp_pval 1e-5 -doGeno 2 -GL 1 -minQ 20 -minMapQ 20 -doPlink 2 -doCounts 1
