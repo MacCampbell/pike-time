@@ -6,6 +6,7 @@
 #If running on the bio or analysis queue add:
 #SBATCH --mem=214G
 
+#SBATCH --time=0-20:05:00
 #SBATCH --mail-user=macampbell2@alaska.edu
 #SBATCH --mail-type=BEGIN
 #SBATCH --mail-type=END
