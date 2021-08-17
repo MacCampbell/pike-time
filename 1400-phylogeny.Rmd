@@ -11,6 +11,10 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
 
 ```{r}
 library(tidyverse)
+library(adegenet)
+library(vcfR)
+library(ggtree)
+library(ape)
 ```
 
 ## Generate a list of all wild samples
@@ -29,6 +33,7 @@ sub<-meta %>% select(String, Region, Site, `RAD identifier`) %>% mutate(DataType
   bind_rows(wgs)
 
 write_tsv(select(sub,String), "bamlists/wgs-phy.bamlist", col_names=FALSE)
+write_tsv(select(sub,`RAD identifier`), "outputs/1400/samples.tsv", col_names = FALSE)
 ```
 
 ```{r}
@@ -39,3 +44,120 @@ We have 139 samples.
 
 Generating a plink file, see 1400.1-plink.sh.
 
+
+```{sh, eval=FALSE}
+plink --tped plink.tped --tfam plink.tfam  --out binary --recode --allow-extra-chr --noweb
+plink --ped binary.ped --map binary.map --recode vcf --allow-extra-chr -out recode
+bcftools +prune -l 0.9 -w 10000 recode.vcf  -Ov -o recode.prune.vcf
+bcftools reheader --samples samples.tsv -o recode.prune.reheadered.vcf recode.prune.vcf
+source activate py2; ~/github/mccloud-rrt/vcf2phylip.py -i recode.prune.reheadered.vcf; conda deactivate;
+ ~/github/mccloud-rrt/103-remove-invariant.py -p recode.prune.reheadered.min4.phy -o recode.prune.reheadered.min4.asc.phy
+```
+ 
+## PCA
+
+
+Read in recode.prune.reheadered.vcf
+
+```{r}
+vcf<-read.vcfR(file="outputs/1400/recode.prune.reheadered.vcf")
+genind<-vcfR2genind(vcf)
+genind@pop<-as.factor(paste0(sub$Site,"-",sub$DataType))
+```
+
+425 variants.    
+
+
+```{r}
+gen<-genind
+X <- tab(gen, NA.method="mean")
+
+pca1 <- dudi.pca(X,scannf=FALSE,scale=FALSE,nf=3)
+plot(pca1$li)
+```
+
+```{r}
+pcdf<-as_tibble(pca1$l1) %>% rename(PC1=RS1, PC2=RS2, PC3=RS3)
+pcdf$Site<-pop(gen)
+pcdf<-pcdf %>% separate(Site, into=c("Site","DataType"))
+
+eigens<-as_tibble(pca1$eig) %>% rename(Eigen=value) %>% mutate(Porportion=Eigen/sum(Eigen)*100)
+
+ggplot(pcdf)+geom_point(aes(x=PC1, y=PC2, color=Site, shape=DataType), alpha=0.75, size=2)+
+  xlab(paste0("PC1 ", round(eigens$Porportion[1],2),"%")) +
+  ylab(paste0("PC2 ", round(eigens$Porportion[2],2),"%")) +
+  theme_bw()+
+  theme(panel.grid=element_blank()) +
+  theme(axis.title = element_text(face="bold")) +
+  theme(legend.title = element_text(face="bold"))
+```
+
+Nice to see Fairbanks fish cluster with Fairbanks fish.     
+
+```{r}
+ggplot(pcdf)+geom_point(aes(x=PC1, y=PC3, color=Site, shape=DataType), alpha=0.75, size=2)+
+  xlab(paste0("PC1 ", round(eigens$Porportion[1],2),"%")) +
+  ylab(paste0("PC3 ", round(eigens$Porportion[3],2),"%")) +
+  theme_bw()+
+  theme(panel.grid=element_blank()) +
+  theme(axis.title = element_text(face="bold")) +
+  theme(legend.title = element_text(face="bold"))
+```
+
+
+## Tree
+```{r}
+labelling<-sub %>% select(Site, DataType, `RAD identifier`) %>% mutate(Label=paste0(Site,DataType)) %>% group_by(Label) %>% 
+  mutate(Text=paste(`RAD identifier`, collapse = " ")) %>% select(Label, Text) %>% unique()
+
+counts<-sub %>% select(Site, DataType, `RAD identifier`) %>% mutate(Label=paste0(Site,DataType)) %>% 
+    group_by(Label) %>% summarize(Count=n())
+write_tsv(labelling,"outputs/1400/labels-for-nexus.tsv", col_names=FALSE)
+```
+
+
+Plotting     
+```{r}
+tree<-read.nexus("outputs/1400/svdMAF.tre")
+t<-ggtree(tree, branch.length = "none")
+```
+
+```{r}
+t %<+% counts +
+  geom_tippoint(aes(size=Count), pch=21, fill="black") +
+  geom_tiplab(offset=.5) +
+  geom_nodelab(fontface="bold") +
+  xlim(0,10)
+
+ggsave("outputs/1400/test-tree.jpg")
+```
+
+# Plink2
+
+```{sh, eval=FALSE}
+plink --tped plink2.tped --tfam plink2.tfam  --out binary2 --recode --allow-extra-chr --noweb
+plink --ped binary2.ped --map binary2.map --recode vcf --allow-extra-chr -out recode2
+bcftools +prune -l 0.9 -w 10000 recode2.vcf  -Ov -o recode2.prune.vcf
+bcftools reheader --samples samples.tsv -o recode2.prune.reheadered.vcf recode2.prune.vcf
+source activate py2; ~/github/mccloud-rrt/vcf2phylip.py -i recode2.prune.reheadered.vcf; conda deactivate;
+ ~/github/mccloud-rrt/103-remove-invariant.py -p recode2.prune.reheadered.min4.phy -o recode2.prune.reheadered.min4.asc.phy
+```
+
+ 1226 sites pruned to 656 to 430 with ASC.
+ 
+ Plotting     
+```{r}
+tree2<-read.nexus("outputs/1400/svdMAF-2.tre")
+t2<-ggtree(tree2, branch.length = "none")
+```
+
+```{r}
+t2 %<+% counts +
+  geom_tippoint(aes(size=Count), pch=21, fill="black") +
+  geom_tiplab(offset=.5) +
+  geom_nodelab(fontface="bold") +
+  xlim(0,10)
+
+ggsave("outputs/1400/test-tree-430-snps.jpg")
+```
+ 
