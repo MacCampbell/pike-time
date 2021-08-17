@@ -15,7 +15,7 @@
 
 #Generate beagle file
 /home/macampbell2/angsd/angsd -minInd 155 -GL 1 -out /home/macampbell2/pike-time/outputs/1401/sc -nThreads 12 -doGlf 2 -doMajorMinor 1 -doMaf 2 -minMaf 0.05 \
--SNP_pval 1e-5 -minMapQ 20 -minQ 20 -bam /home/macampbell2/pike-time/bamlists/bamlists/pike_bams_list_all.txt
+-SNP_pval 1e-5 -minMapQ 20 -minQ 20 -bam /home/macampbell2/pike-time/bamlists/pike_bams_list_all.txt
 
 
 #Generate covariance matrix
