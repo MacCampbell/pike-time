@@ -1,0 +1,294 @@
+---
+title: "1401-SC-pca"
+author: "Mac Campbell"
+date: "August 17, 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+
+```{r}
+library(tidyverse)
+library(RcppCNPy)
+library(ggpubr)
+library(ggrepel)
+library(viridis)
+library(vcfR)
+library(adegenet)
+```
+
+## Get Meta
+
+```{r}
+metaall<-read_csv("metadata/358.csv")
+bams<-read_tsv("bamlists/pike_bams_list_all.txt", col_names = c("Path"))
+bams$X<-gsub("bams/","", bams$Path)
+bams$`RAD identifier`<-gsub("_sorted.bam", "", bams$X)
+meta<-bams %>% select(-X) %>% left_join(metaall)
+doubles<-metaall %>% group_by(`RAD identifier`) %>% summarize(Count=n()) %>% filter(Count==2)
+```
+Get matrix (189 samples and non-excluded due to relatedness)
+
+
+##PCA from genotypes
+
+```{sh, eval=FALSE}
+plink --tped Pike_SC_AK2.tped --tfam Pike_SC_AK2.tfam  --out Pike_SC_AK2-binary --recode --allow-extra-chr --noweb
+plink --ped Pike_SC_AK2-binary.ped --map Pike_SC_AK2-binary.map --recode vcf --allow-extra-chr -out Pike_SC_AK2
+
+```
+
+```{r}
+vcf<-read.vcfR(file="outputs/1400/Pike_SC_AK2.vcf")
+genind<-vcfR2genind(vcf)
+genind@pop<-as.factor(meta$Site)
+save(genind, file="outputs/1400/genind.rda")
+```
+
+```{r}
+gen<-genind
+X <- tab(gen, NA.method="mean")
+
+pca1 <- dudi.pca(X,scannf=FALSE,scale=FALSE,nf=3)
+plot(pca1$li)
+```
+
+```{r}
+pcdf<-as_tibble(pca1$l1) %>% rename(PC1=RS1, PC2=RS2, PC3=RS3)
+pcdf$Site<-pop(gen)
+
+eigens<-as_tibble(pca1$eig) %>% rename(Eigen=value) %>% mutate(Porportion=Eigen/sum(Eigen)*100)
+
+ggplot(pcdf)+geom_point(aes(x=PC1, y=PC2, color=Site), alpha=0.75, size=2)+
+  xlab(paste0("PC1 ", round(eigens$Porportion[1],2),"%")) +
+  ylab(paste0("PC2 ", round(eigens$Porportion[2],2),"%")) +
+  theme_bw()+
+  theme(panel.grid=element_blank()) +
+  theme(axis.title = element_text(face="bold")) +
+  theme(legend.title = element_text(face="bold"))
+```
+
+```{r}
+grp<-find.clusters(gen, n.pca = 150, n.clust = 4)
+
+table(pop(gen), grp$grp)
+
+```
+```{r}
+dapc4 <- dapc(gen, grp$grp, n.pca=150, n.da=4)
+scatter(dapc4)
+t4<-dapc4$posterior %>% as_tibble()
+t4$inds<-rownames(dapc4$posterior)
+write_tsv(t4, "outputs/1400/dapc4-posteriors.tsv")
+```
+
+```{r}
+grp3<-find.clusters(gen, n.pca = 150, n.clust = 3)
+
+table(pop(gen), grp3$grp)
+
+```
+```{r}
+dapc3 <- dapc(gen, grp3$grp, n.pca=150, n.da=4)
+scatter(dapc3)
+t3<-dapc3$posterior %>% as_tibble()
+t3$inds<-rownames(dapc3$posterior)
+write_tsv(t3, "outputs/1400/dapc3-posteriors.tsv")
+```
+
+```{r}
+grp5<-find.clusters(gen, n.pca = 150, n.clust = 5)
+
+table(pop(gen), grp5$grp)
+
+dapc5 <- dapc(gen, grp5$grp, n.pca=150, n.da=4)
+scatter(dapc5)
+t5<-dapc5$posterior %>% as_tibble()
+t5$inds<-rownames(dapc5$posterior)
+write_tsv(t5, "outputs/1400/dapc5-posteriors.tsv")
+```
+## PCA from GLs
+
+
+
+```{r}
+cov<-read_delim("outputs/1401/sc-pca.cov", col_names=FALSE, delim=" ") %>% as.matrix()
+```
+
+
+
+```{r}
+#' @param samples character vector with the individuals IDs in the order in which
+#' they were passed in the bamlist to angsd.
+#' @param cov covariance matrix
+covar2pcs <- function(samples, cov) {
+  
+  
+  eig <- eigen(cov, symm = TRUE)
+  PC <- as.data.frame(eig$vectors) %>%
+    as_tibble() %>%
+    setNames(sprintf("PC-%02d", 1:ncol(.)))
+  
+  samtib <- tibble(sample = samples)
+  
+  list(
+    PCs = bind_cols(samtib, PC),
+    eigevalues = eig$values
+  )
+}
+```
+
+
+```{r}
+pca <- covar2pcs(meta$`RAD identifier`, cov)
+
+pca_long <- pca$PCs %>%
+  tidyr::gather(., key = "PC", "val", -sample)
+
+# then expand a grid of the possible comparisons (ordered)
+expg <- expand.grid(sample = pca$PCs$sample,
+                    PCx = sprintf("PC-%02d", 1:6),
+                    PCy = sprintf("PC-%02d", 1:6),
+                    stringsAsFactors = FALSE) %>%
+  tibble::as_tibble()
+
+# then left join the pca results onto that
+pca_pairs <- dplyr::left_join(expg, pca_long, by = c("sample", "PCx" = "PC")) %>%
+  dplyr::rename(val_x = val) %>%
+  dplyr::left_join(pca_long, by = c("sample", "PCy" = "PC")) %>%
+  dplyr::rename(val_y = val)
+
+pp_meta <- pca_pairs %>%   # just keep the first 6 PCs around
+  left_join(., meta, by = c("sample" = "RAD identifier")) %>%
+  mutate(group = Site) 
+```
+
+Plot:    
+```{r}
+npc <- 2
+pp_meta2 <- pp_meta %>%
+  filter( (PCx %in% sprintf("PC-%02d", 1:npc)) & 
+            (PCy %in% sprintf("PC-%02d", 1:npc)) )
+
+eig <- eigen(cov, symm = TRUE)
+var<-eig$values/sum(eig$values)
+cumvar<-cumsum(eig$values)/sum(eig$values)
+
+head(var)
+head(cumvar)
+```
+
+
+```{r}
+ggplot(pp_meta2, aes(x = val_x, y = val_y, color=Site)) +
+  geom_point() +
+  facet_grid(PCx ~ PCy)
+```
+
+Hmmm... NAs?
+
+## Admix 
+These results are a bit silly.
+```{r}
+k16<-npyLoad("outputs/1401/sc-pca.admix.Q.npy") %>% as_tibble() 
+#Need to rename all colnames smartly!
+
+colnames(k16)<-gsub("V","Q",colnames(k16))
+k16$Individual<-meta$`RAD identifier`
+k16$Site<-meta$Site
+k16$Region<-meta$Region
+k16 <- k16 %>% arrange(Site)
+k16<-mutate(k16, Index=1:n())
+```
+
+
+```{r}
+q16<-k16 %>% dplyr::select(Index, Site, Region, Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8, Q9, Q10, Q11) %>% gather(key=Ancestry, value=Q, 4:14)
+
+pops2<-q16  %>% group_by(Site) %>% mutate(Start=min(Index), Stop=max(Index)) %>% 
+  select(Site,Start,Stop) %>% unique() %>% 
+  mutate(Position=round((Start+Stop)/2))
+```
+
+
+```{r}
+kplot<-ggplot(q16) +
+  geom_col(aes(x=Index, y=Q, fill=Ancestry), color="NA", size = 0, width = 1)+
+  geom_segment(data=pops2, x = pops2$Start - 0.5, y=0, xend = pops2$Start-0.5, yend=1, alpha=0.9, size=0.25) +
+  geom_segment(data=pops2, x = pops2$Stop[length(pops2$Stop)]  + 0.5, y=0, xend= pops2$Stop[length(pops2$Stop)] + 0.5, yend=1,  alpha=0.9,
+               size=0.25) +
+  geom_segment(x=0, xend= pops2$Stop[length(pops2$Stop)], y=1, yend=1, alpha=0.9, size=0.25) +
+  theme(axis.text.x = element_text(angle=45, hjust=1)) +
+  ylim(0,1.01) +
+  xlim(-0.1, pops2$Stop[length(pops2$Stop)]+1) +
+  theme(panel.background = element_blank())+
+  scale_x_continuous(breaks=pops2$Position, labels=pops2$Site) +
+  xlab("") +
+    scale_fill_viridis_d(option="magma")
+ # theme(axis.text.x = element_blank(), axis.ticks.x=element_blank()) +
+#  theme(legend.position = "NA") +
+
+kplot
+
+ggsave("outputs/1401/pike-admix-k11.jpeg", width=11, height=8.5)
+```
+
+Calculating inbreed sites then excluding...
+
+```{sh, eval=FALSE}
+
+python /home/macampbell2/pcangsd/pcangsd.py -beagle /home/macampbell2/pike-time/outputs/1401/sc.beagle.gz -inbreedSites -o /home/macampbell2/pike-time/outputs/1401/inbreed -threads 10
+python /home/macampbell2/pcangsd/pcangsd.py -beagle /home/macampbell2/pike-time/outputs/1401/sc.beagle.gz -hwe  /home/macampbell2/pike-time/outputs/1401/inbreed.lrt.sites.npy \
+-admix -admix_K 4 -selection -sites_save -snp_weights -o /home/macampbell2/pike-time/outputs/1401/selection-inbreed -threads 10
+```
+
+```{r}
+sel<-npyLoad("outputs/1401/selection-inbreed.selection.npy")
+```
+
+```{r}
+k16<-npyLoad("outputs/1401/selection-inbreed.admix.Q.npy") %>% as_tibble() 
+#Need to rename all colnames smartly!
+
+colnames(k16)<-gsub("V","Q",colnames(k16))
+k16$Individual<-meta$`RAD identifier`
+k16$Site<-meta$Site
+k16$Region<-meta$Region
+k16 <- k16 %>% arrange(Site)
+k16<-mutate(k16, Index=1:n())
+```
+
+
+```{r}
+q16<-k16 %>% dplyr::select(Index, Site, Region, Q1, Q2, Q3, Q4) %>% gather(key=Ancestry, value=Q, 4:7)
+
+pops2<-q16  %>% group_by(Site) %>% mutate(Start=min(Index), Stop=max(Index)) %>% 
+  select(Site,Start,Stop) %>% unique() %>% 
+  mutate(Position=round((Start+Stop)/2))
+```
+
+
+```{r}
+kplot<-ggplot(q16) +
+  geom_col(aes(x=Index, y=Q, fill=Ancestry), color="NA", size = 0, width = 1)+
+  geom_segment(data=pops2, x = pops2$Start - 0.5, y=0, xend = pops2$Start-0.5, yend=1, alpha=0.9, size=0.25) +
+  geom_segment(data=pops2, x = pops2$Stop[length(pops2$Stop)]  + 0.5, y=0, xend= pops2$Stop[length(pops2$Stop)] + 0.5, yend=1,  alpha=0.9,
+               size=0.25) +
+  geom_segment(x=0, xend= pops2$Stop[length(pops2$Stop)], y=1, yend=1, alpha=0.9, size=0.25) +
+  theme(axis.text.x = element_text(angle=45, hjust=1)) +
+  ylim(0,1.01) +
+  xlim(-0.1, pops2$Stop[length(pops2$Stop)]+1) +
+  theme(panel.background = element_blank())+
+  scale_x_continuous(breaks=pops2$Position, labels=pops2$Site) +
+  xlab("") +
+    scale_fill_viridis_d(option="magma")
+ # theme(axis.text.x = element_blank(), axis.ticks.x=element_blank()) +
+#  theme(legend.position = "NA") +
+
+kplot
+
+ggsave("outputs/1401/pike-admix-k4.jpeg", width=11, height=8.5)
+```
