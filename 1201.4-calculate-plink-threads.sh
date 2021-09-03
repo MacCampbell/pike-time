@@ -1,7 +1,6 @@
 #! /bin/bash
 
 #SBATCH --partition=bio
-#SBATCH --nodes=2
 #If running on the bio or analysis queue add:
 #SBATCH --mem=214G
 
