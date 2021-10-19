@@ -27,7 +27,7 @@
 
 # (2) data set of all samples 358 samples, for phylogenetics. 90% missing thresh
 /home/macampbell2/angsd/angsd -nThreads 8 -minInd 322 -GL 2 -doGlf 2 -doMajorMinor 1 \
--doMaf 2 -minMaf 0.05 -doGeno 4 -SNP_pval 1e-6 -minMapQ 20 -minQ 20 \
+-doMaf 1 -minMaf 0.05 -doGeno 4 -SNP_pval 1e-6 -minMapQ 20 -minQ 20 \
 -bam /home/macampbell2/pike-time/bamlists/358.bamlist -doPlink 2 -doCounts 1 -doPost 1 \
 -postCutoff 0.95 \
 -out /home/macampbell2/pike-time/outputs/data/358-phylo 
@@ -35,7 +35,7 @@
 # (3) Southcentral data set
 
 /home/macampbell2/angsd/angsd -minInd 172 -GL 2 -out /home/macampbell2/pike-time/outputs/data/sc -nThreads 12 -doGlf 2 \
--doMajorMinor 1 -doMaf 2 -minMaf 0.05 \
+-doMajorMinor 1 -doMaf 1 -minMaf 0.05 \
 -SNP_pval 1e-6 -minMapQ 20 -minQ 20 -bam /home/macampbell2/pike-time/bamlists/sc.bamlist.txt
 
 # (3) Anchorage subset
