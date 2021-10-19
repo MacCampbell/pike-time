@@ -208,7 +208,7 @@ scp
 
 scp2<-ggplot()+
   geom_point(data=sc, aes(x = val_x, y = val_y), size=2, alpha=0.75) +
-  geom_text_repel(data=sc, aes(x=val_x, y=val_y, label=Site), fontface='bold', size=3) +
+  geom_text_repel(data=sc, aes(x=val_x, y=val_y, label=Site), fontface='bold', size=2, max.overlaps = Inf) +
   theme_bw()+
   theme(panel.grid=element_blank())+
   xlab(paste("PC1", " ", round((100*var[1]),2), "%", sep = ""))+
@@ -220,4 +220,13 @@ scp2
 ggarrange(scp, scp2, ncol = 2)
 ggsave("outputs/104/southcentral-focused.pdf")
 
+```
+
+Plot these two things together
+
+```{r}
+ggarrange(pc12,scp2)
+
+ggsave("outputs/104/pc12-southcentral-focused.jpg")
+        
 ```

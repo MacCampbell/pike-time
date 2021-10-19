@@ -15,6 +15,8 @@ library(adegenet)
 library(vcfR)
 library(ggtree)
 library(ape)
+library(ggpubr)
+library(gridExtra)
 ```
 
 ## Generate a list of all wild samples
@@ -83,25 +85,73 @@ pcdf<-pcdf %>% separate(Site, into=c("Site","DataType"))
 
 eigens<-as_tibble(pca1$eig) %>% rename(Eigen=value) %>% mutate(Porportion=Eigen/sum(Eigen)*100)
 
-ggplot(pcdf)+geom_point(aes(x=PC1, y=PC2, color=Site, shape=DataType), alpha=0.75, size=2)+
+ggplot(pcdf)+geom_point(aes(x=PC1, y=PC1, fill=Site, shape=DataType), alpha=0.75, size=2)+
+  theme_bw()+
+  theme(panel.grid=element_blank()) +
+  theme(axis.title = element_text(face="bold")) +
+  theme(legend.title = element_text(face="bold")) +
+  scale_shape_manual(values = c(21,24)) +
+  guides(fill = guide_legend(override.aes=list(shape=22))) +
+  theme(legend.position = "") +
+  theme(plot.title = element_text(face="bold", size=16))
+
+ggplot(pcdf)+geom_point(aes(x=PC2, y=PC2, fill=Site, shape=DataType), alpha=0.75, size=2)+
+  theme_bw()+
+  theme(panel.grid=element_blank()) +
+  theme(axis.title = element_text(face="bold")) +
+  theme(legend.title = element_text(face="bold")) +
+  scale_shape_manual(values = c(21,24)) +
+  guides(fill = guide_legend(override.aes=list(shape=22))) +
+  theme(legend.position = "") +
+  theme(plot.title = element_text(face="bold", size=16))
+
+```
+
+```{r}
+p12<-ggplot(pcdf)+geom_point(aes(x=PC1, y=PC2, fill=Site, shape=DataType), alpha=0.75, size=2)+
   xlab(paste0("PC1 ", round(eigens$Porportion[1],2),"%")) +
   ylab(paste0("PC2 ", round(eigens$Porportion[2],2),"%")) +
   theme_bw()+
   theme(panel.grid=element_blank()) +
   theme(axis.title = element_text(face="bold")) +
-  theme(legend.title = element_text(face="bold"))
+  theme(legend.title = element_text(face="bold")) +
+  scale_shape_manual(values = c(21,24)) +
+  guides(fill = guide_legend(override.aes=list(shape=22))) +
+  theme(legend.position = "") +
+  ggtitle("A")+
+  theme(plot.title = element_text(face="bold", size=16))
+p12
 ```
 
 Nice to see Fairbanks fish cluster with Fairbanks fish.     
 
 ```{r}
-ggplot(pcdf)+geom_point(aes(x=PC1, y=PC3, color=Site, shape=DataType), alpha=0.75, size=2)+
+ggplot(pcdf)+geom_point(aes(x=PC3, y=PC3, fill=Site, shape=DataType), alpha=0.75, size=2)+
+  theme_bw()+
+  theme(panel.grid=element_blank()) +
+  theme(axis.title = element_text(face="bold")) +
+  theme(legend.title = element_text(face="bold")) +
+  scale_shape_manual(values = c(21,24)) +
+  guides(fill = guide_legend(override.aes=list(shape=22))) +
+  theme(legend.position = "") +
+  theme(plot.title = element_text(face="bold", size=16))
+
+```
+
+```{r}
+p13<-ggplot(pcdf)+geom_point(aes(x=PC1, y=PC3, fill=Site, shape=DataType), alpha=0.75, size=2)+
   xlab(paste0("PC1 ", round(eigens$Porportion[1],2),"%")) +
   ylab(paste0("PC3 ", round(eigens$Porportion[3],2),"%")) +
   theme_bw()+
   theme(panel.grid=element_blank()) +
   theme(axis.title = element_text(face="bold")) +
-  theme(legend.title = element_text(face="bold"))
+  theme(legend.title = element_text(face="bold")) +
+  scale_shape_manual(values = c(21,24)) +
+  guides(fill = guide_legend(override.aes=list(shape=22)))  +
+  theme(legend.position = "") +
+  ggtitle("B")+
+  theme(plot.title = element_text(face="bold", size=16))
+p13
 ```
 
 
@@ -111,7 +161,7 @@ labelling<-sub %>% select(Site, DataType, `RAD identifier`) %>% mutate(Label=pas
   mutate(Text=paste(`RAD identifier`, collapse = " ")) %>% select(Label, Text) %>% unique()
 
 counts<-sub %>% select(Site, DataType, `RAD identifier`) %>% mutate(Label=paste0(Site,DataType)) %>% 
-    group_by(Label) %>% summarize(Count=n())
+    group_by(Label, Site, DataType) %>% summarize(Count=n())
 write_tsv(labelling,"outputs/1400/labels-for-nexus.tsv", col_names=FALSE)
 ```
 
@@ -123,14 +173,30 @@ t<-ggtree(tree, branch.length = "none")
 ```
 
 ```{r}
-t %<+% counts +
-  geom_tippoint(aes(size=Count), pch=21, fill="black") +
-  geom_tiplab(offset=.5) +
+u<-t %<+% counts +
+  geom_tippoint(aes(fill=Site, shape=DataType), size=3) +
+  geom_tiplab(aes(label=Site), offset=.5) +
   geom_nodelab(fontface="bold") +
-  xlim(0,10)
+  xlim(0,10) +
+  scale_shape_manual(values=c(21,24), name="Data Type") +
+  guides(fill = guide_legend(override.aes=list(shape=22))) +
+  guides(size = FALSE) +
+  theme(legend.title = element_text(face="bold")) +
+  ggtitle("C")+
+  theme(plot.title = element_text(face="bold", size=16))
 
+u
 ggsave("outputs/1400/test-tree.jpg")
 ```
+
+Combine:
+```{r}
+ggarrange(arrangeGrob(p12,p13, ncol=1), 
+          u, widths = c(1, 1.25))
+ggsave("outputs/1400/figure.jpg", width=8, height = 7)
+```
+
+
 
 # Plink2
 
@@ -145,15 +211,17 @@ source activate py2; ~/github/mccloud-rrt/vcf2phylip.py -i recode2.prune.reheade
 
  1226 sites pruned to 656 to 430 with ASC.
  
+ Dropping selawik
+ 
  Plotting     
 ```{r}
-tree2<-read.nexus("outputs/1400/svdMAF-2.tre")
+tree2<-read.nexus("outputs/1400/svdMAF2.tre")
 t2<-ggtree(tree2, branch.length = "none")
 ```
 
 ```{r}
 t2 %<+% counts +
-  geom_tippoint(aes(size=Count), pch=21, fill="black") +
+  geom_tippoint(aes(size=Count, fill=Site), pch=21) +
   geom_tiplab(offset=.5) +
   geom_nodelab(fontface="bold") +
   xlim(0,10)
