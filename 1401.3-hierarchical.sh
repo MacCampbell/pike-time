@@ -19,13 +19,16 @@
 #./angsd -GL 2 -nThreads 8 -doGlf 2 -doMajorMinor 1 -SNP_pval 1e-6 -minMapQ 20 -minQ 20 -minMaf 0.05 -doMaf 1
 #-minInd flag @ 0.8
 
+#create bamlists 
+#cat bamlists/pike_anchorage_bams_list.txt | perl -pe 's/\/Users.*pike_bams\//bams/g' > bamlists/anchorage.bamlist
+#cat bamlists/pike_susitna_bams_list\ copy.txt | perl -pe 's/\/Users.*pike_bams\//bams/g' > bamlists/susitna.bamlist
 /home/macampbell2/angsd/angsd -GL 2 -nThreads 8 -doGlf 2 -doMajorMinor 1 -doMaf 1 -minInd 68 \
--minMaf 0.05 -SNP_pval 1e-6 -minMapQ 20 -minQ 20 -bam /home/macampbell2/pike-time/bamlists/pike_anchorage_bams_list.txt \
--out /home/macampbell2/pike-time/outputs/1401/pike_anchorage_bams_list
+-minMaf 0.05 -SNP_pval 1e-6 -minMapQ 20 -minQ 20 -bam /home/macampbell2/pike-time/bamlists/anchorage.bamlist \
+-out /home/macampbell2/pike-time/outputs/1401/anchorage
 
 /home/macampbell2/angsd/angsd -GL 2 -nThreads 8 -doGlf 2 -doMajorMinor 1 -doMaf 1 -minInd 78 \
--minMaf 0.05 -SNP_pval 1e-6 -minMapQ 20 -minQ 20 -bam /home/macampbell2/pike-time/bamlists/pike_susitna_bams_list copy.txt \
--out /home/macampbell2/pike-time/outputs/1401/pike_susitna_bams_list
+-minMaf 0.05 -SNP_pval 1e-6 -minMapQ 20 -minQ 20 -bam /home/macampbell2/pike-time/bamlists/susitna.bamlist \
+-out /home/macampbell2/pike-time/outputs/1401/susitna
 
 
 
