@@ -16,6 +16,6 @@
 
 /home/macampbell2/angsd/angsd -GL 1 -nThreads 8 -minInd 322 -doMajorMinor 1 -doMaf 2 -minMaf 0.05 -doGeno 2 -SNP_pval 1e-5 
 -minMapQ 20 -minQ 20 -doPlink 2 -doCounts 1 -doPost 1 \
--bam /home/macampbell2/pike-time/bamlists/358.bamlist out /home/macampbell2/pike-time/outputs/data/358-gwas
+-bam /home/macampbell2/pike-time/bamlists/358.bamlist -out /home/macampbell2/pike-time/outputs/data/358-gwas
 
 
