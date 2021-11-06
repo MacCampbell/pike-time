@@ -135,7 +135,7 @@ tt2<-ggtree(t2)  %<+% sub
 tt2$data$Region<-factor(tt2$data$Region, levels=c("Southeast","Southcentral", "Southwest", "Interior", "Northwest",
                                                    "North","Midwest"))       
 
-tt2 + geom_tiplab(aes(label=Site, color=Region), align=TRUE, size=1) +
+tt2 + geom_tiplab(aes(label=paste0(Site,"-",label), color=Site), align=TRUE, size=1) +
     geom_nodelab(aes(label=node)) +
     xlim(0,.75)
 ggsave("outputs/1500/358-rectangular-tree.pdf", height=20, width=10)

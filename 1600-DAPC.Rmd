@@ -1,0 +1,298 @@
+---
+title: "1600-DAPC"
+author: "Mac Campbell"
+date: "October 27, 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message = FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(adegenet)
+library(ggpubr)
+library(grid)
+library(gridExtra)
+```
+
+
+## DAPC Analysis of all samples first.
+
+```{r}
+bamlist<-read_tsv("bamlists/358.bamlist", col_names=c("String"))
+meta<-read_csv("metadata/358.csv")
+meta<-left_join(bamlist, meta)
+```
+
+Convert:    
+
+```{sh, eval=FALSE}
+plink --tped 358-dapc.tped --tfam 358-dapc.tfam  --out 358-dapc-binary --recode --allow-extra-chr --noweb
+plink --ped 358-dapc-binary.ped --map 358-dapc-binary.map --recode vcf --allow-extra-chr -out 358-dapc
+```
+
+4860 variants.
+
+```{r}
+vcf<-read.vcfR(file="outputs/1600/358-dapc.vcf")
+genind<-vcfR2genind(vcf)
+genind@pop<-as.factor(meta$Site)
+save(genind, file="outputs/1600/358-genind.rada")
+```
+
+
+```{r}
+gen<-genind
+X <- tab(gen, NA.method="mean")
+
+pca1 <- dudi.pca(X,scannf=FALSE,scale=FALSE,nf=3)
+plot(pca1$li)
+```
+
+Remove small samplesizes.
+
+```{r}
+meta %>% select(Site) %>% group_by(Site) %>% summarize(Count=n()) %>% arrange(Count)
+```
+### Find clusters
+```{r}
+gen2<-gen[!gen@pop %in% c("Selawik", "NorthSlope", "EagleLake")]
+```
+
+```{r}
+grp<-find.clusters(gen2, n.pca=300, n.clust = 2)
+table(pop(gen2), grp$grp)
+```
+
+```{r}
+dapc<-dapc(gen2,pop = grp$grp, n.pca=300, n.da=7)
+```
+
+##Plot structure-like
+```{r}
+post<-as_tibble(dapc$posterior)
+post$Site<-gen2@pop
+post$`RAD Identifier`<-meta[!meta$Site %in% c("Selawik", "NorthSlope", "EagleLake"), ]$`RAD identifier`
+post<-post %>%   filter(!`RAD Identifier` %in% c("F-021","A-026","B-021","C-021","G-021"))
+post$Site<-factor(post$Site, levels = c("AntlinRiver","YukonFlats","MintoFlats","Fairbanks","LakeClark","LakeNerka","StormyLake","TinyLake","AlexanderCreek",
+                                        "AlexanderLake","DeshkaRiver","OtterLake","ShellLake","AndersonLake","BulchitnaLake","Tyonek","YentnaIndianCreek"))
+post<-post %>% arrange(Site) %>% mutate(Position=1:n()) %>% group_by(Site) %>% mutate(Individual=1:n())
+untidy<-post
+post<-post %>% gather(key=Group, value=Posterior, 1:2) 
+```
+
+```{r}
+ggplot(post) + 
+  geom_col(aes(x=Position, y=Posterior, fill=Group)) 
+
+```
+
+Labels:
+```{r}
+labels<-untidy %>% group_by(Site) %>% mutate(xbar=mean(Position), minx=min(Position), maxx=max(Position)) %>% select(Site,xbar, minx, maxx) %>% unique()
+```
+
+```{r}
+k2<-ggplot(post) + 
+  geom_col(aes(x=Position, y=Posterior, fill=Group), color="NA", size = 0, width = 1) +
+  geom_segment(data=labels, x = labels$minx - 0.5, y=0, xend = labels$minx-0.5, yend=1, alpha=0.9, size=0.25) +
+  geom_segment(data=labels, x = labels$maxx + 0.5, y=0, xend= labels$maxx + 0.5, yend=1,  alpha=0.9,
+               size=0.25) +
+  geom_segment(x=0, xend= max(labels$maxx), y=1, yend=1, alpha=0.9, size=0.25) +
+  geom_segment(x=0, xend= max(labels$maxx), y=0, yend=0, alpha=0.9, size=0.25) +
+  #scale_x_continuous(breaks=labels$xbar, labels=labels$Site) +
+  theme(axis.text.x = element_text(angle=45, hjust=1)) +
+  theme(axis.title.x = element_blank()) +
+  scale_fill_viridis_d(option="magma", direction=-1) +
+  theme(panel.background = element_blank()) +
+  guides(fill=guide_legend(title="K = 2")) +
+  theme(axis.ticks.x = element_blank(), axis.text.x = element_blank()) +
+  ylab("Posterior\n") +
+  theme(axis.title.y = element_text(size=16, face="bold"))
+
+k2
+```
+
+Higher K    
+
+```{r}
+grp8<-find.clusters(gen2, n.pca=300, n.clust = 8)
+#save(grp8, file="outputs/1600/grp8.rda")
+grp10<-find.clusters(gen2, n.pca=350, n.clust =10)
+#save(grp12, file="outputs/1600/grp12.rda")
+```
+
+```{r}
+dapc8<-dapc(gen2, pop=grp8$grp , n.pca=300, n.da=9)
+```
+
+```{r}
+post<-as_tibble(dapc8$posterior)
+post$Site<-gen2@pop
+post$`RAD Identifier`<-meta[!meta$Site %in% c("Selawik", "NorthSlope", "EagleLake"), ]$`RAD identifier`
+post<-post %>%   filter(!`RAD Identifier` %in% c("F-021","A-026","B-021","C-021","G-021"))
+
+post$Site<-factor(post$Site, levels = c("AntlinRiver","YukonFlats","MintoFlats","Fairbanks","LakeClark","LakeNerka","StormyLake","TinyLake","AlexanderCreek",
+                                        "AlexanderLake","DeshkaRiver","OtterLake","ShellLake","AndersonLake","BulchitnaLake","Tyonek","YentnaIndianCreek"))
+post<-post %>% arrange(Site) %>% mutate(Position=1:n()) %>% group_by(Site) %>% mutate(Individual=1:n())
+untidy<-post
+post<-post %>% gather(key=Group, value=Posterior, 1:8) 
+```
+
+
+Labels:
+```{r}
+labels<-untidy %>% group_by(Site) %>% mutate(xbar=mean(Position), minx=min(Position), maxx=max(Position)) %>% select(Site,xbar, minx, maxx) %>% unique()
+```
+
+```{r}
+k8<-ggplot(post) + 
+  geom_col(aes(x=Position, y=Posterior, fill=Group), color="NA", size = 0, width = 1) +
+  geom_segment(data=labels, x = labels$minx - 0.5, y=0, xend = labels$minx-0.5, yend=1, alpha=0.9, size=0.25) +
+  geom_segment(data=labels, x = labels$maxx + 0.5, y=0, xend= labels$maxx + 0.5, yend=1,  alpha=0.9,
+               size=0.25) +
+  geom_segment(x=0, xend= max(labels$maxx), y=1, yend=1, alpha=0.9, size=0.25) +
+  geom_segment(x=0, xend= max(labels$maxx), y=0, yend=0, alpha=0.9, size=0.25) +
+  scale_x_continuous(breaks=labels$xbar, labels=labels$Site) +
+  theme(axis.text.x = element_text(angle=45, hjust=1)) +
+  theme(axis.title.x = element_blank()) +
+  scale_fill_viridis_d(option="magma", direction=-1) +
+  theme(panel.background = element_blank()) +
+  guides(fill=guide_legend(title="K = 8")) +
+ # theme(axis.ticks.x = element_blank(), axis.text.x = element_blank()) +
+  ylab("Posterior\n") +
+  theme(axis.title.y = element_text(size=16, face="bold"))
+
+k8
+```
+
+
+Plot
+d
+```{r}
+ggarrange(k2,k8, ncol=1, nrow=2, heights = c(1,1.25))
+ggsave("outputs/1600/dapcs.jpeg", width=8, height=6)
+```
+
+
+##Load up anchorage and subdivide   
+
+```{sh, eval=FALSE}
+plink --tped anchorage-dapc.tped --tfam anchorage-dapc.tfam  --out anchorage-dapc-binary --recode --allow-extra-chr --noweb
+plink --ped anchorage-dapc-binary.ped --map anchorage-dapc-binary.map --recode vcf --allow-extra-chr -out anchorage-dapc
+```
+
+4163 variants.
+
+```{r}
+bam<-read_tsv("bamlists/anchorage.bamlist", col_names=c("Path")) %>% mutate(`RAD identifier`=Path)
+bam$`RAD identifier`<-gsub("bams/|_sorted.bam","",bam$`RAD identifier`)
+metatot<-read_csv("metadata/361.csv")
+metaa<-left_join(bam, metatot)
+
+```
+
+
+```{r}
+vcfa<-read.vcfR(file="outputs/1600/anchorage-dapc.vcf")
+geninda<-vcfR2genind(vcfa)
+geninda@pop<-as.factor(metaa$Site)
+save(geninda, file="outputs/1600/anchorage-genind.rada")
+```
+
+```{r}
+grpa<-find.clusters(geninda, n.pca = 80, n.clust = 2)
+dapca<-dapc(geninda, pop=grpa$grp, n.pca=8, n.da=3)
+```
+
+
+```{r}
+posta<-as_tibble(dapca$posterior)
+posta$Site<-geninda@pop
+posta$Site<-factor(posta$Site, levels = c("AndersonLake","BulchitnaLake","Tyonek","YentnaIndianCreek"))
+posta<-posta %>% arrange(Site) %>% mutate(Position=1:n()) %>% group_by(Site) %>% mutate(Individual=1:n())
+untidya<-posta
+posta<-posta %>% gather(key=Group, value=Posterior, 1:2) 
+```
+
+Labels:
+```{r}
+labelsa<-untidya %>% group_by(Site) %>% mutate(xbar=mean(Position), minx=min(Position), maxx=max(Position)) %>% select(Site,xbar, minx, maxx) %>% unique()
+```
+
+```{r}
+ka<-ggplot(posta) + 
+  geom_col(aes(x=Position, y=Posterior, fill=Group), color="NA", size = 0, width = 1) +
+  geom_segment(data=labelsa, x = labelsa$minx - 0.5, y=0, xend = labelsa$minx-0.5, yend=1, alpha=0.9, size=0.25) +
+  geom_segment(data=labelsa, x = labelsa$maxx + 0.5, y=0, xend= labelsa$maxx + 0.5, yend=1,  alpha=0.9,
+               size=0.25) +
+  geom_segment(x=0, xend= max(labelsa$maxx), y=1, yend=1, alpha=0.9, size=0.25) +
+  geom_segment(x=0, xend= max(labelsa$maxx), y=0, yend=0, alpha=0.9, size=0.25) +
+  scale_x_continuous(breaks=labelsa$xbar, labels=labelsa$Site) +
+  theme(axis.text.x = element_text(angle=45, hjust=1)) +
+  theme(axis.title.x = element_blank()) +
+  scale_fill_viridis_d(option="jet", direction=-1) +
+  theme(panel.background = element_blank()) +
+  guides(fill=guide_legend(title="K = 2")) +
+ # theme(axis.ticks.x = element_blank(), axis.text.x = element_blank()) +
+  ylab("Posterior\n") +
+  theme(axis.title.y = element_text(size=16, face="bold"))
+
+ka
+```
+
+
+### Plot
+```{r}
+blank <- grid.rect(gp=gpar(col="white"))
+
+ggarrange(arrangeGrob(k2 + ggtitle("A") + theme(plot.title=element_text(size=14, face="bold")),
+                      k8 + ggtitle("B") + theme(plot.title=element_text(size=14, face="bold")),
+                      ncol=1, nrow=2, heights = c(1,1.25)), 
+          arrangeGrob(blank, ka + ggtitle("C") + theme(plot.title=element_text(size=14, face="bold")), 
+                      nrow=2, heights=c(1,1.25)), ncol=2, widths=c(3,1))
+
+ggsave("outputs/1600/dapcs.jpeg", width=12, height=6)
+
+```
+                      
+                      
+### Introduced versus everybody else!!!
+```{r}
+type<-as_tibble(gen2@pop) 
+type<-type %>% mutate(Type=ifelse(value %in% c("StormyLake","TinyLake","AlexanderCreek",
+                           "AlexanderLake","DeshkaRiver","OtterLake",
+                            "ShellLake","AndersonLake","BulchitnaLake",
+                             "Tyonek","YentnaIndianCreek"), "Introduced","Native"))
+                           
+gen3<-gen2
+gen3@pop<-as.factor(type$Type)
+```
+
+```{r}
+dapct<-dapc(gen3, pop=gen3@pop, n.pca=300, n.da=2)
+```
+
+```{r}
+scatter(dapct)
+```
+
+```{r}
+contrib <- loadingplot(dapct$var.contr, axis=1, thres=.0015, lab.jitter=0)
+
+contribs<-as.tibble(dapct$var.contr)
+contribs$Position<-rownames(dapct$var.contr)
+topcons<-contribs %>% filter(LD1 > 0.0015) %>% separate(Position, into=c("NC","Chrom","Version","Site")) %>%
+  mutate(Position=paste0(NC,"_",Chrom,"_",Site))
+
+#box<-boxplot(dapc$var.contr)
+loads<-topcons[seq(1, nrow(topcons), by=2),] %>% arrange(-LD1)
+
+write_csv(loads, "outputs/1600/loadings.csv")
+```
+
+```{r}
+loads %>% select(LD1, Position)
+```
