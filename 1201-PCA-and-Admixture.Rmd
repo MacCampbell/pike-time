@@ -211,6 +211,8 @@ pc13<-ggplot(sub13, aes(x = val_x, y = val_y, color = Site)) +
 
 
 ggarrange(pc12, pc13, ncol = 2)
+ggsave("outputs/1201/PCs123.pdf")
+
 ```
 
 Redo with different covariance matrix
@@ -306,6 +308,7 @@ pc13<-ggplot(sub13, aes(x = val_x, y = val_y, color = Site)) +
 
 
 ggarrange(pc12, pc13, ncol = 2)
+
 ```
 
 Structure like plot of admixture:

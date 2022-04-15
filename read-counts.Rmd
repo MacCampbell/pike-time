@@ -1,0 +1,52 @@
+---
+title: "read-counts"
+author: "Mac Campbell"
+date: "4/15/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+````
+
+Stashing: /home/macampbell2/pike-time/outputs/read-counts
+
+
+cat bamlists/358.bamlist | while read line; do echo `basename $line _sorted.bam`; samtools flagstat $line | grep "mapped (" > outputs/read-counts/`basename $line _sorted.bam`.sort.cov; done;
+
+
+
+
+```{r}
+fronthalf<-read_csv("metadata/358-edited.csv")
+```
+
+```{r}
+files<-list.files(path="outputs/readcounts", pattern="*.sort.cov", full.names=TRUE)
+list<-lapply(files, read_tsv, col_names=FALSE) 
+names<-lapply(files, basename)
+
+backhalf<-data.frame(unlist(names), unlist(list)) %>% as_tibble()
+```
+
+```{r}
+dfp<-backhalf
+dfp$`RAD identifier`<-gsub(".sort.cov","",dfp$unlist.names.) 
+
+dfp2<-dfp %>% separate(unlist.list., sep=" ", into =c("Mapped Reads","+","0","Mapped","Percent of Total Mapped",":","NA"))
+dfp2$`Percent of Total Mapped`<-gsub("\\(", "", dfp2$`Percent of Total Mapped`)
+
+dfp3<-dfp2 %>% dplyr::select(`RAD identifier`, `Mapped Reads`,`Percent of Total Mapped`)
+
+dfp3
+```
+
+
+```{r}
+combinedmeta<-left_join(fronthalf,dfp3) %>% select(-Coverage, -`Major Drainage`, -`Source`,-`Collection date`,-`Comments`,-String)
+write_csv(combinedmeta, "metadata/Supplemental Table S1.csv")
+```
