@@ -1,0 +1,107 @@
+---
+title: "1701-fst"
+author: "Mac Campbell"
+date: "6/14/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(ggrepel)
+```
+
+```{r}
+groups<-read_tsv("stats/pike_TajD_Watterson_sheet2.txt") %>% select(Population,group) %>% mutate(Region=group) %>% unique() %>% select(-group)
+
+groups
+```
+
+```{r}
+fst<-read_tsv("stats/FST_distance_data.txt") %>% left_join(groups, c(`location A`="Population")) %>% rename(`Region A`=Region) %>%
+  left_join(groups, c(`location B`="Population")) %>% rename(`Region B`=Region) %>%
+  mutate(group=1:n())
+
+fst$`Region A`<-factor(fst$`Region A`, levels=c("Southeast","Southcentral","Southwest","Interior","Northwest","North",
+  "Midwest"))
+fst$`Region B`<-factor(fst$`Region B`, levels=c("Southeast","Southcentral","Southwest","Interior","Northwest","North",
+  "Midwest"))
+
+fst<-fst %>% mutate(Comparison=paste0(`Region A`,"-",`Region B`))
+fst<-fst %>% mutate(Locations=paste0(`location A`,"-",`location B`))
+fst
+```
+
+
+```{r}
+ggplot(fst, aes(x=distance, y=FST)) +
+ # geom_smooth(method=`lm`) +
+  geom_point(data=(fst %>% filter(Comparison=="Southcentral-Southcentral")), aes(x=distance, y=FST),pch=21, fill="#C49A00") +
+  geom_text_repel(data=(fst %>% filter(Comparison=="Southcentral-Southcentral")), aes(x=distance, y=FST, label=Locations),max.overlaps = Inf)
+  
+ggsave("outputs/1701/sc-sc.jpeg", width=10, height=10)
+```
+
+```{r}
+antlen1<-fst %>% filter(`location A`=="Antlen River")
+antlen2<-fst %>% filter(`location B`=="Antlen River")
+
+antlen<-bind_rows(antlen1,antlen2)
+antlen
+```
+```{r}
+library(viridis)
+cols=viridis(12, option = "turbo")
+```
+
+```{r}
+southcentral<-fst %>% filter(Comparison=="Southcentral-Southcentral")
+stormy1<-fst %>% filter(`location A`=="Stormy Lake")
+stormy2<-fst %>% filter(`location B`=="Stormy Lake")
+
+stormy<-bind_rows(stormy1,stormy2) %>% filter(Comparison=="Southcentral-Southcentral")
+stormy
+```
+
+```{r}
+ggplot(fst, aes(x=distance, y=FST)) +
+  geom_point(alpha=0.75, cex=1, pch=15) +
+  geom_smooth(method=`lm`, color="grey50", lty=2) +
+  geom_point(data=southcentral, aes(x=distance, y=FST),pch=21, fill="#C49A00", cex=1.5) +
+  geom_point(data=antlen, aes(x=distance, y=FST),pch=24, fill="#F8766D", cex=1.5) +
+  geom_point(data=stormy, aes(x=distance, y=FST),pch=21, fill=cols[2], cex=1.5) +
+  theme_bw() +
+  theme(panel.grid=element_blank()) +
+  xlab("geographic distance (km)") +
+  theme(axis.title = element_text(size=12, face="bold")) 
+```
+
+Workaround for legend
+
+```{r}
+stormy3<-stormy
+stormy3$Comparison<-"Stormy Lake within Southcentral"
+
+antlen3<-antlen
+antlen3$Comparison<-"Antlen River to Other Locations"
+points<-bind_rows(southcentral,antlen3,stormy3)
+```
+
+```{r}
+ggplot(fst, aes(x=distance, y=FST)) +
+  geom_point(alpha=0.75, cex=1.5, pch=15) +
+  geom_smooth(method=`lm`, color="grey50", lty=2) +
+  geom_point(data=points, aes(x=distance, y=FST, shape=Comparison, fill=Comparison), cex=2) +
+  theme_bw() +
+  theme(panel.grid=element_blank()) +
+  xlab("geographic distance (km)") +
+  theme(axis.title = element_text(size=12, face="bold")) +
+  scale_shape_manual(values=c(24,21,21)) +
+  scale_fill_manual(values=c("#F8766D","#C49A00",cols[2]))
+
+ggsave("outputs/1701/fst-distance.jpeg", width=9, height=5.5)
+```
+

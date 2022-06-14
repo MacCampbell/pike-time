@@ -15,6 +15,7 @@ library(maps)
 library(raster)
 library(viridis)
 library(ggrepel)
+library(scales)
 ```
 
 
@@ -39,6 +40,15 @@ ggplot(locs) +
 
 ```
 
+Get colors.    
+```{r}
+locs$Region
+```
+
+```{r}
+codes<-hue_pal()(length(unique(locs$Region)))
+show_col(codes)
+```
 
 #Load in base raster.
 

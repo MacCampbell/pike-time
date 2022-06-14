@@ -255,6 +255,7 @@ ggarrange(arrangeGrob(k2 + ggtitle("A") + theme(plot.title=element_text(size=14,
                       nrow=2, heights=c(1,1.25)), ncol=2, widths=c(3,1))
 
 ggsave("outputs/1600/dapcs.jpeg", width=12, height=6)
+ggsave("outputs/1600/dapcs-threepanel.pdf", width=12, height=6)
 
 ```
                       

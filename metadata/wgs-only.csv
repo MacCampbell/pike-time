@@ -1,10 +1,1 @@
-String,Region,Site,RAD identifier,DataType
-data/wgs/Fair1_sorted.bam,Interior,Fairbanks,Fair1,WGS
-data/wgs/Fair2_sorted.bam,Interior,Fairbanks,Fair2,WGS
-data/wgs/Fair3_sorted.bam,Interior,Fairbanks,Fair3,WGS
-data/wgs/Palm1_sorted.bam,BritishColumbia,PalmerLake,Palm1,WGS
-data/wgs/Palm2_sorted.bam,BritishColumbia,PalmerLake,Palm2,WGS
-data/wgs/Palm3_sorted.bam,BritishColumbia,PalmerLake,Palm3,WGS
-data/wgs/Yuk1_sorted.bam,YukonTerritory,YukonRiver,Yukon1,WGS
-data/wgs/Yuk2_sorted.bam,YukonTerritory,YukonRiver,Yukon2,WGS
-data/wgs/Yuk3_sorted.bam,YukonTerritory,YukonRiver,Yukon3,WGS
+String,Region,Site,RAD identifier,DataTypedata/wgs/Fair1_sorted.bam,Interior,Fairbanks,Fair1,WGSdata/wgs/Fair2_sorted.bam,Interior,Fairbanks,Fair2,WGSdata/wgs/Fair3_sorted.bam,Interior,Fairbanks,Fair3,WGSdata/wgs/Palm1_sorted.bam,Western Canada,PalmerLake,Palm1,WGSdata/wgs/Palm2_sorted.bam,Western Canada,PalmerLake,Palm2,WGSdata/wgs/Palm3_sorted.bam,Western Canada,PalmerLake,Palm3,WGSdata/wgs/Yuk1_sorted.bam,Western Canada,YukonRiver,Yukon1,WGSdata/wgs/Yuk2_sorted.bam,Western Canada,YukonRiver,Yukon2,WGSdata/wgs/Yuk3_sorted.bam,Western Canada,YukonRiver,Yukon3,WGS

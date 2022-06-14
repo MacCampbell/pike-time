@@ -1,0 +1,116 @@
+---
+title: "1700-pop-stats"
+author: "Mac Campbell"
+date: "6/13/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(ggpubr)
+```
+
+```{r}
+dat<-read_tsv("stats/pike_TajD_Watterson_sheet2.txt")
+dat
+```
+
+```{r}
+unique(dat$Population)
+```
+
+```{r}
+unique(dat$group)
+```
+
+
+```{r}
+df<-dat
+df$Population<-factor(dat$Population, levels=c("Antlen River","Yukon Flats","Minto Flats","Fairbanks",
+                                               "Lake Clark","Lake Nerka","Stormy Lake","Tiny Lake",
+                                               "Alexander Creek","Alexander Lake","Deshka River",
+                                               "Otter Lake","Shell Lake", "Anderson Lake","Bulchitna Lake",
+                                               "Tukallah Lake","Yentna River"))
+
+df$Region<-factor(dat$group, levels=c("Southeast","Southcentral","Southwest","Interior","Northwest","North",
+  "Midwest"))
+```
+
+
+
+Color Scheme
+Southeast->Antlen River->#F8766D
+Southcentral->All the Introduced Pops->#C49A00
+Southwest->Lake Nerka, Lake Clark->#53B400
+Interior->Yukon Flats, Minto Flats, Fairbanks->#00C094
+Northwest->Selawik River 00B6EB (Not in 2a/b)
+North Slope->  #A58AFF (not in 2a/b)
+Midwest -> Eagle Lake -> #FB61D7 -> Not in 2a/2b
+
+```{r}
+d<-ggplot(df) +
+  geom_boxplot(aes(x=Population, y=`Tajima's D`, fill=Region), alpha=0.8) +
+  theme_bw() +
+  theme(panel.grid=element_blank()) +
+  theme(axis.text.x = element_text(angle=45, vjust=1, hjust=1)) +
+  ylab("Tajima's D") +
+  theme(axis.title = element_text(size=12, face="bold")) +
+  scale_fill_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A58AFF",
+                             "#FB61D7"))
+d
+```
+
+```{r}
+pi<-ggplot(df) +
+  geom_boxplot(aes(x=Population, y=Pi, fill=Region), alpha=0.8) +
+  theme_bw() +
+  theme(panel.grid=element_blank()) +
+  theme(axis.text.x = element_text(angle=45, vjust=1, hjust=1)) +
+  ylab("Pi") +
+  theme(axis.title = element_text(size=12, face="bold")) +
+  scale_fill_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A58AFF",
+                             "#FB61D7"))
+pi
+```
+
+```{r}
+ggarrange(pi,d, ncol=1)
+```
+
+Facet
+
+```{r}
+df2<-df %>% select(Population, Region, `Tajima's D`, Pi) %>%
+  gather(key=Statistic, value=Value, 3:4)
+
+df2
+```
+Names for facets     
+```{r}
+supp <- c("(A) Pi","(B) Tajima's D")
+names(supp) <- c("Pi", "Tajima's D")
+```
+
+     
+
+```{r}
+plot<-ggplot(df2) +
+  geom_boxplot(aes(x=Population, y=Value, fill=Region), alpha=0.8) +
+  theme_bw() +
+  theme(panel.grid=element_blank()) +
+  theme(axis.text.x = element_text(angle=45, vjust=1, hjust=1)) +
+  theme(axis.title = element_text(size=12, face="bold")) +
+  scale_fill_manual(values=c("#F8766D","#C49A00","#53B400","#00C094","#00B6EB","#A58AFF",
+                             "#FB61D7")) +
+  facet_grid(Statistic~., scales="free_y", labeller = labeller(Statistic=supp)) +
+  theme(strip.text.y = element_text(size=12)) +
+  theme(axis.text = element_text(size=10))
+plot
+
+ggsave("outputs/1700/Figure 2.jpeg", width = 11, height=6)
+```
+

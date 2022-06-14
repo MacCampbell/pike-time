@@ -1,0 +1,106 @@
+location A	location B	distance	FST
+Alexander Creek	Alexander Lake	0	0.019
+Yentna River	Alexander Lake	15.88	0.139
+Yentna River	Alexander Creek	15.88	0.135
+Yentna River	Deshka River	29.4	0.144
+Alexander Creek	Deshka River	30.44	0.019
+Alexander Lake	Deshka River	30.44	-0.013
+Yentna River	Shell Lake	36.6	0.03
+Alexander Creek	Shell Lake	38	0.032
+Alexander Lake	Shell Lake	38	0.035
+Stormy Lake	Tukallah Lake	41.56	0.286
+Anderson Lake	Otter Lake	42.5	0.168
+Anderson Lake	Deshka River	53.09	0.147
+Deshka River	Otter Lake	56.5	0.042
+Deshka River	Shell Lake	65.1	0.035
+Tukallah Lake	Alexander Creek	66.79	0.134
+Tukallah Lake	Alexander Lake	66.79	0.141
+Tukallah Lake	Otter Lake	75.89	0.145
+Tukallah Lake	Deshka River	76.31	0.145
+Alexander Creek	Otter Lake	79.1	0.048
+Alexander Lake	Otter Lake	79.1	0.041
+Anderson Lake	Yentna River	80.71	0.018
+Tukallah Lake	Yentna River	81.26	0.008
+Anderson Lake	Alexander Creek	83.42	0.144
+Anderson Lake	Alexander Lake	83.42	0.143
+Yentna River	Otter Lake	84.54	0.165
+Stormy Lake	Otter Lake	91.07	0.304
+Tukallah Lake	Shell Lake	92.1	0.165
+Stormy Lake	Alexander Lake	107.37	0.309
+Stormy Lake	Alexander Creek	107.37	0.297
+Anderson Lake	Tukallah Lake	108.89	0.022
+Stormy Lake	Deshka River	111.67	0.019
+Otter Lake	Shell Lake	117.04	0.03
+Anderson Lake	Shell Lake	117.29	0.152
+Stormy Lake	Yentna River	122.49	0.281
+Minto Flats	Fairbanks	124.4	0.201
+Anderson Lake	Stormy Lake	131.51	0.284
+Stormy Lake	Shell Lake	133.58	0.03
+Stormy Lake	Lake Clark	202.64	0.224
+Tukallah Lake	Lake Clark	215.1	0.329
+Lake Clark	Shell Lake	258	0.27
+Alexander Creek	Lake Clark	262	0.245
+Alexander Lake	Lake Clark	262	0.256
+Lake Clark	Lake Nerka	262	0.143
+Yentna River	Lake Clark	276.3	0.331
+Deshka River	Lake Clark	284.8	0.255
+Lake Clark	Otter Lake	288.9	0.27
+Anderson Lake	Lake Clark	323.93	0.327
+Minto Flats	Shell Lake	370.24	0.331
+Minto Flats	Yentna River	372.46	0.193
+Anderson Lake	Fairbanks	381.07	0.335
+Minto Flats	Deshka River	385.75	0.328
+Yentna River	Fairbanks	386.3	0.339
+Minto Flats	Alexander Lake	387.92	0.322
+Minto Flats	Alexander Creek	387.92	0.324
+Deshka River	Fairbanks	390.1	0.267
+Anderson Lake	Minto Flats	393.34	0.203
+Fairbanks	Shell Lake	395.8	0.263
+Alexander Creek	Fairbanks	402.1	0.239
+Alexander Lake	Fairbanks	402.1	0.261
+Fairbanks	Otter Lake	422.7	0.267
+Minto Flats	Otter Lake	430.47	0.335
+Minto Flats	Tukallah Lake	454.71	0.197
+Stormy Lake	Lake Nerka	463.69	0.199
+Tukallah Lake	Fairbanks	466	0.339
+Tukallah Lake	Lake Nerka	471.24	0.301
+Lake Nerka	Shell Lake	492.4	0.228
+Minto Flats	Stormy Lake	494.81	0.267
+Stormy Lake	Fairbanks	501.93	0.288
+Alexander Creek	Lake Nerka	506.8	0.211
+Alexander Lake	Lake Nerka	506.8	0.224
+Yentna River	Lake Nerka	518.8	0.299
+Deshka River	Lake Nerka	533.6	0.229
+Lake Nerka	Otter Lake	546.8	0.237
+Anderson Lake	Lake Nerka	578.42	0.295
+Antlen River	Anderson Lake	603.93	0.271
+Minto Flats	Lake Clark	612.75	0.278
+Antlen River	Otter Lake	614.06	0.419
+Lake Clark	Fairbanks	652.8	0.194
+Antlen River	Deshka River	656.68	0.414
+Antlen River	Stormy Lake	672.95	0.356
+Antlen River	Tukallah Lake	683.13	0.259
+Antlen River	Yentna River	684.59	0.266
+Antlen River	Alexander Creek	686.54	0.401
+Antlen River	Alexander Lake	686.54	0.405
+Antlen River	Shell Lake	721.18	0.415
+Antlen River	Fairbanks	744.02	0.311
+Minto Flats	Lake Nerka	797.37	0.268
+Antlen River	Minto Flats	819.64	0.165
+Antlen River	Lake Clark	861.53	0.371
+Lake Nerka	Fairbanks	863.9	0.176
+Antlen River	Lake Nerka	1119.16	0.35
+Yukon Flats	Alexander Creek	578.32	0.324
+Yukon Flats	Alexander Lake	578.32	0.322
+Yukon Flats	Deshka River	566	0.328
+Yukon Flats	Otter Lake	595.56	0.335
+Yukon Flats	Shell Lake	572.19	0.331
+Yukon Flats	Stormy Lake	677.06	0.267
+Yukon Flats	Yentna River	562.59	0.193
+Yukon Flats	Tukallah Lake	641.84	0.197
+Yukon Flats	Anderson Lake	553.39	0.203
+Yukon Flats	Minto Flats	246.31	0.074
+Yukon Flats	Fairbanks	208.6	0.194
+Yukon Flats	Lake Clark	828.64	0.269
+Yukon Flats	Lake Nerka	1033.8	0.259
+Yukon Flats	Antlen River	786.5	0.202
