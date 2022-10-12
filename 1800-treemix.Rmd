@@ -1,0 +1,210 @@
+---
+title: "1800-treemix"
+author: "Mac Campbell"
+date: "2022-10-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+## Treemix     
+in `outputs/1800/`    
+
+__1__ Data
+
+```{sh, eval=FALSE}
+ln -s ~/Dropbox/ak-pike-genetics/data-files/358-phylogeny/recode.prune.reheadered.vcf .
+````
+__1__ A text file with no header line, and one line per sample with the following three fields:
+
+1 Family ID 2 Within-family ID 3 Cluster name
+
+Example:     
+CoyS1_2 CoyS1_2	Coy    
+CoyS2_2 CoyS2_2	Coy    
+CoyS3_2 CoyS3_2	Coy     
+CoyS4_2 CoyS4_2	Coy    
+
+```{sh, eval=FALSE}
+cut -f 6 ~/Dropbox/ak-pike-genetics/EVA\ submission/supplemental/Supplemental\ Table\ S1.txt | awk '{print $1, $1}' | perl -pe 's/RAD.+\n//g' > 358-part1.txt
+
+cut -f 9 ~/Dropbox/ak-pike-genetics/EVA\ submission/supplemental/Supplemental\ Table\ S1.txt | perl -pe 's/Sit.+\n//g' > 358-part2.txt
+
+paste 358-part1.txt 358-part2.txt  > 358.clst
+```
+
+There may be a problem with chroms. Trying initially with recode.prune.reheadered.vcf 
+
+Had to increase ulimit -n 3000     
+
+```{sh, eval=FALSE}
+bcftools view -H recode.prune.reheadered.vcf | cut -f 1 | uniq | awk '{print $0"\t"$0}' > redoneChroms.chrom-map.txt
+vcftools --vcf  recode.prune.reheadered.vcf --plink --mac 2 --remove-indels --max-alleles 2  --out redoneChroms --chrom-map redoneChroms.chrom-map.txt
+
+plink --file redoneChroms --make-bed --out redoneChroms --allow-no-sex --allow-extra-chr # drop 0
+plink --bfile redoneChroms --freq --missing  --within 358.clst --out redoneChroms --allow-no-sex --allow-extra-chr
+
+gzip redoneChroms.frq.strat
+plink2treemix.py redoneChroms.frq.strat.gz redoneChroms.treemix.frq.gz
+gunzip -c redoneChroms.treemix.frq.gz 
+```
+
+-noss ? -k appears to account for linkage. we pruned the data.
+```{sh, eval=FALSE}
+treemix -i redoneChroms.treemix.frq.gz -m 0 -o redone-noss-0 -root  EagleLake -global  -k 50  -noss > treemix_0_log
+treemix -i redoneChroms.treemix.frq.gz -m 1 -o redone-noss-1 -root  EagleLake -global  -k 50  -noss > treemix_1_log
+treemix -i redoneChroms.treemix.frq.gz -m 2 -o redone-noss-2 -root  EagleLake -global  -k 50  -noss > treemix_2_log
+treemix -i redoneChroms.treemix.frq.gz -m 3 -o redone-noss-3 -root  EagleLake -global  -k 50  -noss > treemix_3_log
+treemix -i redoneChroms.treemix.frq.gz -m 4 -o redone-noss-4 -root  EagleLake -global  -k 50  -noss > treemix_4_log
+
+```
+
+Plot    
+
+```{r}
+library(RColorBrewer)
+library(R.utils)
+source("~/treemix/treemix-1.13/src/plotting_funcs.R")
+```
+
+```{r}
+prefix="outputs/1800/redone-noss-"
+
+par(mfrow=c(3,2))
+for(edge in 0:4){
+  plot_tree(cex=0.8,paste0(prefix,edge))
+  title(paste(edge,"edges"))
+}
+```
+
+```{r}
+pdf("outputs/1800/358-noss.pdf", height=12, width=8)
+
+prefix="outputs/1800/redone-noss-"
+
+par(mfrow=c(3,2))
+for(edge in 0:4){
+  plot_tree(cex=0.8,paste0(prefix,edge))
+  title(paste(edge,"edges"))
+}
+
+dev.off()
+```
+
+
+###using sample size correction as we do have multiple samples/location
+
+```{sh, eval=FALSE}
+treemix -i redoneChroms.treemix.frq.gz -m 0 -o redone-0 -root  EagleLake -global  -k 50 > treemix_0_stand_log
+treemix -i redoneChroms.treemix.frq.gz -m 1 -o redone-1 -root  EagleLake -global  -k 50 > treemix_1_stand_log
+treemix -i redoneChroms.treemix.frq.gz -m 2 -o redone-2 -root  EagleLake -global  -k 50 > treemix_2_stand_log
+treemix -i redoneChroms.treemix.frq.gz -m 3 -o redone-3 -root  EagleLake -global  -k 50 > treemix_3_stand_log
+treemix -i redoneChroms.treemix.frq.gz -m 4 -o redone-4 -root  EagleLake -global  -k 50 > treemix_4_stand_log
+
+```
+
+```{r}
+pdf("outputs/1800/358.pdf", height=12, width=8)
+
+prefix="outputs/1800/redone-"
+
+par(mfrow=c(3,2))
+for(edge in 0:4){
+  plot_tree(cex=0.8,paste0(prefix,edge))
+  title(paste(edge,"edges"))
+}
+
+dev.off()
+```
+
+
+
+# Removing small samples sizes.   
+
+```{sh}
+cat outputs/1800/358-part2.txt | sort | uniq -c | sort -k 1 -n
+```
+
+Dropping Selawik River and Northslope (using 1801).
+
+Getting reduced sample size list and vcf.    
+
+```{sh, eval=FALSE}
+cat ../1800/358.clst  | grep -v "Selawik" | grep -v "NorthSlope" > 352.clst
+cut -f 1 -d ' ' 352.clst > samples-352.txt
+bcftools view -S samples-352.txt ../1800/recode.prune.reheadered.vcf > recode.prune.reheadered.vcf
+```
+
+Now for some copy and paste!     
+
+```{sh, eval=FALSE}
+bcftools view -H recode.prune.reheadered.vcf | cut -f 1 | uniq | awk '{print $0"\t"$0}' > redoneChroms.chrom-map.txt
+ulimit -n 3000   
+vcftools --vcf  recode.prune.reheadered.vcf --plink --mac 2 --remove-indels --max-alleles 2  --out redoneChroms --chrom-map redoneChroms.chrom-map.txt
+
+plink --file redoneChroms --make-bed --out redoneChroms --allow-no-sex --allow-extra-chr 
+plink --bfile redoneChroms --freq --missing  --within 352.clst --out redoneChroms --allow-no-sex --allow-extra-chr
+
+gzip redoneChroms.frq.strat
+plink2treemix.py redoneChroms.frq.strat.gz redoneChroms.treemix.frq.gz
+gunzip -c redoneChroms.treemix.frq.gz 
+```
+
+After filtering, kept 2015 out of a possible 2015 Sites (same as 358)
+
+Running:
+
+```{sh, eval=FALSE}
+treemix -i redoneChroms.treemix.frq.gz -m 0 -o redone-noss-0 -root  EagleLake -global  -k 50  -noss > treemix_0_log
+treemix -i redoneChroms.treemix.frq.gz -m 1 -o redone-noss-1 -root  EagleLake -global  -k 50  -noss > treemix_1_log
+treemix -i redoneChroms.treemix.frq.gz -m 2 -o redone-noss-2 -root  EagleLake -global  -k 50  -noss > treemix_2_log
+treemix -i redoneChroms.treemix.frq.gz -m 3 -o redone-noss-3 -root  EagleLake -global  -k 50  -noss > treemix_3_log
+treemix -i redoneChroms.treemix.frq.gz -m 4 -o redone-noss-4 -root  EagleLake -global  -k 50  -noss > treemix_4_log
+
+```
+
+
+```{sh, eval=FALSE}
+treemix -i redoneChroms.treemix.frq.gz -m 0 -o redone-0 -root  EagleLake -global  -k 50  > treemix_0_stand_log
+treemix -i redoneChroms.treemix.frq.gz -m 1 -o redone-1 -root  EagleLake -global  -k 50  > treemix_1_stand_log
+treemix -i redoneChroms.treemix.frq.gz -m 2 -o redone-2 -root  EagleLake -global  -k 50  > treemix_2_stand_log
+treemix -i redoneChroms.treemix.frq.gz -m 3 -o redone-3 -root  EagleLake -global  -k 50  > treemix_3_stand_log
+treemix -i redoneChroms.treemix.frq.gz -m 4 -o redone-4 -root  EagleLake -global  -k 50  > treemix_4_stand_log
+
+```
+
+
+```{r}
+pdf("outputs/1801/352.pdf", height=12, width=8)
+
+prefix="outputs/1801/redone-"
+
+par(mfrow=c(3,2))
+for(edge in 0:4){
+  plot_tree(cex=0.8,paste0(prefix,edge))
+  title(paste(edge,"edges"))
+}
+
+dev.off()
+```
+   
+
+```{r}
+pdf("outputs/1801/352-noss.pdf", height=12, width=8)
+
+prefix="outputs/1801/redone-noss-"
+
+par(mfrow=c(3,2))
+for(edge in 0:4){
+  plot_tree(cex=0.8,paste0(prefix,edge))
+  title(paste(edge,"edges"))
+}
+
+dev.off()
+```

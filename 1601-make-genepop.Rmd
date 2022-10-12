@@ -1,0 +1,102 @@
+---
+title: "1601-make-genepop"
+author: "Mac Campbell"
+date: "2022-10-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(snpR)
+```
+
+Need colnames.
+
+```{r}
+m358<-read_tsv("~/Dropbox/ak-pike-genetics/EVA submission/supplemental/Supplemental Table S1.txt")
+m358
+```
+```{r}
+genos<-read_tsv(file="outputs/1601/358-dapc.geno", col_names=FALSE) %>% select(-X361)
+
+colnames(genos)<-c("Chrom","Site",m358$`RAD identifier`)
+genos
+```
+
+#make data long
+
+```{r}
+g1<-genos %>% mutate(Locus=paste0(Chrom,"-",Site)) %>% select(-Chrom,-Site) %>% relocate(Locus) #%>% rownames_to_column(var = "Locus")
+rownames(g1)<-g1$Locus
+g2<-g1 %>% select(-Locus)
+g3<-t(g2)
+g4<-as_tibble(g3)
+colnames(g4)<-g1$Locus
+g4$Pop<-paste0(m358$Site,",")
+g4<-g4 %>% relocate(Pop)
+
+g4
+```
+
+df[df == "Old Value"] <- "New Value"
+
+```{r}
+g5<-g4 %>% select(-Pop)
+g5<-bind_cols(lapply(g5, function(x) gsub("A","111",x)))
+g5<-bind_cols(lapply(g5, function(x) gsub("G","222",x)))
+g5<-bind_cols(lapply(g5, function(x) gsub("C","333",x)))
+g5<-bind_cols(lapply(g5, function(x) gsub("T","444",x)))
+g5<-bind_cols(lapply(g5, function(x) gsub("N","000",x)))
+g5$Pop<-g4$Pop
+g5<-g5 %>% relocate(Pop)
+g5<-g5 %>% arrange(Pop)
+```
+
+
+```{r}
+write_delim(g5, delim=" ", file="outputs/1601/358-genepop.txt")
+```
+
+## Now to run it via snpR
+
+```{sh, eval=FALSE}
+plink --tped 358-dapc.tped --tfam 358-dapc.tfam  --out binary --recode --allow-extra-chr --noweb
+plink --ped binary.ped --map binary.map --recode vcf --allow-extra-chr -out recode
+bcftools +prune -l 0.9 -w 10000 recode.vcf  -Ov -o recode.prune.vcf
+bcftools reheader --samples ../../metadata/358-samples.tsv -o recode.prune.reheadered.vcf recode.prune.vcf
+```
+
+now 2933 snps
+```{r}
+my.dat <- import.snpR.data("outputs/1601/recode.prune.reheadered.vcf", sample.meta = m358 %>% select(Site))
+```
+
+```{r}
+ne<-calc_ne(
+  my.dat,
+  facets = "Site",
+  chr = "CHROM",
+  NeEstimator_path = "/Users/mac/Downloads/NeEstimator/Ne2-1M",
+  mating = "random",
+  pcrit = c(0.05, 0.02, 0.01,0),
+  methods = c("LD"),
+  max_ind_per_pop = NULL,
+  outfile = "ne_out",
+  verbose = TRUE,
+  cleanup = TRUE
+)
+```
+
+```{r}
+res<-get.snpR.stats(ne, "Site", stat="ne")
+write_tsv(res$pop, "outputs/1601/LD-method.tsv")
+```
+
+```{r}
+#ne01<-res$pop %>% select(pop,"He_Ne_0.01","He_lCIp_0.01","He_uCIp_0.01")
+#write_tsv(ne01, "outputs/1601/ne01.tsv")
+```
